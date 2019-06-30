@@ -1,0 +1,9 @@
+1、IDEA读取编译的class文件是在target中的classes目录，代码中的文件和配置文件有增删，target/classes中并不一定会及时有同步变化，所以在启动程序的时候有问题，需要检查下该目录是否跟代码文件中的同步。
+2、IDEA 在使用idea的过程中，遇到其中一个maven模块变成灰色，如下所示
+造成这个的原因可能是忽略了maven模块，可以尝试如下解决方法：在idea中maven的setting中找到ignored files,看右边的面板中是否将变灰的maven模块忽略了。我的模块变灰就是因为这个原因，Settings–>Maven–>Ignored Files 看看是不是有勾选的。
+3、IDEA在maven列表显示多root的时候，先检查父pom中是否有指定该模块，如果有，那么重新打开项目；
+4、如果IEDA显示的项目名称有问题，project structure功能里面可以修改模块名称和项目名称；
+5、模块的target编译到项目目录下了，
+原因有两个：
+1、IDEA中project structure配置的编译输出路径不对；
+2、模块带有root，模块没有作为父pom的module；

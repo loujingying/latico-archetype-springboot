@@ -1,0 +1,12 @@
+maven 安装jar到本地仓库
+
+<dependency>
+            <groupId>com.latico.jar</groupId>
+            <artifactId>demo</artifactId>
+            <version>1.0</version>
+        </dependency>
+命令格式：
+mvn install:install-file -Dfile=jar包的位置 -DgroupId=上面的groupId -DartifactId=上面的artifactId -Dversion=上面的version -Dpackaging=jar
+
+示例(骨架项目为根目录，lib下面有个示例jar)：
+mvn install:install-file -Dfile=./lib/demo-1.0.jar -DgroupId=com.latico.jar -DartifactId=demo -Dversion=1.0 -Dpackaging=jar

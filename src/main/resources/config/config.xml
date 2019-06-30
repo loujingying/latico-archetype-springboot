@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config hint="提供给Config类进行配置加载">
+    <common commonId="commonIdValue" commonName="commonNameValue">
+        <id>1</id>
+        <name1>value1</name1>
+        <name2 a="1" ag="3">value2</name2>
+        <name3>3</name3>
+        <name4>3</name4>
+        <name5>5</name5>
+        <name6></name6>
+    </common>
+</config>

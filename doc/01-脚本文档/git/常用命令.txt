@@ -1,0 +1,23 @@
+1、关闭换行符自动转换功能: git config --global core.autocrlf false
+2、如果提交了.idea目录，那么用如下命令删除：
+这里以删除.idea  文件夹为案例
+git rm -r --cached .idea
+git commit -m 'delete .idea dir'
+git push -u origin master
+
+3、git 放弃本地修改，强制拉取更新
+git fetch --all
+git reset --hard origin/master
+git pull
+
+1、git clone git-URL   克隆方式连接git地址
+git clone xxx.git
+
+2、git fetch origin dev    命令来把远程dev分支拉到本地  --
+git fetch origin master
+
+3、checkout -b dev origin/dev   在本地创建分支dev并切换到该分支 --
+checkout -b master origin/master
+
+4、git pull origin dev 就可以把远程dev分支上的内容都拉取到本地了--
+git pull origin master

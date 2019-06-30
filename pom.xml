@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--骨架的版本号最好带上 RELEASE/SNAPSHOT 或者其他版本号字符，而且版本号最好3位长度，也可以在版本号前面加一些特殊字符，以防止跟其他开源包版本冲突，要不然maven的骨架插件会错把其他字符替换掉，比如：假如版本号是1.0的话，生成骨架后xml文件头的版本号是1.0也会变成变量，别人用骨架生成项目的时候就会把它给替换-->
+    <groupId>com.latico.archetype.springboot</groupId>
+    <artifactId>latico-springboot-archetype</artifactId>
+    <version>1.0.0-RELEASE</version>
+    <packaging>jar</packaging>
+    <name>latico-springboot-archetype</name>
+    <description>springboot的maven骨架，有配置springcloud但是默认不启动，支持JPA和mybatis共存</description>
+
+    <!--邮件管理列表-->
+    <mailingLists>
+        <mailingList>
+            <name>Development List</name>
+            <subscribe>dev-subscribe@mail.com</subscribe>
+            <unsubscribe>dev-unsubscribe@mail.com</unsubscribe>
+            <post>dev@mail.com</post>
+        </mailingList>
+    </mailingLists>
+
+    <!--开发者-->
+    <developers>
+        <developer>
+            <id>developer-name</id>
+            <name>developer-name</name>
+            <url>developer-name@mail.com</url>
+        </developer>
+    </developers>
+
+    <!--许可证-->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!--组织机构-->
+    <organization>
+        <name>latico</name>
+        <url>http://www.mail.com/</url>
+    </organization>
+
+    <!--项目名称和URL-->
+    <issueManagement>
+        <!--项目名字，-->
+        <system>latico-springboot-archetype</system>
+        <!--该项目使用的URL-->
+        <url>https://localhost:8080/latico-springboot-archetype</url>
+    </issueManagement>
+
+    <!--软件配置管理（SCM：Software Configuration Management）功能-->
+    <scm>
+        <url>https://github.com/latico/latico-springboot-archetype.git</url>
+        <connection>scm:git:https://github.com/latico/latico-springboot-archetype.git
+        </connection>
+    </scm>
+
+    <!--项目持续集成信息-->
+    <ciManagement>
+        <!--持续集成系统的名字，例如continuum-->
+        <system>jenkins</system>
+        <!--该项目使用的持续集成系统的URL（如果持续集成系统有web接口的话）。-->
+        <url>https://localhost:8080/jenkins</url>
+    </ciManagement>
+
+    <!--发布管理，发布到私服地址-->
+    <distributionManagement>
+        <!-- 私服地址 ，公司级基线仓库 -->
+        <repository>
+            <id>Releases</id>
+            <url>http://172.168.10.100:8081/nexus/content/repositories/releases</url>
+        </repository>
+
+        <!-- 私服地址 ，公司级快照仓库 -->
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <url>http://172.168.10.100:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- 版本和变量统一管理 -->
+    <properties>
+        <!-- JDK版本配置 -->
+        <java.version>1.8</java.version>
+        <!-- JDK版本配置 -->
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <!-- 项目编码配置 -->
+        <project.encoding>UTF-8</project.encoding>
+        <!-- 文件拷贝时的编码 -->
+        <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+        <!-- 编译时的编码 -->
+        <maven.compiler.encoding>${project.encoding}</maven.compiler.encoding>
+
+        <!--跳过单元测试-->
+        <skipTests>true</skipTests>
+        <!--取消webxml的依赖，非必须的-->
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
+        <!--解决控制台乱码问题-->
+        <argLine>-Dfile.encoding=UTF-8</argLine>
+
+        <!-- build的时候设置的时间格式, 可用于生成文件名等 -->
+        <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
+
+        <!-- logback版本配置 -->
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <janino.version>3.0.11</janino.version>
+        <springcloud.version>Finchley.RELEASE</springcloud.version>
+        <springboot.version>2.1.4.RELEASE</springboot.version>
+        <swagger.version>2.6.1</swagger.version>
+        <feign.version>10.2.0</feign.version>
+    </properties>
+
+    <!-- 打包配置 -->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <!--插件的顺序决定执行顺序，maven-assembly-plugin插件应该在spring-boot-maven-plugin插件之前执行，这样maven-assembly-plugin插件才能拿到spring-boot-maven-plugin生成的target下面的jar，否则assembly拷贝的jar是普通生成的jar-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <!--指定启动类-->
+                    <!--<mainClass>${start-class}</mainClass>-->
+                    <layout>ZIP</layout>
+                    <includes>
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--repackage：创建一个自动可执行的jar或war文件。它可以替换常规的artifact，或者用一个单独的classifier附属在maven构建的生命周期中。-->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--拷贝classpath配置等文件，执行assembly-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <encoding>${project.encoding}</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>replace-win</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>build/assembly/program.properties</filter>
+                                <!--<filter>${project.build.directory}/classpath-win.properties</filter>-->
+                            </filters>
+                            <descriptors>
+                                <!--<descriptor>${basedir}/../build/assembly/assembly-descriptor-win.xml</descriptor>-->
+                                <descriptor>build/assembly/assembly-descriptor-win.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>replace-unix</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>build/assembly/program.properties</filter>
+                                <!--<filter>${project.build.directory}/classpath-unix.properties</filter>-->
+                            </filters>
+                            <descriptors>
+                                <!--<descriptor>${basedir}/../build/assembly/assembly-descriptor-unix.xml</descriptor>-->
+                                <descriptor>build/assembly/assembly-descriptor-unix.xml</descriptor>
+                            </descriptors>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--打包骨架插件，如果是多模块方式的项目结构，有bug(模块中不能含有名称为config的文件夹)-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>3.0.1</version>
+            </plugin>
+
+            <!-- 打源码包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Compile -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <encoding>${project.encoding}</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <encoding>${project.encoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <!--打bean和common包-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>bean</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <classifier>${maven.build.timestamp}</classifier>
+                            <includes>
+                                <include>com/latico/**/bean/**</include>
+                                <include>com/latico/**/common/**</include>
+                            </includes>
+                            <excludes>
+
+                            </excludes>
+                            <finalName>${project.artifactId}-bean-${project.version}</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+    <!-- 专用依赖统一管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!--注意：根据同一个pom文件，依赖的优先级是根据依赖的顺序决定，因为要以springboot为主，
+            而且依赖的打包插件等都是要以springboot优先，如果以springcloud在前，
+            那么spring-boot-maven-plugin打包插件不会打包成springboot的启动方式-->
+            <!--管理导入springboot的父pom-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--springcloud父依赖管理-->
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${springcloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    <!-- 共用依赖 -->
+    <dependencies>
+        <!-- 单元测试开始-->
+        <!--统一测试包-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-test</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- 单元测试结束-->
+        <!--servlet容器使用-->
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- =====================公共包系列开始===================== -->
+        <!--通用工具包-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--通用工具包-->
+        <!--网络包，telnet、ssh、dhcp等-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-net</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>latico-commons-common</artifactId>
+                    <groupId>com.latico.commons</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--网络包，telnet、ssh、dhcp等-->
+        <!--spring工具类，可以拿到spring里面的对象操作-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-spring</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>latico-commons-common</artifactId>
+                    <groupId>com.latico.commons</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-feign</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--spring工具类，可以拿到spring里面的对象操作-->
+
+        <!--mybatis工具包，可以自动化生成mybatis源码等-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-orm-mybatis</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>latico-commons-common</artifactId>
+                    <groupId>com.latico.commons</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jsqlparser</artifactId>
+                    <groupId>com.github.jsqlparser</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mybatis-spring</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--mybatis工具包-->
+        <!--并发工具包-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-disruptor</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>latico-commons-common</artifactId>
+                    <groupId>com.latico.commons</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--并发工具包-->
+        <!--定时器包-->
+        <dependency>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-timer</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>latico-commons-common</artifactId>
+                    <groupId>com.latico.commons</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--定时器包-->
+
+        <!-- =====================公共包系列结束===================== -->
+
+        <!-- =====================spring相关开始 ===================== -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 在工作中，我们会经常遇到读取配置文件的操作，但是一般都是key-value 这种形式的值，
+        从yml(yaml)读取String[],List<Map<String.String>>,List<String>,Map<String,String> 这种格式的数据 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+        <!--spirng JPA包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!--spring-boot-starter-data-jpa 要用到log4j-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!--spirng JPA包-->
+        <!--mybatis相关包-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis-spring-boot-starter</artifactId>
+                    <groupId>org.mybatis.spring.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--mybatis相关包-->
+        <!--阿里巴巴数据源-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <!-- alibaba的druid数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.9</version>
+        </dependency>
+        <!--阿里巴巴数据源-->
+
+        <!-- 热部署，当文件重新编译的时候会自动加载 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- =====================spring相关结束 ===================== -->
+
+        <!-- =====================springcloud相关开始 ===================== -->
+        <!--注册服务客户端，默认注释掉，如果要连接springcloud注册中心，那么要打开此依赖-->
+        <!-- <dependency>
+             <groupId>org.springframework.cloud</groupId>
+             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+         </dependency>-->
+        <!--注册服务客户端，默认注释掉，如果要连接springcloud注册中心，那么要打开此依赖-->
+
+        <!-- 配置中心服务 -->
+        <!--  <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-config</artifactId>
+          </dependency>-->
+        <!-- 配置中心服务 -->
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+            <version>1.4.6.RELEASE</version>
+        </dependency>
+        <!-- =====================springcloud相关结束 ===================== -->
+
+        <!-- lombok，代码简化工具 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!--swagger restful接口自动可视化界面工具-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <!--swagger restful接口自动可视化界面工具-->
+
+
+        <!--aspectj切面包，不需要部署-->
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.2</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
+        <!--aspectj切面包，不需要部署-->
+
+        <!--数据库连接包-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!-- <version>5.1.47</version>-->
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>12.1.0.1</version>
+        </dependency>
+        <!--数据库连接包-->
+
+        <!--模板框架,mybatisplus的自动化生成代码工具要用到，一般不需要发布部署，可以使用<scope>provided</scope>模式 -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
+
+        <!--演示引入lib目录的jar包,示例，注释-->
+        <!--  <dependency>
+              <groupId>com.latico.jar</groupId>
+              <artifactId>demo</artifactId>
+              <version>1.0</version>
+              <scope>system</scope>
+              <systemPath>${project.basedir}/lib/demo-1.0.jar</systemPath>
+          </dependency>-->
+    </dependencies>
+
+</project>

@@ -1,0 +1,9 @@
+FROM hub.c.163.com/library/java
+
+MAINTAINER springboot
+
+RUN mkdir -p /home/cattsoft/springboot
+
+COPY ./demo.jar /home/cattsoft/springboot/demo.jar
+
+ENTRYPOINT ["java","-jar","demo.jar"]
