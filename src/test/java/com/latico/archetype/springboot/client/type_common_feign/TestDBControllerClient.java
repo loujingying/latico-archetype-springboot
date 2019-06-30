@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.invoker.type_common_feign;
+package com.latico.archetype.springboot.client.type_common_feign;
 
 
 import com.latico.archetype.springboot.dao.primary.entity.Demo;

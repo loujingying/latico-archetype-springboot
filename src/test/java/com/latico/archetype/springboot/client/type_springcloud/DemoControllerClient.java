@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.invoker.type_springcloud;
+package com.latico.archetype.springboot.client.type_springcloud;
 
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import org.springframework.cloud.openfeign.FeignClient;

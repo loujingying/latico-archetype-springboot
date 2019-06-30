@@ -11,4 +11,4 @@
  * @Date: 2019-02-21 22:56
  * @Version: 1.0
  */
-package com.latico.archetype.springboot.invoker.type_common_feign;
+package com.latico.archetype.springboot.client.type_common_feign;
