@@ -1,9 +1,9 @@
-package com.latico.archetype.springboot.invoker.type_common_feign;
+package com.latico.archetype.springboot.client.type_common_feign;
 
 
+import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.bean.dto.RestRequestDTO;
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
-import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.invoker.type_springcloud;
+package com.latico.archetype.springboot.client.type_springcloud;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.invoker.type_springcloud;
+package com.latico.archetype.springboot.client.type_springcloud;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
