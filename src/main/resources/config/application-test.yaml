@@ -115,10 +115,12 @@ spring:
       type: com.alibaba.druid.pool.DruidDataSource
 ###########################################################
 ###########################################################
-#  指定mybatis映射文件的地址，多数据源已经在java代码处理
-#  mybatis:
-#  mapper-locations: classpath:mapper/**/*.xml
-#  type-aliases-package: com.latico.archetype.springboot.dao.entity
+##  指定mybatis映射文件的地址，多数据源已经在java代码处理
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: false
+##  mapper-locations: classpath:mapper/**/*.xml
+##  type-aliases-package: com.latico.archetype.springboot.dao.secondary
 ###########################################################
 ###########################################################
 logging:
