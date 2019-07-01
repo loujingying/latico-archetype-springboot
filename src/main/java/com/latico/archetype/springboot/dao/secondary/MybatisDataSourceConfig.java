@@ -80,7 +80,7 @@ public class MybatisDataSourceConfig {
     /**
      * 配置
      */
-    public static final String configurationBeanName = "com.catt.archetype.springboot.dao.secondary.configuration";
+    public static final String configurationBeanName = "com.latico.archetype.springboot.dao.secondary.configuration";
 
     /**
      * mybatis配置前缀
