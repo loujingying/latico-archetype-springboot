@@ -1,6 +1,7 @@
 package com.latico.archetype.springboot.dao.secondary;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -76,6 +77,20 @@ public class MybatisDataSourceConfig {
      * TODO
      */
     public static final String sqlSessionTemplateBeanName = "com.latico.archetype.springboot.dao.secondary.sqlSessionTemplate";
+    /**
+     * 配置
+     */
+    public static final String configurationBeanName = "com.latico.archetype.springboot.dao.secondary.configuration";
+
+    /**
+     * mybatis配置前缀
+     */
+    public static final String mybatisConfigurationPrefix = "mybatis.configuration";
+    /**
+     * mybatis配置
+     */
+    @Resource(name = configurationBeanName)
+    private MybatisConfiguration configuration;
 
     /**
      * 数据源，拷贝后需要修改bean名称
@@ -105,6 +120,8 @@ public class MybatisDataSourceConfig {
         //指定扫描的xml文件
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(MAPPER_LOCATION));
+//        添加配置文件配置
+        bean.setConfiguration(configuration);
         return bean.getObject();
     }
 
@@ -118,4 +135,13 @@ public class MybatisDataSourceConfig {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
+    /**
+     * 配置文件读取mybatis配置自动注入
+     * @return
+     */
+    @Bean(name = configurationBeanName)
+    @ConfigurationProperties(prefix = mybatisConfigurationPrefix)
+    public MybatisConfiguration configuration() {
+        return new MybatisConfiguration();
+    }
 }
