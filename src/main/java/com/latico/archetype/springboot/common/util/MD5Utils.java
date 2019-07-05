@@ -2,12 +2,12 @@ package com.latico.archetype.springboot.common.util;
 
 /**
  * <PRE>
- * XML工具
+ *
  * </PRE>
  *
  * @Author: LanDingDong
- * @Date: 2019-06-06 14:30
+ * @Date: 2019-07-05 9:47
  * @Version: 1.0
  */
-public class XmlUtils extends com.latico.commons.common.util.xml.XmlUtils {
+public class MD5Utils extends com.latico.commons.common.util.codec.MD5Utils {
 }
