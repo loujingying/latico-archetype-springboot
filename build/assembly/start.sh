@@ -8,6 +8,8 @@ PID=`ps -ef|grep $workdir|grep ${programname}|grep -v grep|awk '{print $2}'`
 
 if [ -z $PID ];then
     ${javapath} -Dprogramname=${programname} -Dprogrampath=$workdir -XX:+HeapDumpOnOutOfMemoryError -Dloader.path=lib -jar lib/${programname}.jar >/dev/null 2>err.log &
+    PID=`ps -ef|grep $workdir|grep ${programname}|grep -v grep|awk '{print $2}'`
+    echo "PID=$PID the program <<$workdir && ${programname}>> starting..."
 else
     echo "PID=$PID the program <<$workdir && ${programname}>> has been running.Please stop it firstly."
 fi
