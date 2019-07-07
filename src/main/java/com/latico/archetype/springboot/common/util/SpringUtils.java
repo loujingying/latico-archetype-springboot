@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * Spring容器操作工具
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-05 10:03
  * @Version: 1.0
  */

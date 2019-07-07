@@ -7,7 +7,7 @@ import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
  *
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-07 14:52
  * @Version: 1.0
  */

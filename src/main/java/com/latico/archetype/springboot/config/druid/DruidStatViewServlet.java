@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebServlet;
  *  配置登录账号的白名单
  *  访问：http://127.0.0.1:8080/demo/druid
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-27 11:23:57
  * @Version: 1.0
  */

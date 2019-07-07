@@ -10,7 +10,7 @@
  这个类会读取测试资源目录下的generator/mybatis-plus-generator.properties配置进行mybatis代码自动生成。
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-24 21:35
  * @Version: 1.0
  */

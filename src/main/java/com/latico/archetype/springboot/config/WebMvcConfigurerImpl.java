@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *  可以添加拦截器等
  *
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 15:01:17
  * @Version: 1.0
  */

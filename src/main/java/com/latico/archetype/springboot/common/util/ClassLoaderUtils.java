@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * 类加载器工具类
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-05 9:59
  * @Version: 1.0
  */

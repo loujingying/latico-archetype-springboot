@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * <PRE>
  * 认证拦截器
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-04-18 09:05:48
  * @Version: 1.0
  */

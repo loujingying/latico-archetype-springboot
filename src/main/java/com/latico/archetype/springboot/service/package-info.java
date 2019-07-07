@@ -6,7 +6,7 @@
  * 具体的采集设备MAC的编写，这个是脱离业务的单个功能，就写到convert层，convert层一般就是使用公共包等实现
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 10:29
  * @Version: 1.0
  */

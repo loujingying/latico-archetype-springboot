@@ -15,7 +15,7 @@ import com.lmax.disruptor.dsl.Disruptor;
  * 中间件
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-07 1:09
  * @Version: 1.0
  */

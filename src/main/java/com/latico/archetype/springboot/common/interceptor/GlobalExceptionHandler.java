@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <PRE>
  * 全局异常拦截器
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-04-18 09:06:05
  * @Version: 1.0
  */

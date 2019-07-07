@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *  DAO测试程序启动入口类
  *
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-03-13 22:06:01
  * @Version: 1.0
  */

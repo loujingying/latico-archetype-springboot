@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  *  DemoControllerClient的测试用例
  *  
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-27 10:54:20
  * @Version: 1.0
  */

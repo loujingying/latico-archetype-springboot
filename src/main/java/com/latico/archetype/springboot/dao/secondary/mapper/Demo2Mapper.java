@@ -10,7 +10,7 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author landingdong
+ * @author latico
  * @since 2019-02-26
  */
 public interface Demo2Mapper extends BaseMapper<Demo2> {

@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * restful客户端工具Feign的工具类
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-05 10:04
  * @Version: 1.0
  */

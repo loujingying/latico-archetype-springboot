@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * 字段工具
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-07 3:42
  * @Version: 1.0
  */

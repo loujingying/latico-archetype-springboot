@@ -6,7 +6,7 @@ package com.latico.archetype.springboot.common.util;
  * 比如
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 14:47
  * @Version: 1.0
  */

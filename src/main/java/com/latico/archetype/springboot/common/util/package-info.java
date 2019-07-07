@@ -5,7 +5,7 @@
  * 同时扩展增加了项目业务相关的项目内部通用方法，而不是全球通用
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-21 22:51
  * @Version: 1.0
  */

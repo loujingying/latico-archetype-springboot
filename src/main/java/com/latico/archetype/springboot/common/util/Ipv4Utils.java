@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * IPV4操作工具类
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-04 14:56
  * @Version: 1.0
  */

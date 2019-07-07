@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * 在这里添加专用的集合工具方法
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-05-09 18:42
  * @Version: 1.0
  */

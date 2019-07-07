@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  *  该测试类用来进行常规的启动测试,检查项目标准组件是否正常
  *
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-27 10:54:33
  * @Version: 1.0
  */

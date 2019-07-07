@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 指定扫描的标准组件的目录包括：dao、controller、config、service，如果有需要，请自行添加
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-27 10:58
  * @Version: 1.0
  */

@@ -16,7 +16,7 @@ import com.lmax.disruptor.EventHandler;
  *
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 18:55:35
  * @Version: 1.0
  */

@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  *
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-05 9:47
  * @Version: 1.0
  */

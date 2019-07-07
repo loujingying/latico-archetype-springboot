@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * 配置不要连接数据库
  *  com.latico.commons.spring路径包括了spring的工具类
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-03-13 22:06:01
  * @Version: 1.0
  */

@@ -20,10 +20,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 因为实现{@link Job}的实例，每次执行都会创建一个新的对象，所以不应该在该类里面写对象字段变量，一般用静态变量或者引用外界对象；
  * 该示例中，我们创建了一个生产者消费者并发器，然后执行任务的时候，就把任务生产到并发器中，消费者就会执行
  * </PRE>
- * <B>项	       目：</B>研发中心公共-综合网管
- * <B>技术支持：</B>凯通科技股份有限公司 (c)
+ * <B>项	       目：</B>
+ * <B>技术支持：</B>
  *
- * @author <B><a href="mailto:landingdong@gdcattsoft.com"> 蓝鼎栋 </a></B>
+ * @author <B><a href="mailto:latico@qq.com"> latico </a></B>
  * @version <B>V1.0 2018年11月7日</B>
  * @since <B>JDK1.6</B>
  */

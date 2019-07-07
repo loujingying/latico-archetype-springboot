@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * 日志工具类，可以手动加载日志
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-05 9:49
  * @Version: 1.0
  */

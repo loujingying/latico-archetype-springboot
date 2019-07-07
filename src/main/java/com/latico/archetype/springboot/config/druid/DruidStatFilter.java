@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebInitParam;
  * <PRE>
  *  配置druid过滤规则：监控所有的页面，排除以下配置的文件
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-27 11:24:12
  * @Version: 1.0
  */

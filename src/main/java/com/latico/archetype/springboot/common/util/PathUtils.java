@@ -6,7 +6,7 @@ package com.latico.archetype.springboot.common.util;
  * 路径合并，路径适配
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-07-05 9:55
  * @Version: 1.0
  */

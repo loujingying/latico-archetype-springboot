@@ -22,7 +22,7 @@ import java.net.UnknownHostException;
  * 2、网页介绍信息
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-25 17:14:23
  * @Version: 1.0
  */
@@ -89,7 +89,7 @@ public class Swagger2Config {
                 .title("Swagger Restful API")
                 .description("REST接口调测请访问:" + link)
                 .termsOfServiceUrl("http://localhost:" + serverPort + serverContextPath + "swagger-ui.html")
-                .contact("landingdong")
+                .contact("latico")
                 .version("1.0")
                 .build();
     }

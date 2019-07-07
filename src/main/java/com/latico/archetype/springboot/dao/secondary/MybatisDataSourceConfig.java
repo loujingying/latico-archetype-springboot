@@ -29,7 +29,7 @@ import javax.sql.DataSource;
  * 把后缀带有secondary的名称全部替换目标字符串
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-26 09:25:32
  * @Version: 1.0
  */

@@ -3,7 +3,7 @@
  * 生产者消费者队列
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 18:52
  * @Version: 1.0
  */

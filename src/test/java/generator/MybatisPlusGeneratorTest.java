@@ -8,7 +8,7 @@ import org.junit.Test;
  *  Mybatis-plus代码生成器
  *
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 15:04:09
  * @Version: 1.0
  */

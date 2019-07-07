@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 请求参数
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-03-20 15:56
  * @Version: 1.0
  */

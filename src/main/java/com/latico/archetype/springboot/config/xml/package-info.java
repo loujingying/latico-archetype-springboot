@@ -3,7 +3,7 @@
  * XML方式的配置，使用了自己封装的XML加载流程
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-27 10:39
  * @Version: 1.0
  */

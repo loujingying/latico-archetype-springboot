@@ -10,7 +10,7 @@ import java.util.List;
  * 资源工具类
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-07 3:39
  * @Version: 1.0
  */

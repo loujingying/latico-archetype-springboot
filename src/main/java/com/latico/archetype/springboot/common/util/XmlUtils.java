@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * XML工具
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 14:30
  * @Version: 1.0
  */

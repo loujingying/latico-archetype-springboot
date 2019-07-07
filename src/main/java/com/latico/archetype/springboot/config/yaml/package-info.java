@@ -3,7 +3,7 @@
  * yaml方式的配置，使用了springboot的yaml配方式加载流程
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-27 10:39
  * @Version: 1.0
  */

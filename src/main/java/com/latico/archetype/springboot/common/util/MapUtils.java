@@ -5,7 +5,7 @@ package com.latico.archetype.springboot.common.util;
  * Map工具
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-05-09 18:42
  * @Version: 1.0
  */

@@ -4,7 +4,7 @@
  * springcloud的方式，这种方式是需要连接到注册中心
  * </PRE>
  *
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-02-21 22:56
  * @Version: 1.0
  */

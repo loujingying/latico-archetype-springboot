@@ -8,7 +8,7 @@ import java.util.Map;
  *  枚举模板示例
  *
  * </PRE>
- * @Author: LanDingDong
+ * @Author: latico
  * @Date: 2019-06-06 14:15:31
  * @Version: 1.0
  */
