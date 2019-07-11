@@ -5,10 +5,10 @@
 
     <!--骨架的版本号最好带上 RELEASE/SNAPSHOT 或者其他版本号字符，而且版本号最好3位长度，也可以在版本号前面加一些特殊字符，以防止跟其他开源包版本冲突，要不然maven的骨架插件会错把其他字符替换掉，比如：假如版本号是1.0的话，生成骨架后xml文件头的版本号是1.0也会变成变量，别人用骨架生成项目的时候就会把它给替换-->
     <groupId>com.latico.archetype.springboot</groupId>
-    <artifactId>latico-springboot-archetype</artifactId>
+    <artifactId>latico-archetype-springboot</artifactId>
     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
-    <name>latico-springboot-archetype</name>
+    <name>latico-archetype-springboot</name>
     <description>springboot的maven骨架，有配置springcloud但是默认不启动，支持JPA和mybatis共存</description>
 
     <!--邮件管理列表-->
@@ -48,15 +48,15 @@
     <!--项目名称和URL-->
     <issueManagement>
         <!--项目名字，-->
-        <system>latico-springboot-archetype</system>
+        <system>latico-archetype-springboot</system>
         <!--该项目使用的URL-->
-        <url>https://localhost:8080/latico-springboot-archetype</url>
+        <url>https://localhost:8080/latico-archetype-springboot</url>
     </issueManagement>
 
     <!--软件配置管理（SCM：Software Configuration Management）功能-->
     <scm>
-        <url>https://github.com/latico/latico-springboot-archetype.git</url>
-        <connection>scm:git:https://github.com/latico/latico-springboot-archetype.git
+        <url>https://github.com/latico/latico-archetype-springboot.git</url>
+        <connection>scm:git:https://github.com/latico/latico-archetype-springboot.git
         </connection>
     </scm>
 
