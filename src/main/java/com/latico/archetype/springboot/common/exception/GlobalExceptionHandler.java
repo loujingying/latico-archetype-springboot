@@ -1,8 +1,6 @@
-package com.latico.archetype.springboot.common.interceptor;
+package com.latico.archetype.springboot.common.exception;
 
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
-import com.latico.archetype.springboot.common.exception.DemoException;
-import com.latico.archetype.springboot.common.exception.DemoRuntimeException;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

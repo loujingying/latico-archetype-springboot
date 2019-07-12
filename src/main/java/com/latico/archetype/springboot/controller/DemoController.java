@@ -83,7 +83,7 @@ public class DemoController {
     /**
      * @return 对象类型数据
      */
-    @RequestMapping("serverTimeBean")
+    @RequestMapping(value = "serverTimeBean", method = {RequestMethod.POST})
     @ApiOperation("获取服务器时间API")
     public RestResponseDTO<DemoTimeParam> serverTimeBean(@RequestBody RestRequestDTO<DemoTimeParam> restRequestDTO) {
         RestResponseDTO<DemoTimeParam> restResponseDTO = new RestResponseDTO<>();
