@@ -485,7 +485,7 @@
         </dependency>
         <!--阿里巴巴数据源-->
 
-        <!-- 热部署，当文件重新编译的时候会自动加载 -->
+        <!-- 热部署，当文件重新编译的时候会自动加载，使用的是替换类加载器的方式，而不是javaagent的方式 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
