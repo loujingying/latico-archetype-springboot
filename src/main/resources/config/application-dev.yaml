@@ -68,6 +68,8 @@ spring:
       min-evictable-idle-time-millis: 300000
 
       #druid相关配置
+      #保持连接
+      keep-alive: true
       #监控统计拦截的filters
       filters: stat
       test-while-idle: true
@@ -103,6 +105,8 @@ spring:
       #一个连接在池中最小生存的时间
       min-evictable-idle-time-millis: 300000
       #druid相关配置
+      #保持连接
+      keep-alive: true
       #监控统计拦截的filters
       filters: stat
       test-while-idle: true

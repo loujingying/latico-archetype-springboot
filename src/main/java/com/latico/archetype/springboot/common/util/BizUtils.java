@@ -10,5 +10,5 @@ package com.latico.archetype.springboot.common.util;
  * @Date: 2019-06-06 14:47
  * @Version: 1.0
  */
-public class ServiceUtils {
+public class BizUtils {
 }

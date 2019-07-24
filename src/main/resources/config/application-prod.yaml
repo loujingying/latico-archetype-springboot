@@ -69,6 +69,8 @@ spring:
 
       #druid相关配置
       #监控统计拦截的filters
+      #保持连接
+      keep-alive: true
       filters: stat
       test-while-idle: true
       test-on-borrow: false
@@ -108,6 +110,8 @@ spring:
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
+      #保持连接
+      keep-alive: true
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
