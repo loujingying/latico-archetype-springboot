@@ -4,6 +4,11 @@ export programname=$(cat ./programname.cfg)
 export javapath=$(cat ./javapath.cfg)
 workdir=$(cd $(dirname $0); pwd)
 
+logdir="logs"
+if [ ! -d ${logdir} ];then
+  mkdir ${logdir}
+fi
+
 PID=`ps -ef|grep $workdir|grep ${programname}|grep -v grep|awk '{print $2}'`
 
 if [ -z $PID ];then
