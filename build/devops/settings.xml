@@ -6,7 +6,6 @@
     <pluginGroups>
         <pluginGroup>org.mortbay.jetty</pluginGroup>
         <pluginGroup>org.codehaus.cargo</pluginGroup>
-        <pluginGroup>com.latico.plugin</pluginGroup>
     </pluginGroups>
     <proxies>
     </proxies>
