@@ -70,7 +70,7 @@
             <repositories>
                 <repository>
                     <id>nexus</id>
-                    <url>http://172.168.10.100:8081/nexus/content/groups/public/</url>
+                    <url>http://172.168.1.100:8080/nexus/content/groups/public/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
@@ -86,7 +86,7 @@
             <pluginRepositories>
                 <pluginRepository>
                     <id>nexus</id>
-                    <url>http://172.168.10.100:8081/nexus/content/groups/public</url>
+                    <url>http://172.168.1.100:8080/nexus/content/groups/public</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
