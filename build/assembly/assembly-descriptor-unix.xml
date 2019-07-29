@@ -29,14 +29,6 @@
             </includes>
             <filtered>true</filtered>
         </fileSet>
-        <fileSet>
-            <directory>${basedir}\target</directory>
-            <outputDirectory>\</outputDirectory>
-            <includes>
-                <include>classpath-unix.properties</include>
-            </includes>
-            <filtered>true</filtered>
-        </fileSet>
 
         <!-- 拷贝配置文件 -->
         <!-- 先从项目目录的config拷贝配置文件 -->
