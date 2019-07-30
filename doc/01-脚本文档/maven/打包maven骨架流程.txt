@@ -20,7 +20,7 @@ pe:
 方式2：先进入骨架项目的pom文件目录：
 
 2、进入骨架项目包所在的目录target\generated-sources\archetype，
-在目录和子目录找出并删除.idea等无用文件夹，
+在目录和子目录找出并删除.idea等无用文件夹，同时用压缩软件打开target/generated-sources/archetype/target/latico-archetype-springboot.jar，同样删除里面的无用文件夹。
 在target\generated-sources\archetype目录执行命令安装骨架到本地：mvn clean install
 
 三、把骨架项目发布到私服中（作用是让‘别人’根据骨架文件可以拉下来项目）
