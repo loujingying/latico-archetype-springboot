@@ -8,7 +8,7 @@ if [[ -z ${PID} ]];then
     echo "The program <<${workdir} && ${programname}>> has been stoped."
 else
     echo "==========="
-    echo "|PID:${PID}|"
+    echo "|PID=${PID}|"
     echo "==========="
     echo `ps -ef|grep ${workdir}|grep ${programname}|grep -v grep`
 fi

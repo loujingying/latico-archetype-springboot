@@ -1,0 +1,1 @@
+call bin/startup.bat
