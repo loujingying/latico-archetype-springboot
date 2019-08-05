@@ -180,7 +180,7 @@ public class XmlBizConfig extends AbstractConfig {
     protected boolean initConfig(String fileContent) throws Exception {
         Element rootElement = Dom4jUtils.getRootElement(fileContent);
 
-        Element commonEle = rootElement.element("common");
+        Element commonEle = rootElement.element("demo");
 
 //        把属性写进本对象
         Map<String, String> allAttributeNameValueMap = Dom4jUtils.getAllAttributeNameValueMap(commonEle);
