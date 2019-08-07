@@ -45,7 +45,7 @@ public class Application {
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     /** APP总运行状态,默认true,控制总状态，在钩子函数关闭设置为false后，其它线程应该要感知此状态以此关闭自身线程 */
-    public final static AtomicBoolean APP_RUN_STATUS = new AtomicBoolean(true);
+    public static final AtomicBoolean APP_RUN_STATUS = new AtomicBoolean(true);
 
     /**
      * springboot启动
