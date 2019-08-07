@@ -18,8 +18,9 @@ typeMapping = [
         (~/int/)                          : "Integer",
         (~/(?i)float|double|decimal|real/): "Double",
         (~/(?i)datetime|timestamp/)       : "java.util.Date",
-        (~/(?i)date/)                     : "java.sql.Date",
+        (~/(?i)date/)                     : "java.util.Date",
         (~/(?i)time/)                     : "java.sql.Time",
+        (~/(?i)number/)                   : "Integer",
         (~/(?i)/)                         : "String"
 ]
 
@@ -62,7 +63,7 @@ def genProperty(out, field) {
 }
 
 def genEntity(out, table, entityName, fields, basePackage) {
-  out.println "package ${basePackage}.entity;"
+//  out.println "package ${basePackage}.entity;"
   out.println ""
   if (config.extendBaseEntity) {
     out.println "import $baseEntityPackage;"
@@ -122,11 +123,13 @@ def genService(out, table, entityName, fields, basePackage) {
 }
 
 def genRepository(out, table, entityName, fields, basePackage) {
-  out.println "package ${basePackage}.repository;"
+//  out.println "package ${basePackage}.repository;"
   out.println ""
-  out.println "import ${basePackage}.entity.$entityName;"
+//  out.println "import ${basePackage}.entity.$entityName;"
   out.println "import org.springframework.data.jpa.repository.JpaRepository;"
+  out.println "import org.springframework.stereotype.Repository;"
   out.println ""
+  out.println "@Repository"
   out.println "public interface ${entityName}Repository extends JpaRepository<$entityName, ${fields[0].type}>{}"
 }
 

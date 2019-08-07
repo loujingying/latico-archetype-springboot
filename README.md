@@ -2,7 +2,7 @@
     springboot的maven骨架
     
 ### 项目介绍 
-    springboot混杂骨架，有配置springcloud但是默认不启动，支持多数据源，spring Data JPA和mybatis共存
+    springboot的maven骨架，有配置springcloud但是默认不启动，支持多数据源，spring Data JPA和mybatis共存
     有些依赖包是latico-commons里面的公共组件，需要提前install进本地仓库
 
 ### 如何启动程序？
@@ -103,7 +103,7 @@
     3、指定程序使用的配置文件（生产环境建议使用prod），在application.properties文件中，
         指定为：dev（开发环境）或 test（测试环境）、prod（生产环境），
     
-    4、正常情况，可执行文件:start.bat、start.sh、show-psid.sh、stop.sh，不允许更改；
+    4、正常情况，可执行文件:start.bat、start.sh、status.sh、stop.sh，不允许更改；
 
 ### 如何启动与关闭程序？
     1、windows下
@@ -111,8 +111,8 @@
         1.2、关闭：直接关闭bat窗口
     2、linux下
         2.1启动 ：
-            执行命令：  sh ./start.sh
+            执行命令：  sh start.sh
         2.2、查看进程ID
-            执行命令： sh ./show-psid.sh
+            执行命令： sh status.sh
         2.3、停止进程
-            执行命令： sh ./stop.sh    
+            执行命令： sh stop.sh    
