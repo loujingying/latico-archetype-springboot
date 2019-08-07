@@ -44,8 +44,8 @@ public class Application {
      */
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    /** APP总运行状态,默认false,控制总状态，在钩子函数关闭设置为false后，其它线程应该要感知此状态以此关闭自身线程 */
-    public final static AtomicBoolean APP_RUN_STATUS = new AtomicBoolean(false);
+    /** APP总运行状态,默认true,控制总状态，在钩子函数关闭设置为false后，其它线程应该要感知此状态以此关闭自身线程 */
+    public final static AtomicBoolean APP_RUN_STATUS = new AtomicBoolean(true);
 
     /**
      * springboot启动
@@ -56,7 +56,7 @@ public class Application {
     public static void main(String[] args) throws Throwable {
         //        打开程序状态开关
         APP_RUN_STATUS.set(true);
-        
+
         long startTime = System.currentTimeMillis();
         System.out.println("开始启动程序,时间点:" + new Timestamp(startTime));
         LOG.info("开始启动程序,时间点:" + new Timestamp(startTime));
