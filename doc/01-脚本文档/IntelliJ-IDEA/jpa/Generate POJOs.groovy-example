@@ -97,13 +97,13 @@ def genEntity(out, table, entityName, fields, basePackage) {
 }
 
 def genService(out, table, entityName, fields, basePackage) {
-  out.println "package ${basePackage}.service;"
+//  out.println "package ${basePackage}.service;"
   out.println ""
-  out.println "import ${basePackage}.repository.${entityName}Repository;"
-  out.println "import ${basePackage}.base.Result;"
+//  out.println "import ${basePackage}.repository.${entityName}Repository;"
+//  out.println "import ${basePackage}.base.Result;"
   if (config.extendBaseService) {
-    out.println "import $baseServicePackage;"
-    out.println "import ${basePackage}.entity.$entityName;"
+//    out.println "import $baseServicePackage;"
+//    out.println "import ${basePackage}.entity.$entityName;"
   }
   out.println "import org.springframework.stereotype.Service;"
   out.println ""
@@ -141,14 +141,14 @@ def genRepository(out, table, entityName, fields, basePackage) {
 }*/
 
 def getServiceImpl(out, table, entityName, fields, basePackage) {
-  out.println "package ${basePackage}.service.impl;"
+//  out.println "package ${basePackage}.service.impl;"
   out.println ""
-  out.println "import ${basePackage}.service.${entityName}Service;"
+//  out.println "import ${basePackage}.service.${entityName}Service;"
   out.println "import org.springframework.stereotype.Service;"
-  out.println "import ${basePackage}.base.Result;"
-  out.println "import ${basePackage}.entity.${entityName};"
-  out.println "import ${basePackage}.service.${entityName}Service;"
-  out.println "import ${basePackage}.repository.${entityName}Repository;"
+//  out.println "import ${basePackage}.base.Result;"
+//  out.println "import ${basePackage}.entity.${entityName};"
+//  out.println "import ${basePackage}.service.${entityName}Service;"
+//  out.println "import ${basePackage}.repository.${entityName}Repository;"
   out.println "import org.springframework.beans.factory.annotation.Autowired;"
   out.println ""
   out.println "@Service"
