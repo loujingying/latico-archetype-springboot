@@ -3,6 +3,7 @@ package com.latico.archetype.springboot.controller;
 import com.latico.archetype.springboot.bean.dto.RestRequestDTO;
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
+import com.latico.archetype.springboot.common.util.StrUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.config.yaml.YamlBizConfig;
 import com.latico.archetype.springboot.service.DemoService;
@@ -14,6 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
 import java.util.Date;
 import java.util.Map;
 
@@ -66,7 +69,11 @@ public class DemoController {
      */
     @RequestMapping("serverTime")
     @ApiOperation("获取服务器时间参数API")
-    public DemoTimeParam serverTime() {
+    public DemoTimeParam serverTime(@Context HttpServletRequest httpServletRequest) {
+        String requestURI = httpServletRequest.getRequestURI();
+        String remoteHost = httpServletRequest.getRemoteHost();
+        LOG.info("调用的客户端信息:{} {}", remoteHost, requestURI);
+
         return demoService.serverTime();
     }
 

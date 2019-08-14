@@ -1,5 +1,8 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.common.util.StrUtils;
+import com.latico.commons.common.util.logging.Logger;
+import com.latico.commons.common.util.logging.LoggerFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -23,6 +28,7 @@ import java.net.UnknownHostException;
 @Configuration
 @Api(description = "主页API")
 public class HomeController {
+    private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
     /**
      * 拿到端口配置
@@ -38,7 +44,11 @@ public class HomeController {
 
     @RequestMapping("")
     @ApiOperation("默认主页API")
-    public String home() {
+    public String home(@Context HttpServletRequest httpServletRequest) {
+        String requestURI = httpServletRequest.getRequestURI();
+        String remoteHost = httpServletRequest.getRemoteHost();
+        LOG.info("调用的客户端信息:{} {}", remoteHost, requestURI);
+
         String serverContextPath = this.serverContextPath;
         if (!serverContextPath.startsWith("/")) {
             serverContextPath = "/" + serverContextPath;
