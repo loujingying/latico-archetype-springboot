@@ -47,7 +47,7 @@ public class HomeController {
     public String home(@Context HttpServletRequest httpServletRequest) {
         String requestURI = httpServletRequest.getRequestURI();
         String remoteHost = httpServletRequest.getRemoteHost();
-        LOG.info("调用的客户端信息:{} {}", remoteHost, requestURI);
+        LOG.info("调用的客户端信息,地址:{} 请求路径:{}", remoteHost, requestURI);
 
         String serverContextPath = this.serverContextPath;
         if (!serverContextPath.startsWith("/")) {
