@@ -1,6 +1,8 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+.gradle/
+gradle/
 
 ### STS ###
 .apt_generated
@@ -37,6 +39,7 @@ log/
 *.log
 gen
 target/
+
 pom.xml.versionsBackup
 .settings/
 .apt_generated/
