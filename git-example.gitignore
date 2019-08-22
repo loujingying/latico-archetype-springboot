@@ -1,7 +1,7 @@
 ### 因为骨架打包的原因，.gitignore打包不进去，新建项目后把该文件重命名为: .gitignore
 HELP.md
 /target/
-!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/
 .gradle/
 gradle/
 
