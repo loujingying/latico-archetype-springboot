@@ -55,7 +55,7 @@ public class MybatisDataSourceConfig {
      * TODO 需要修改的地方
      * mapper的xml文件的位置
      */
-    private static final String MAPPER_LOCATION = "classpath*:mapper/secondary/**/*.xml";
+    private static final String MAPPER_LOCATION = "classpath*:mybatis/mapper/secondary/**/*.xml";
 
 
     /**

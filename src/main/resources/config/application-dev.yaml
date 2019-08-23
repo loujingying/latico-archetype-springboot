@@ -90,7 +90,7 @@ spring:
       username: ${jdbcUsername}
       password: ${jdbcPassword}
       #      mysql的查询校验
-#      validation-query: SELECT 'x'
+      #      validation-query: SELECT 'x'
       #      oracle的查询校验
       #      validation-query: SELECT 'x'  FROM DUAL
 
@@ -123,7 +123,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: false
-##  mapper-locations: classpath:mapper/**/*.xml
+##  mapper-locations: classpath:mybatis/mapper/**/*.xml
 ##  type-aliases-package: com.latico.archetype.springboot.dao.secondary
 ###########################################################
 ###########################################################
