@@ -208,6 +208,11 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
             <!--打包骨架插件，如果是多模块方式的项目结构，有bug(模块中不能含有名称为config的文件夹)-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
