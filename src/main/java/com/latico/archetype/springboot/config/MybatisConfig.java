@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * <PRE>
- *
+ * mybatis的配置
  * </PRE>
  *
  * @Author: latico

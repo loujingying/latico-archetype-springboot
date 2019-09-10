@@ -3,6 +3,7 @@ package com.latico.archetype.springboot.controller;
 import com.latico.archetype.springboot.bean.dto.RestRequestDTO;
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
+import com.latico.archetype.springboot.common.anno.TimeStatisAspectAnnotation;
 import com.latico.archetype.springboot.common.util.StrUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.config.yaml.YamlBizConfig;
@@ -67,6 +68,7 @@ public class DemoController {
     /**
      * @return 对象类型数据
      */
+    @TimeStatisAspectAnnotation
     @RequestMapping("serverTime")
     @ApiOperation("获取服务器时间参数API")
     public DemoTimeParam serverTime(@Context HttpServletRequest httpServletRequest) {
@@ -80,6 +82,7 @@ public class DemoController {
     /**
      * @return 字符串类型数据
      */
+    @TimeStatisAspectAnnotation
     @RequestMapping(value = "serverTimeStr")
     @ApiOperation("获取字符串类型服务器时间API")
     public String serverTimeStr() {
@@ -90,6 +93,7 @@ public class DemoController {
     /**
      * @return 对象类型数据
      */
+    @TimeStatisAspectAnnotation
     @RequestMapping(value = "serverTimeBean", method = {RequestMethod.POST})
     @ApiOperation("获取服务器时间API")
     public RestResponseDTO<DemoTimeParam> serverTimeBean(@RequestBody RestRequestDTO<DemoTimeParam> restRequestDTO) {
@@ -111,6 +115,7 @@ public class DemoController {
      * 测试URL中的键值对参数，可以多个 RequestParam
      * @return 字符串类型数据
      */
+    @TimeStatisAspectAnnotation
     @RequestMapping(value = "testRequestParam")
     @ApiOperation("测试请求参数API")
     public String testRequestParam(@RequestParam("name") String name) {
@@ -122,6 +127,7 @@ public class DemoController {
      * 测试路径中的参数 PathVariable
      * @return 字符串类型数据
      */
+    @TimeStatisAspectAnnotation
     @RequestMapping(value = "testPathVariable/{name}")
     @ApiOperation("获测试路径变量API")
     public String testPathVariable(@PathVariable String name) {
@@ -133,6 +139,7 @@ public class DemoController {
      * 测试路径中的多参数 多路径参数，PathVariable
      * @return 字符串类型数据
      */
+    @TimeStatisAspectAnnotation
     @RequestMapping(value = "testMultiPathVariable/{name}/{value}")
     @ApiOperation("测试路径多变量API")
     public String testMultiPathVariable(@PathVariable Map<String, String> map) {
