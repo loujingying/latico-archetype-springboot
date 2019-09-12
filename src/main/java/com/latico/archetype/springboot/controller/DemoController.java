@@ -15,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
@@ -145,5 +146,20 @@ public class DemoController {
     public String testMultiPathVariable(@PathVariable Map<String, String> map) {
         //返回字符串，需要包一层JSON
         return JacksonUtils.objToJson("测试testMultiPathVariable:" + map.get("name") + "/" + map.get("value"));
+    }
+
+    /**
+     * 返回ModelAndView
+     * @return
+     */
+    @RequestMapping("hello")
+    @ApiOperation("返回动态类型的hello.html网页API")
+    public ModelAndView hello() {
+        ModelAndView modelAndView = new ModelAndView();
+        //templates目录下的
+        modelAndView.setViewName("hello.html");
+        modelAndView.addObject("city", "北京");
+        modelAndView.addObject("name", "长城");
+        return modelAndView;
     }
 }
