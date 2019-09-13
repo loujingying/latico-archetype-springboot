@@ -148,18 +148,4 @@ public class DemoController {
         return JacksonUtils.objToJson("测试testMultiPathVariable:" + map.get("name") + "/" + map.get("value"));
     }
 
-    /**
-     * 返回ModelAndView
-     * @return
-     */
-    @RequestMapping("hello")
-    @ApiOperation("返回动态类型的hello.html网页API")
-    public ModelAndView hello() {
-        ModelAndView modelAndView = new ModelAndView();
-        //templates目录下的
-        modelAndView.setViewName("hello.html");
-        modelAndView.addObject("city", "北京");
-        modelAndView.addObject("name", "长城");
-        return modelAndView;
-    }
 }

@@ -441,7 +441,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <!-- thymeleaf模版 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!-- 在工作中，我们会经常遇到读取配置文件的操作，但是一般都是key-value 这种形式的值，
         从yml(yaml)读取String[],List<Map<String.String>>,List<String>,Map<String,String> 这种格式的数据 -->
         <dependency>
