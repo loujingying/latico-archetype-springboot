@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import java.util.Date;
 import java.util.Map;
@@ -72,7 +73,7 @@ public class DemoController {
     @TimeStatisAspectAnnotation
     @RequestMapping("serverTime")
     @ApiOperation("获取服务器时间参数API")
-    public DemoTimeParam serverTime(@Context HttpServletRequest httpServletRequest) {
+    public DemoTimeParam serverTime(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
         String requestURI = httpServletRequest.getRequestURI();
         String remoteHost = httpServletRequest.getRemoteHost();
         LOG.info("调用的客户端信息,地址:{} 请求路径:{}", remoteHost, requestURI);

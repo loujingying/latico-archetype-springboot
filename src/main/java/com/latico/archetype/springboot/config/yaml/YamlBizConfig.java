@@ -24,7 +24,7 @@ public class YamlBizConfig {
      * 私有单例对象，需要使用volatile，让其他线程直接可见
      */
     private static volatile YamlBizConfig instance;
-    private final DemoYamlConfigAttributes demoYamlConfigAttributes;
+    private final DemoYamlConfig demoYamlConfigAttributes;
 
     /**
      * 提供给外界获取单例的方法
@@ -49,7 +49,7 @@ public class YamlBizConfig {
      * 私有构造方法，让外界不能创建对象，在这里做初始化逻辑处理
      */
     private YamlBizConfig() {
-        this.demoYamlConfigAttributes = SpringUtils.getBean(DemoYamlConfigAttributes.class);
+        this.demoYamlConfigAttributes = SpringUtils.getBean(DemoYamlConfig.class);
     }
 
     /**
@@ -82,8 +82,8 @@ public class YamlBizConfig {
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "config-attributes")
-class DemoYamlConfigAttributes {
+@ConfigurationProperties(prefix = "demo-yaml-config")
+class DemoYamlConfig {
     private String value;
     private String[] valueArray;
     private List<String> valueList;
