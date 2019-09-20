@@ -1,6 +1,7 @@
 package com.latico.archetype.springboot.controller;
 
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.mapper.DemoDaoRepository;
 import com.latico.archetype.springboot.dao.primary.mapper.DemoRepository;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.archetype.springboot.dao.secondary.mapper.Demo2Mapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,13 +42,43 @@ public class TestDBController {
     @Autowired
     Demo2Mapper demo2Mapper;
 
+
+    @Autowired
+    DemoDaoRepository demoDaoRepository;
+
     /**
      * @return 查询数据库所有Demo数据
      */
     @RequestMapping(value = "selectDemo")
     @ApiOperation("测试查询Demo表API")
     public List<Demo> selectDemo() {
-        return demoRepository.findAll();
+
+        List<Demo> list = new ArrayList<>();
+
+        Demo demo = new Demo();
+        list.add(demo);
+        demo.setAdministrator(true);
+        demo.setPassword("admin");
+        demo.setUsername("admin");
+        demo = new Demo();
+        list.add(demo);
+        demo.setAdministrator(true);
+        demo.setPassword("admin");
+        demo.setUsername("admin");
+        demo = new Demo();
+        list.add(demo);
+        demo.setAdministrator(true);
+        demo.setPassword("admin");
+        demo.setUsername("admin");
+        demoDaoRepository.insertBatch(list, 500);
+
+        List<Demo> all = demoRepository.findAll();
+
+        Iterable<Demo> demos = demoDaoRepository.updateBatch(all, 500);
+
+        return all;
+
+
     }
 
     @RequestMapping(value = "selectDemo2")
