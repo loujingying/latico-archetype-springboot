@@ -1,13 +1,13 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.bean.dto.RestRequestDTO;
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
-import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.common.anno.TimeStatisAspectAnnotation;
-import com.latico.archetype.springboot.common.util.StrUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.config.yaml.YamlBizConfig;
-import com.latico.archetype.springboot.dao.secondary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.archetype.springboot.service.DemoService;
 import com.latico.commons.common.util.json.JacksonUtils;
 import com.latico.commons.common.util.logging.Logger;
@@ -16,7 +16,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,13 +53,13 @@ public class DemoController {
      */
     @RequestMapping(value = "insertAndSelectDemo")
     @ApiOperation("测试第一个数据源查询Demo表API")
-    public List<com.latico.archetype.springboot.dao.primary.entity.Demo> insertAndSelectDemo(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
+    public List<Demo> insertAndSelectDemo(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
         return demoService.insertAndSelectDemo(httpServletRequest, httpServletResponse);
     }
 
     @RequestMapping(value = "selectDemo2")
     @ApiOperation("测试第二个数据源查询Demo表API")
-    public List<com.latico.archetype.springboot.dao.secondary.entity.Demo> selectDemo2(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
+    public List<Demo2> selectDemo2(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
         return demoService.selectDemo2(httpServletRequest, httpServletResponse);
     }
 

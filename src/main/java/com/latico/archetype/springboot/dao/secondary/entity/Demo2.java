@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "demo")
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
-public class Demo implements Serializable {
+public class Demo2 implements Serializable {
 
 	@Column(name = "auto_id", insertable = false, updatable = false)
 	private Integer autoId;

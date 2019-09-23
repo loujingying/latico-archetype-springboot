@@ -3,7 +3,7 @@
 <mapper namespace="com.latico.archetype.springboot.dao.secondary.mapper.Demo2Mapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.latico.archetype.springboot.dao.secondary.entity.Demo">
+    <resultMap id="BaseResultMap" type="com.latico.archetype.springboot.dao.secondary.entity.Demo2">
         <id column="auto_id" property="autoId" />
         <result column="id" property="id" />
         <result column="task_id" property="taskId" />

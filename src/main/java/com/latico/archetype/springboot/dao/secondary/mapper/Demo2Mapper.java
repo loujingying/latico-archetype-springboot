@@ -1,7 +1,7 @@
 package com.latico.archetype.springboot.dao.secondary.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.latico.archetype.springboot.dao.secondary.entity.Demo;
+import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import java.util.List;
  * @author latico
  * @since 2019-02-26
  */
-public interface Demo2Mapper extends BaseMapper<Demo> {
+public interface Demo2Mapper extends BaseMapper<Demo2> {
     /**
      * @return
      */
-    List<Demo> findAll();
+    List<Demo2> findAll();
 }

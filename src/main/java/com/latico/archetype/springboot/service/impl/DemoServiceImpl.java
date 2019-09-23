@@ -7,6 +7,7 @@ import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
 import com.latico.archetype.springboot.dao.primary.mapper.DemoMapper;
 import com.latico.archetype.springboot.dao.primary.repository.DemoRepository;
+import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.archetype.springboot.dao.secondary.mapper.Demo2Mapper;
 import com.latico.archetype.springboot.dao.secondary.repository.Demo2Repository;
 import com.latico.archetype.springboot.service.DemoService;
@@ -89,7 +90,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public List<com.latico.archetype.springboot.dao.secondary.entity.Demo> selectDemo2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public List<Demo2> selectDemo2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return demo2Mapper.findAll();
     }
 
