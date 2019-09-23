@@ -108,6 +108,9 @@ public class DemoServiceImpl implements DemoService {
     protected void insert(HttpServletRequest httpServletRequest) {
         Demo demo = new Demo();
         Integer taskIdMax = demoRepository.getTaskIdMax();
+        if (taskIdMax == null) {
+            taskIdMax = 1;
+        }
         demo.setTaskId(++taskIdMax);
         demo.setExecType(httpServletRequest.getRequestURI());
         demo.setExecStatus(2);
@@ -126,6 +129,9 @@ public class DemoServiceImpl implements DemoService {
     protected void insertDemo(HttpServletRequest httpServletRequest) {
         List<Demo> list = new ArrayList<>();
         Integer taskIdMax = demoRepository.getTaskIdMax();
+        if (taskIdMax == null) {
+            taskIdMax = 1;
+        }
         Demo demo = new Demo();
         list.add(demo);
         demo.setTaskId(++taskIdMax);
