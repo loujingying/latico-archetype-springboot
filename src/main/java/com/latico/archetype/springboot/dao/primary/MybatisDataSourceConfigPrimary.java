@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.dao.secondary;
+package com.latico.archetype.springboot.dao.primary;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -28,7 +29,7 @@ import javax.sql.DataSource;
  * 数据源配置，如果不需要，可以把该类删掉，那么启动程序的时候就不会连接数据库
  * <p>
  * 如果拷贝该类创建一个新数据源，需要修改的地方有如下字段：
- * 把后缀带有secondary的名称全部替换目标字符串
+ * 把后缀带有primary的名称全部替换目标字符串
  * </PRE>
  *
  * @Author: latico
@@ -36,37 +37,37 @@ import javax.sql.DataSource;
  * @Version: 1.0
  */
 @Configuration
-@MapperScan(basePackages = MybatisDataSourceConfig.MAPPER_PACKAGE,
-        sqlSessionTemplateRef = MybatisDataSourceConfig.sqlSessionTemplateBeanName)
-public class MybatisDataSourceConfig {
+@MapperScan(basePackages = MybatisDataSourceConfigPrimary.MAPPER_PACKAGE,
+        sqlSessionTemplateRef = MybatisDataSourceConfigPrimary.sqlSessionTemplateBeanName)
+public class MybatisDataSourceConfigPrimary {
 
     /**
      * TODO 需要修改的地方
      * mapper的接口类
      * 精确到 master 目录，以便跟其他数据源隔离
      */
-    public static final String MAPPER_PACKAGE = "com.latico.archetype.springboot.dao.secondary.mapper";
+    public static final String MAPPER_PACKAGE = "com.latico.archetype.springboot.dao.primary.mapper";
 
     /**
      * TODO 需要修改的地方
      * mapper的xml文件的位置
      */
-    private static final String MAPPER_LOCATION = "classpath*:mybatis/mapper/secondary/**/*.xml";
+    private static final String MAPPER_LOCATION = "classpath*:mybatis/mapper/primary/**/*.xml";
 
 
     /**
      * TODO
      */
-    public static final String sqlSessionFactoryBeanName = "com.latico.archetype.springboot.dao.secondary.sqlSessionFactory";
+    public static final String sqlSessionFactoryBeanName = "com.latico.archetype.springboot.dao.primary.sqlSessionFactory";
 
     /**
      * TODO
      */
-    public static final String transactionManagerBeanName = "com.latico.archetype.springboot.dao.secondary.mybatisTransactionManager";
+    public static final String transactionManagerBeanName = "com.latico.archetype.springboot.dao.primary.mybatisTransactionManager";
     /**
      * TODO
      */
-    public static final String sqlSessionTemplateBeanName = "com.latico.archetype.springboot.dao.secondary.sqlSessionTemplate";
+    public static final String sqlSessionTemplateBeanName = "com.latico.archetype.springboot.dao.primary.sqlSessionTemplate";
     /**
      * mybatis配置
      */
@@ -76,9 +77,8 @@ public class MybatisDataSourceConfig {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = DbConfig.secondaryDatasourceConfigPrefix)
+    @Resource(name = DbConfig.primaryDatasourceConfigPrefix)
     private DataSource dataSource;
-
 
     @Bean(name = sqlSessionFactoryBeanName)
     public SqlSessionFactory sqlSessionFactory() throws Exception {

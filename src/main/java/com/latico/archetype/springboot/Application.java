@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationListener;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.sql.Timestamp;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -35,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class})
 @ServletComponentScan
 @EnableFeignClients
-
+@EnableTransactionManagement
 //EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接
 //@org.springframework.cloud.netflix.eureka.EnableEurekaClient
 public class Application {

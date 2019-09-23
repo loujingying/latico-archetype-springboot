@@ -7,6 +7,7 @@ import com.latico.archetype.springboot.common.anno.TimeStatisAspectAnnotation;
 import com.latico.archetype.springboot.common.util.StrUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.config.yaml.YamlBizConfig;
+import com.latico.archetype.springboot.dao.secondary.entity.Demo;
 import com.latico.archetype.springboot.service.DemoService;
 import com.latico.commons.common.util.json.JacksonUtils;
 import com.latico.commons.common.util.logging.Logger;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +48,27 @@ public class DemoController {
 
     @Autowired
     DemoService demoService;
+
+    /**
+     * @return 查询数据库所有Demo数据
+     */
+    @RequestMapping(value = "insertAndSelectDemo")
+    @ApiOperation("测试第一个数据源查询Demo表API")
+    public List<com.latico.archetype.springboot.dao.primary.entity.Demo> insertAndSelectDemo(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
+        return demoService.insertAndSelectDemo(httpServletRequest, httpServletResponse);
+    }
+
+    @RequestMapping(value = "selectDemo2")
+    @ApiOperation("测试第二个数据源查询Demo表API")
+    public List<com.latico.archetype.springboot.dao.secondary.entity.Demo> selectDemo2(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
+        return demoService.selectDemo2(httpServletRequest, httpServletResponse);
+    }
+
+    @RequestMapping(value = "queryAllDemo")
+    @ApiOperation("测试所有数据源查询demo表API")
+    public String queryAllDemo() {
+        return demoService.queryAllDemo();
+    }
 
     /**
      * 测试读取yaml业务配置文件的方式2，单例读取配置方式

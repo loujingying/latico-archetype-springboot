@@ -3,6 +3,7 @@ package com.latico.archetype.springboot.dao.primary.mapper;
 import com.latico.archetype.springboot.common.util.PageableUtils;
 import com.latico.archetype.springboot.dao.DaoTestApplication;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.repository.DemoRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package com.latico.archetype.springboot.dao.secondary.mapper;
+package com.latico.archetype.springboot.dao.primary.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.latico.archetype.springboot.dao.secondary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.entity.Demo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author latico
  * @since 2019-02-26
  */
-public interface Demo2Mapper extends BaseMapper<Demo> {
+public interface DemoMapper extends BaseMapper<Demo> {
     /**
      * @return
      */

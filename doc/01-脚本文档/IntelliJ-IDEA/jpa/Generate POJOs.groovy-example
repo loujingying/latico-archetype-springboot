@@ -130,7 +130,7 @@ def genRepository(out, table, entityName, fields, basePackage) {
   out.println "import org.springframework.stereotype.Repository;"
   out.println ""
   out.println "@Repository"
-  out.println "public interface ${entityName}Repository extends JpaRepository<$entityName, ${fields[0].type}>{"
+  out.println "public interface ${entityName}Repository extends BaseRepository<$entityName, ${fields[0].type}>{"
   out.println "    "
   out.println "}"
 }

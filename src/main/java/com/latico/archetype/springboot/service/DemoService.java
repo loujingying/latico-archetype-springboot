@@ -2,6 +2,10 @@ package com.latico.archetype.springboot.service;
 
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 /**
  * <PRE>
  *
@@ -25,4 +29,9 @@ public interface DemoService {
      */
     DemoTimeParam serverTime();
 
+    List<com.latico.archetype.springboot.dao.primary.entity.Demo> insertAndSelectDemo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
+
+    List<com.latico.archetype.springboot.dao.secondary.entity.Demo> selectDemo2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
+
+    String queryAllDemo();
 }

@@ -2,7 +2,6 @@ package com.latico.archetype.springboot.client.type_common_feign;
 
 
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
-import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -19,7 +18,7 @@ import java.util.List;
  }
 
  @RequestMapping(value = "selectDemo2")
- public List<Demo2> selectDemo2() {
+ public List<Demo> selectDemo2() {
  return demo2Mapper.findAll();
  }
  * </PRE>
@@ -41,6 +40,6 @@ public interface TestDBControllerClient {
     @Path("/selectDemo2")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public List<Demo2> selectDemo2();
+    public List<Demo> selectDemo2();
 
 }

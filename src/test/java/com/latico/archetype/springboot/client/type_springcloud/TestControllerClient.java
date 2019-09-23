@@ -2,7 +2,6 @@ package com.latico.archetype.springboot.client.type_springcloud;
 
 
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
-import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,6 +32,6 @@ public interface TestControllerClient {
     public List<Demo> selectDemo();
 
     @RequestMapping("selectDemo2")
-    public List<Demo2> selectDemo2();
+    public List<Demo> selectDemo2();
 
 }

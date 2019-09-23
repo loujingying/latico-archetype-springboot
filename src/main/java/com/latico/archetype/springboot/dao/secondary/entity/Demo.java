@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.dao.primary.entity;
+package com.latico.archetype.springboot.dao.secondary.entity;
 
 import lombok.Data;
 

@@ -1,9 +1,9 @@
 package com.latico.archetype.springboot.dao.secondary.mapper;
 
-import com.latico.archetype.springboot.dao.DaoTestApplication;
-import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
-import com.latico.commons.orm.mybatis.PageHelperUtils;
 import com.github.pagehelper.Page;
+import com.latico.archetype.springboot.dao.DaoTestApplication;
+import com.latico.archetype.springboot.dao.secondary.entity.Demo;
+import com.latico.commons.orm.mybatis.PageHelperUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,9 @@ public class Demo2MapperTest {
     @Test
     public void test() {
 
-        Page<Demo2> page = PageHelperUtils.startPage(1, 3);
+        Page<Demo> page = PageHelperUtils.startPage(1, 3);
         System.out.println("page查询前:" + page);
-        List<Demo2> datas = demo2Mapper.findAll();
+        List<Demo> datas = demo2Mapper.findAll();
         System.out.println("page查询后:" + page);
         System.out.println("数据结果:" + datas);
     }
