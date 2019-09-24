@@ -61,25 +61,25 @@ public class JpaDataSourceConfig {
     public static final String ENTITY_PREFIX = "com.latico.archetype.springboot.dao.secondary.entity";
 
     /**
-     *
+     *TODO
      */
-    public static final String entityManagerBeanName = "com.latico.archetype.springboot.dao.secondary.entityManager";
+    public static final String entityManagerBeanName = "secondary.jpa.entityManager";
     /**
-     *
+     *TODO
      */
-    public static final String entityManagerFactoryBuilderBeanName = "com.latico.archetype.springboot.dao.secondary.entityManagerFactoryBuilder";
+    public static final String entityManagerFactoryBuilderBeanName = "secondary.jpa.entityManagerFactoryBuilder";
     /**
-     *
+     *TODO
      */
-    public static final String entityManagerFactoryBeanName = "com.latico.archetype.springboot.dao.secondary.entityManagerFactory";
+    public static final String entityManagerFactoryBeanName = "secondary.jpa.entityManagerFactory";
     /**
-     *
+     *TODO
      */
-    public static final String persistenceUnitBeanName = "com.latico.archetype.springboot.dao.secondary.persistenceUnit";
+    public static final String persistenceUnitBeanName = "secondary.jpa.persistenceUnit";
     /**
-     *
+     *TODO
      */
-    public static final String transactionManagerBeanName = "com.latico.archetype.springboot.dao.secondary.jpaTransactionManager";
+    public static final String transactionManagerBeanName = "secondary.jpa.transactionManager";
 
     /**
      * JPA配置

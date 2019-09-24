@@ -57,16 +57,16 @@ public class MybatisDataSourceConfig {
     /**
      * TODO
      */
-    public static final String sqlSessionFactoryBeanName = "com.latico.archetype.springboot.dao.secondary.sqlSessionFactory";
+    public static final String sqlSessionFactoryBeanName = "secondary.mybatis.sqlSessionFactory";
 
     /**
      * TODO
      */
-    public static final String transactionManagerBeanName = "com.latico.archetype.springboot.dao.secondary.mybatisTransactionManager";
+    public static final String transactionManagerBeanName = "secondary.mybatis.transactionManager";
     /**
      * TODO
      */
-    public static final String sqlSessionTemplateBeanName = "com.latico.archetype.springboot.dao.secondary.sqlSessionTemplate";
+    public static final String sqlSessionTemplateBeanName = "secondary.mybatis.sqlSessionTemplate";
     /**
      * mybatis配置
      */

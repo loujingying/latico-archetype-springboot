@@ -58,16 +58,16 @@ public class MybatisDataSourceConfigPrimary {
     /**
      * TODO
      */
-    public static final String sqlSessionFactoryBeanName = "com.latico.archetype.springboot.dao.primary.sqlSessionFactory";
+    public static final String sqlSessionFactoryBeanName = "primary.mybatis.sqlSessionFactory";
 
     /**
      * TODO
      */
-    public static final String transactionManagerBeanName = "com.latico.archetype.springboot.dao.primary.mybatisTransactionManager";
+    public static final String transactionManagerBeanName = "primary.mybatis.transactionManager";
     /**
      * TODO
      */
-    public static final String sqlSessionTemplateBeanName = "com.latico.archetype.springboot.dao.primary.sqlSessionTemplate";
+    public static final String sqlSessionTemplateBeanName = "primary.mybatis.sqlSessionTemplate";
     /**
      * mybatis配置
      */
