@@ -39,7 +39,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
     public static void startTimer() {
         LOG.info("开始启动定时器QuartzManager定时执行相关任务");
 
-//        使用最简单的构造方式，如果有特殊需求，可以使用其他更多入参的方法，配置5秒钟执行一次
+//        使用最简单的构造方式，如果有特殊需求，可以使用其他更多入参的方法，配置3秒钟执行一次
         QuartzManager.getInstance().addJob(DemoQuartzJob.JOB_NAME,
                 DemoQuartzJob.class, "0/3 * * * * ?");
 
