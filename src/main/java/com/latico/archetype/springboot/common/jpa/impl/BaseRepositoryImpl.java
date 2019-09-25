@@ -21,6 +21,7 @@ import java.util.List;
  * @Version: 1.0
  */
 @SuppressWarnings("ALL")
+@Transactional(readOnly = true)
 public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseRepository<T, ID> {
     /**
      * 实体类
