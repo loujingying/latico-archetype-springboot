@@ -5,6 +5,7 @@ import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.spring.extend.ApplicationContextAwareImpl;
 import com.latico.commons.spring.util.SpringUtils;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -60,16 +61,14 @@ public class Application {
         long startTime = System.currentTimeMillis();
         System.out.println("开始启动程序,时间点:" + new Timestamp(startTime));
         LOG.info("开始启动程序,时间点:" + new Timestamp(startTime));
+        //启动程序
+        startShutDownHook();
 
         SpringApplication application = new SpringApplication(Application.class);
 
-        //        添加程序启动后执行的监听器，因为spring还未启动，所以不能使用注解注入的方式获取监听器，要自己扫描出来
-        ApplicationListener[] listeners = ResourcesUtils.scanCurrentApplicationListeners();
-        if (listeners != null) {
-            application.addListeners(listeners);
-        }
-//启动程序
-        startShutDownHook();
+//        添加监听器
+        addListeners(application);
+
         application.run(args);
 
         long endTime = System.currentTimeMillis();
@@ -79,11 +78,30 @@ public class Application {
     }
 
     /**
+     * 添加监听器
+     * @param application
+     * @throws Exception
+     */
+    public static void addListeners(SpringApplication application) {
+        //        添加程序启动后执行的监听器，因为spring还未启动，所以不能使用注解注入的方式获取监听器，要自己扫描出来
+        ApplicationListener[] listeners = new ApplicationListener[0];
+        try {
+            listeners = ResourcesUtils.scanCurrentApplicationListeners();
+            if (listeners != null) {
+                application.addListeners(listeners);
+            }
+        } catch (Exception e) {
+            LOG.error("扫描添加监听器出错", e);
+        }
+
+    }
+
+    /**
      * 该方法不需要改动，添加钩子和打印日志用
      * 防止程序意外退出没有关闭资源，通过钩子函数来清空资源，主要关闭连接，释放列表等。
      * 注意：kill -9 pid是不会执行钩子函数，所以应该用kill pid命令杀进程，如果杀不死再用kill -9 pid
      */
-    private static void startShutDownHook() {
+    public static void startShutDownHook() {
 
         LOG.info("程序启动钩子函数监听功能...");
         //注册一个新的虚拟机关闭钩子
@@ -116,4 +134,5 @@ public class Application {
         LOG.warn("执行ShutDownHook业务操作");
         APP_RUN_STATUS.set(false);
     }
+
 }

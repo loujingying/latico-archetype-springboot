@@ -11,7 +11,6 @@ public class StartupListenerTest {
     @Test
     public void startTimer() {
         LogUtils.loadLogBackConfig("./config/logback-spring.xml");
-        StartupListener.startTimer();
         DemoServiceImpl demo = new DemoServiceImpl();
         System.out.println(demo.serverTimeStr());
     }
