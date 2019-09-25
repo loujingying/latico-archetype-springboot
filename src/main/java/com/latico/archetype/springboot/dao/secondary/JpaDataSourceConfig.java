@@ -103,7 +103,7 @@ public class JpaDataSourceConfig {
     /**
      * @return 配置信息
      */
-    private Map<String, String> getVendorProperties() {
+    private Map<String, String> getJpaProperties() {
         if (jpaProperties == null) {
             return new HashMap<>();
         }
@@ -119,7 +119,7 @@ public class JpaDataSourceConfig {
     public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 //        创建hibernate适配器
         JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        return new EntityManagerFactoryBuilder(adapter, getVendorProperties(), persistenceUnitManager);
+        return new EntityManagerFactoryBuilder(adapter, getJpaProperties(), persistenceUnitManager);
     }
 
     /**
@@ -131,7 +131,7 @@ public class JpaDataSourceConfig {
                 .dataSource(dataSource)
                 .packages(ENTITY_PREFIX)
                 .persistenceUnit(persistenceUnitBeanName)
-                .properties(getVendorProperties())
+                .properties(getJpaProperties())
                 .build();
     }
 
