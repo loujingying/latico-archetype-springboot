@@ -27,6 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  Filter可以直接通过@WebFilter注解自动注册
  Listener可以直接通过@WebListener 注解自动注册
 
+ 排除掉PageHelperAutoConfiguration.class，目的是不让mybatis分页插件重复注册报错
+
  * </PRE>
  *
  * @Author: latico
