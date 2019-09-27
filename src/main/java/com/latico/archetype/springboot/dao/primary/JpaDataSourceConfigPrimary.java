@@ -49,34 +49,38 @@ import java.util.Map;
         repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 public class JpaDataSourceConfigPrimary {
 
-
     /**
-     * TODO
+     * TODO 需要修改的地方
+     * 数据库配置名称
+     */
+    public static final String dbConfigName = DbConfig.dbConfigName_primary;
+    /**
+     * TODO 需要修改的地方
      * 实体目录
      * 拷贝后需要修改具体的实体包路径
      */
     public static final String ENTITY_PREFIX = Demo.class.getPackage().getName();
 
     /**
-     * TODO
+     * 实体管理器bean名称
      */
-    public static final String entityManagerBeanName = "primary.jpa.entityManager";
+    public static final String entityManagerBeanName = "jpa.entityManager." + dbConfigName;
     /**
-     * TODO
+     * 实体管理器工厂建造器bean名称
      */
-    public static final String entityManagerFactoryBuilderBeanName = "primary.jpa.entityManagerFactoryBuilder";
+    public static final String entityManagerFactoryBuilderBeanName = "jpa.entityManagerFactoryBuilder." + dbConfigName;
     /**
-     *TODO
+     * 实体管理器工厂bean名称
      */
-    public static final String entityManagerFactoryBeanName = "primary.jpa.entityManagerFactory";
+    public static final String entityManagerFactoryBeanName = "jpa.entityManagerFactory." + dbConfigName;
     /**
-     *TODO
+     * 持久化单元bean名称
      */
-    public static final String persistenceUnitBeanName = "primary.jpa.persistenceUnit";
+    public static final String persistenceUnitBeanName = "jpa.persistenceUnit." + dbConfigName;
     /**
-     *TODO
+     * 事务管理器bean名称
      */
-    public static final String transactionManagerBeanName = "primary.jpa.transactionManager";
+    public static final String transactionManagerBeanName = "jpa.transactionManager." + dbConfigName;
 
     /**
      * JPA配置
@@ -87,7 +91,7 @@ public class JpaDataSourceConfigPrimary {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = DbConfig.primaryDatasourceConfigPrefix)
+    @Resource(name = DbConfig.datasourceConfigPrefix_primary)
     private DataSource dataSource;
 
 

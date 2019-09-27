@@ -21,14 +21,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * <p>
  * 路径包括了spring的工具类{@link SpringUtils}
  * 该类支持从spring容器获取bean，读取spring配置的方式是：{@link SpringUtils#getApplicationContext()} 拿到它后可以读取配置文件里面的内容
+ * <p>
+ * SpringBootApplication 上使用@ServletComponentScan 注解后
+ * Servlet可以直接通过@WebServlet注解自动注册
+ * Filter可以直接通过@WebFilter注解自动注册
+ * Listener可以直接通过@WebListener 注解自动注册
+ * <p>
+ * 排除掉PageHelperAutoConfiguration.class，目的是不让mybatis分页插件重复注册报错
  *
- SpringBootApplication 上使用@ServletComponentScan 注解后
- Servlet可以直接通过@WebServlet注解自动注册
- Filter可以直接通过@WebFilter注解自动注册
- Listener可以直接通过@WebListener 注解自动注册
-
- 排除掉PageHelperAutoConfiguration.class，目的是不让mybatis分页插件重复注册报错
-
  * </PRE>
  *
  * @Author: latico
@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @Version: 1.0
  */
 @SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class},
-exclude = {PageHelperAutoConfiguration.class})
+        exclude = {PageHelperAutoConfiguration.class})
 @ServletComponentScan
 @EnableFeignClients
 //EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接
@@ -47,7 +47,9 @@ public class Application {
      */
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    /** APP总运行状态,默认true,控制总状态，在钩子函数关闭设置为false后，其它线程应该要感知此状态以此关闭自身线程 */
+    /**
+     * APP总运行状态,默认true,控制总状态，在钩子函数关闭设置为false后，其它线程应该要感知此状态以此关闭自身线程
+     */
     public static final AtomicBoolean APP_RUN_STATUS = new AtomicBoolean(true);
 
     /**
@@ -81,6 +83,7 @@ public class Application {
 
     /**
      * 添加监听器
+     *
      * @param application
      * @throws Exception
      */
@@ -129,9 +132,10 @@ public class Application {
     /**
      * 钩子函数具体的执行业务处理操作
      * TODO 在此处执行钩子函数要具体处理的释放资源等操作。
+     *
      * @throws Exception
      */
-    private static void executeShutDownHook() throws Exception{
+    private static void executeShutDownHook() throws Exception {
         System.out.println("执行ShutDownHook业务操作");
         LOG.warn("执行ShutDownHook业务操作");
         APP_RUN_STATUS.set(false);

@@ -3,7 +3,6 @@ package com.latico.archetype.springboot.config;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,25 +27,37 @@ import javax.sql.DataSource;
 public class DbConfig {
 
     /**
+     * TODO 可能需要修改的地方
+     * 主数据库配置名称
+     */
+    public static final String dbConfigName_primary = "primary";
+
+    /**
+     * TODO 可能需要修改的地方
+     * 第二个数据库配置名称
+     */
+    public static final String dbConfigName_secondary = "secondary";
+
+    /**
      * 主数据源配置
      * 数据源配置前缀，跟application配置文件的要对应上
      */
-    public static final String primaryDatasourceConfigPrefix = "spring.datasource.primary";
+    public static final String datasourceConfigPrefix_primary = "spring.datasource." + dbConfigName_primary;
 
     /**
-     * 第二个数据源配置
+     * 第二个数据源配置配置前缀，默认通过组拼字符串方式获取，如果不是，请修改
      */
-    public static final String secondaryDatasourceConfigPrefix = "spring.datasource.secondary";
+    public static final String datasourceConfigPrefix_secondary = "spring.datasource." + dbConfigName_secondary;
 
     /**
      * 在这里，用了什么数据源就返回什么数据源，如果是返回{@link DataSource}，那么springboot2.0会默认使用HikariCP作为数据源
      * 拷贝后需要修改bean名称
      *
-     * @return
+     * @return 主数据源
      */
     @Primary
-    @Bean(name = primaryDatasourceConfigPrefix)
-    @ConfigurationProperties(prefix = primaryDatasourceConfigPrefix)
+    @Bean(name = datasourceConfigPrefix_primary)
+    @ConfigurationProperties(prefix = datasourceConfigPrefix_primary)
     public DataSource primaryDatasource() {
         //默认方式，springboot2.0会默认使用HikariCP作为数据源
 //        return DataSourceBuilder.create().build();
@@ -55,8 +66,11 @@ public class DbConfig {
         return DruidDataSourceBuilder.create().build();
     }
 
-    @Bean(name = secondaryDatasourceConfigPrefix)
-    @ConfigurationProperties(prefix = secondaryDatasourceConfigPrefix)
+    /**
+     * @return 第二个数据源
+     */
+    @Bean(name = datasourceConfigPrefix_secondary)
+    @ConfigurationProperties(prefix = datasourceConfigPrefix_secondary)
     public DataSource secondaryDatasource() {
         //默认方式，springboot2.0会默认使用HikariCP作为数据源
 //        return DataSourceBuilder.create().build();

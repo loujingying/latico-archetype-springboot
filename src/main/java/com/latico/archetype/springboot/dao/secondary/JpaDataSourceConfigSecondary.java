@@ -3,6 +3,7 @@ package com.latico.archetype.springboot.dao.secondary;
 import com.latico.archetype.springboot.common.jpa.BaseRepositoryFactoryBean;
 import com.latico.archetype.springboot.config.DbConfig;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.repository.DemoRepository;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.archetype.springboot.dao.secondary.repository.Demo2Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -33,7 +35,7 @@ import java.util.Map;
  * 数据源配置，如果不需要，可以把该类删掉，那么启动程序的时候就不会连接数据库
  * <p>
  * 如果拷贝该类创建一个新数据源，需要修改的地方有如下字段：
- * 把后缀带有secondary的名称全部替换目标字符串
+ * 把后缀带有primary的名称全部替换目标字符串
  *
  * </PRE>
  *
@@ -43,40 +45,44 @@ import java.util.Map;
  */
 @Configuration
 @EnableJpaRepositories(
-        entityManagerFactoryRef = JpaDataSourceConfig.entityManagerFactoryBeanName,
-        transactionManagerRef = JpaDataSourceConfig.transactionManagerBeanName,
+        entityManagerFactoryRef = JpaDataSourceConfigSecondary.entityManagerFactoryBeanName,
+        transactionManagerRef = JpaDataSourceConfigSecondary.transactionManagerBeanName,
         basePackageClasses = {Demo2Repository.class},
         repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
-public class JpaDataSourceConfig {
-
+public class JpaDataSourceConfigSecondary {
 
     /**
-     * TODO
+     * TODO 需要修改的地方
+     * 数据库配置名称
+     */
+    public static final String dbConfigName = DbConfig.dbConfigName_secondary;
+    /**
+     * TODO 需要修改的地方
      * 实体目录
      * 拷贝后需要修改具体的实体包路径
      */
     public static final String ENTITY_PREFIX = Demo2.class.getPackage().getName();
 
     /**
-     *TODO
+     * 实体管理器bean名称
      */
-    public static final String entityManagerBeanName = "secondary.jpa.entityManager";
+    public static final String entityManagerBeanName = "jpa.entityManager." + dbConfigName;
     /**
-     *TODO
+     * 实体管理器工厂建造器bean名称
      */
-    public static final String entityManagerFactoryBuilderBeanName = "secondary.jpa.entityManagerFactoryBuilder";
+    public static final String entityManagerFactoryBuilderBeanName = "jpa.entityManagerFactoryBuilder." + dbConfigName;
     /**
-     *TODO
+     * 实体管理器工厂bean名称
      */
-    public static final String entityManagerFactoryBeanName = "secondary.jpa.entityManagerFactory";
+    public static final String entityManagerFactoryBeanName = "jpa.entityManagerFactory." + dbConfigName;
     /**
-     *TODO
+     * 持久化单元bean名称
      */
-    public static final String persistenceUnitBeanName = "secondary.jpa.persistenceUnit";
+    public static final String persistenceUnitBeanName = "jpa.persistenceUnit." + dbConfigName;
     /**
-     *TODO
+     * 事务管理器bean名称
      */
-    public static final String transactionManagerBeanName = "secondary.jpa.transactionManager";
+    public static final String transactionManagerBeanName = "jpa.transactionManager." + dbConfigName;
 
     /**
      * JPA配置
@@ -87,7 +93,7 @@ public class JpaDataSourceConfig {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = DbConfig.secondaryDatasourceConfigPrefix)
+    @Resource(name = DbConfig.datasourceConfigPrefix_primary)
     private DataSource dataSource;
 
 
@@ -107,11 +113,13 @@ public class JpaDataSourceConfig {
         return jpaProperties.getProperties();
     }
 
+    @Primary
     @Bean(name = entityManagerBeanName)
     public EntityManager entityManager(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
         return entityManagerFactory(builder).getObject().createEntityManager();
     }
 
+    @Primary
     @Bean(name = entityManagerFactoryBuilderBeanName)
     public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 //        创建hibernate适配器
@@ -122,6 +130,7 @@ public class JpaDataSourceConfig {
     /**
      * 设置实体类所在位置
      */
+    @Primary
     @Bean(name = entityManagerFactoryBeanName)
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
         return builder
@@ -132,6 +141,7 @@ public class JpaDataSourceConfig {
                 .build();
     }
 
+    @Primary
     @Bean(name = transactionManagerBeanName)
     public PlatformTransactionManager transactionManager(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactory(builder).getObject());
