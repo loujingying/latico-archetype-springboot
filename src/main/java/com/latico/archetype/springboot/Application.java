@@ -1,17 +1,16 @@
 package com.latico.archetype.springboot;
 
+import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import com.latico.archetype.springboot.common.util.ResourcesUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.spring.extend.ApplicationContextAwareImpl;
 import com.latico.commons.spring.util.SpringUtils;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationListener;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.sql.Timestamp;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * <PRE>
  * 程序启动入口类
  * <p>
- * com.latico.commons.spring路径包括了spring的工具类{@link com.latico.commons.spring.util.SpringUtils}
+ * 路径包括了spring的工具类{@link SpringUtils}
  * 该类支持从spring容器获取bean，读取spring配置的方式是：{@link SpringUtils#getApplicationContext()} 拿到它后可以读取配置文件里面的内容
  *
  SpringBootApplication 上使用@ServletComponentScan 注解后
@@ -34,7 +33,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @Date: 2019-03-13 22:06:01
  * @Version: 1.0
  */
-@SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class})
+@SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class},
+exclude = {PageHelperAutoConfiguration.class})
 @ServletComponentScan
 @EnableFeignClients
 //EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接

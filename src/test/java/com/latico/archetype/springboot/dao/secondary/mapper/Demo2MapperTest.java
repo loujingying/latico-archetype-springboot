@@ -1,6 +1,7 @@
 package com.latico.archetype.springboot.dao.secondary.mapper;
 
 import com.github.pagehelper.Page;
+import com.latico.archetype.springboot.config.DbConfig;
 import com.latico.archetype.springboot.dao.DaoTestApplication;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.commons.orm.mybatis.PageHelperUtils;
@@ -13,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DaoTestApplication.class)
+@SpringBootTest(classes = {DaoTestApplication.class, DbConfig.class})
 public class Demo2MapperTest {
     @Autowired
     Demo2Mapper demo2Mapper;

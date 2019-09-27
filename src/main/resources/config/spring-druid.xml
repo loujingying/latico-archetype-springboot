@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
@@ -18,6 +19,7 @@
             <list>
                 <!--配置druid监控的class路径-->
                 <value>com.latico.*.dao.*.mapper.*</value>
+                <value>com.latico.*.dao.*.repository.*</value>
             </list>
         </property>
     </bean>

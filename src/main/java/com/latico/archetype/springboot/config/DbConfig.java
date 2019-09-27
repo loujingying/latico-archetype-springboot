@@ -2,11 +2,13 @@ package com.latico.archetype.springboot.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -64,9 +66,19 @@ public class DbConfig {
     }
 
     /**
+     * 因为mybatis的SqlSessionFactory是通过Configuration存放数据源，所以假如Configuration是单例的话，
+     * 后面加载的数据源会把前面加载的覆盖掉，所以这里需要多例模式@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)，
+     * com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean#buildSqlSessionFactory()里面
+     * 调用了org.apache.ibatis.session.Configuration#setEnvironment(org.apache.ibatis.mapping.Environment)方法如下：
+     * configuration.setEnvironment(new Environment(this.environment, this.transactionFactory, this.dataSource));
+     * 看到这里，可以看到把当前数据源环境添加进去了覆盖掉之前的，所以假如Configuration是单例的话，后面加载的数据源会覆盖之前加载的，
+     *
+     * 还有一种方案：在手工创建MybatisSqlSessionFactoryBean的时候，
+     * 每个都自己new一个新的MybatisConfiguration，而不是在这里使用配置文件的方式。
      * @return mybatis的配置
      */
     @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     @ConfigurationProperties(prefix = "mybatis.configuration")
     public MybatisConfiguration mybatisConfiguration() {
         return new MybatisConfiguration();

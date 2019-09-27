@@ -1,5 +1,6 @@
 package com.latico.archetype.springboot.dao;
 
+import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date: 2019-03-13 22:06:01
  * @Version: 1.0
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {PageHelperAutoConfiguration.class})
 public class DaoTestApplication {
     /**
      * springboot启动
