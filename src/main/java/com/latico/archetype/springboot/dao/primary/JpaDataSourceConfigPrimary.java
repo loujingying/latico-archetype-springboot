@@ -2,6 +2,8 @@ package com.latico.archetype.springboot.dao.primary;
 
 import com.latico.archetype.springboot.common.jpa.BaseRepositoryFactoryBean;
 import com.latico.archetype.springboot.config.DbConfig;
+import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.repository.DemoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -43,23 +45,17 @@ import java.util.Map;
 @EnableJpaRepositories(
         entityManagerFactoryRef = JpaDataSourceConfigPrimary.entityManagerFactoryBeanName,
         transactionManagerRef = JpaDataSourceConfigPrimary.transactionManagerBeanName,
-        basePackages = {JpaDataSourceConfigPrimary.MAPPER_PACKAGE},
+        basePackageClasses = {DemoRepository.class},
         repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 public class JpaDataSourceConfigPrimary {
 
-    /**
-     * TODO
-     * mapper的接口类
-     * 精确到 master 目录，以便跟其他数据源隔离
-     */
-    public static final String MAPPER_PACKAGE = "com.latico.archetype.springboot.dao.primary.repository";
 
     /**
      * TODO
      * 实体目录
      * 拷贝后需要修改具体的实体包路径
      */
-    public static final String ENTITY_PREFIX = "com.latico.archetype.springboot.dao.primary.entity";
+    public static final String ENTITY_PREFIX = Demo.class.getPackage().getName();
 
     /**
      * TODO

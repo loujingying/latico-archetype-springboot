@@ -2,8 +2,8 @@ FROM hub.c.163.com/library/java
 
 MAINTAINER springboot
 
-RUN mkdir -p /home/cattsoft/springboot
+RUN mkdir -p /home/latico/springboot
 
-COPY ./demo.jar /home/cattsoft/springboot/demo.jar
+ADD ./demo.jar /home/latico/springboot/demo.jar
 
 ENTRYPOINT ["java","-jar","demo.jar"]

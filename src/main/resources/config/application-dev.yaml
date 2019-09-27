@@ -52,10 +52,10 @@ spring:
     #    默认数据源，主数据源
     primary:
       name: primary
-      driver-class-name: ${jdbcDriverClassName}
-      url: ${jdbcUrl}
-      username: ${jdbcUsername}
-      password: ${jdbcPassword}
+      driver-class-name: ${jdbcDriverClassNamePrimary}
+      url: ${jdbcUrlPrimary}
+      username: ${jdbcUsernamePrimary}
+      password: ${jdbcPasswordPrimary}
 
       #      mysql的查询校验
 #      validation-query: SELECT 'x'
@@ -74,12 +74,16 @@ spring:
       min-evictable-idle-time-millis: 300000
 
       #druid相关配置
-      #保持连接
+      #连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作
       keep-alive: true
       #监控统计拦截的filters
       filters: stat
+      # 建议配置为true，不影响性能，并且保证安全性。
+      # 空闲检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
       test-while-idle: true
+      # 用户从连接池借用连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
       test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
       test-on-return: false
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false
@@ -91,10 +95,10 @@ spring:
     #      第二个数据源，可以跟第一个数据源一样，这里因为大多数项目都是默认一样
     secondary:
       name: secondary
-      driver-class-name: ${jdbcDriverClassName}
-      url: ${jdbcUrl}
-      username: ${jdbcUsername}
-      password: ${jdbcPassword}
+      driver-class-name: ${jdbcDriverClassNameSecondary}
+      url: ${jdbcUrlSecondary}
+      username: ${jdbcUsernameSecondary}
+      password: ${jdbcPasswordSecondary}
       #      mysql的查询校验
       #      validation-query: SELECT 'x'
       #      oracle的查询校验
@@ -111,12 +115,16 @@ spring:
       #一个连接在池中最小生存的时间
       min-evictable-idle-time-millis: 300000
       #druid相关配置
-      #保持连接
+      #连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作
       keep-alive: true
       #监控统计拦截的filters
       filters: stat
+      # 建议配置为true，不影响性能，并且保证安全性。
+      # 空闲检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
       test-while-idle: true
+      # 用户从连接池借用连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
       test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
       test-on-return: false
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false

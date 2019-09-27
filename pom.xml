@@ -284,6 +284,27 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--docker编译插件，在各模块的build/docker面新建Dockerfile文件，默认会发布到本机的docker服务器，
+            如果想发布到远程服务器，在windows系统环境变量中新建DOCKER_HOST,值为tcp://10.100.74.220:2375
+            （你改成你自己的docker服务器ip地址，端口不变）-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <imageName>${project.name}:${project.version}</imageName>
+                    <dockerDirectory>${project.basedir}/build/docker</dockerDirectory>
+                    <skipDockerBuild>false</skipDockerBuild>
+                    <!-- 这里是复制 jar 包到 docker 容器指定目录配置，也可以写到 Docokerfile 中 -->
+                    <resources>
+                        <resource>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
@@ -499,6 +520,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!--springboot的HTTP访问方式的监控信息-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!-- =====================spring相关结束 ===================== -->
 

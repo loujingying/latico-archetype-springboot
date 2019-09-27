@@ -4,6 +4,7 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.latico.archetype.springboot.config.DbConfig;
+import com.latico.archetype.springboot.dao.primary.mapper.DemoMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -37,16 +38,10 @@ import javax.sql.DataSource;
  * @Version: 1.0
  */
 @Configuration
-@MapperScan(basePackages = MybatisDataSourceConfigPrimary.MAPPER_PACKAGE,
-        sqlSessionTemplateRef = MybatisDataSourceConfigPrimary.sqlSessionTemplateBeanName)
+@MapperScan(basePackageClasses = {DemoMapper.class},
+        sqlSessionTemplateRef = MybatisDataSourceConfigPrimary.sqlSessionTemplateBeanName,
+        sqlSessionFactoryRef = MybatisDataSourceConfigPrimary.sqlSessionFactoryBeanName)
 public class MybatisDataSourceConfigPrimary {
-
-    /**
-     * TODO 需要修改的地方
-     * mapper的接口类
-     * 精确到 master 目录，以便跟其他数据源隔离
-     */
-    public static final String MAPPER_PACKAGE = "com.latico.archetype.springboot.dao.primary.mapper";
 
     /**
      * TODO 需要修改的地方
