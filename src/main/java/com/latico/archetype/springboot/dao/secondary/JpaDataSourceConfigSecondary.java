@@ -113,13 +113,11 @@ public class JpaDataSourceConfigSecondary {
         return jpaProperties.getProperties();
     }
 
-    @Primary
     @Bean(name = entityManagerBeanName)
     public EntityManager entityManager(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
         return entityManagerFactory(builder).getObject().createEntityManager();
     }
 
-    @Primary
     @Bean(name = entityManagerFactoryBuilderBeanName)
     public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 //        创建hibernate适配器
@@ -130,7 +128,6 @@ public class JpaDataSourceConfigSecondary {
     /**
      * 设置实体类所在位置
      */
-    @Primary
     @Bean(name = entityManagerFactoryBeanName)
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
         return builder
@@ -141,7 +138,6 @@ public class JpaDataSourceConfigSecondary {
                 .build();
     }
 
-    @Primary
     @Bean(name = transactionManagerBeanName)
     public PlatformTransactionManager transactionManager(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactory(builder).getObject());

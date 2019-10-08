@@ -79,7 +79,6 @@ public class MybatisDataSourceConfigSecondary {
     @Resource(name = DbConfig.datasourceConfigPrefix_primary)
     private DataSource dataSource;
 
-    @Primary
     @Bean(name = sqlSessionFactoryBeanName)
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
@@ -97,7 +96,6 @@ public class MybatisDataSourceConfigSecondary {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Primary
     @Bean(name = sqlSessionTemplateBeanName)
     public SqlSessionTemplate sqlSessionTemplateSecondary(@Qualifier(sqlSessionFactoryBeanName) SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
