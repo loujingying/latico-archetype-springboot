@@ -1,8 +1,10 @@
 package com.latico.archetype.springboot.service.impl;
 
+import com.latico.archetype.springboot.bean.bo.DemoByPageResult;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.common.util.DateTimeUtils;
 import com.latico.archetype.springboot.common.util.MD5Utils;
+import com.latico.archetype.springboot.common.util.PageableUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
 import com.latico.archetype.springboot.dao.primary.mapper.DemoMapper;
@@ -14,6 +16,9 @@ import com.latico.archetype.springboot.service.DemoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -104,6 +109,22 @@ public class DemoServiceImpl implements DemoService {
         return "查询成功";
     }
 
+    @Override
+    public DemoByPageResult queryDemoByPage(int pageNum, int pageSize, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String sortField = "autoId";
+
+        Pageable pageable = PageableUtils.createPageable(pageNum, pageSize, Sort.Direction.ASC, sortField);
+        Page<Demo> page = demoRepository.findAll(pageable);
+        DemoByPageResult demoByPage = new DemoByPageResult();
+        demoByPage.setDemos(page.getContent());
+        demoByPage.setPageNum(pageNum);
+        demoByPage.setPageSize(pageSize);
+        demoByPage.setTotalPages(page.getTotalPages());
+        demoByPage.setTotalElements(page.getTotalElements());
+
+        return demoByPage;
+    }
+
     @Transactional
     protected void insert(HttpServletRequest httpServletRequest) {
         Demo demo = new Demo();
@@ -119,6 +140,7 @@ public class DemoServiceImpl implements DemoService {
         demo.setCreateTime(DateTimeUtils.getSysDate());
         demo.setUpdateTime(demo.getCreateTime());
         demo.setId(MD5Utils.toLowerCaseMd5(demo.getTaskId()));
+        demo.setHandleStatus(0);
 
         LOG.info("准备插入:{}", demo);
         Demo save = demoRepository.saveAndFlush(demo);
@@ -142,6 +164,7 @@ public class DemoServiceImpl implements DemoService {
         demo.setCreateTime(DateTimeUtils.getSysDate());
         demo.setUpdateTime(demo.getCreateTime());
         demo.setId(MD5Utils.toLowerCaseMd5(demo.getTaskId()));
+        demo.setHandleStatus(0);
         demo = new Demo();
         list.add(demo);
         demo.setTaskId(++taskIdMax);
@@ -152,6 +175,7 @@ public class DemoServiceImpl implements DemoService {
         demo.setCreateTime(DateTimeUtils.getSysDate());
         demo.setUpdateTime(demo.getCreateTime());
         demo.setId(MD5Utils.toLowerCaseMd5(demo.getTaskId()));
+        demo.setHandleStatus(0);
 
         demoRepository.insertBatch(list, 500);
 

@@ -1,5 +1,7 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.bean.bo.DemoByPageResult;
+import com.latico.archetype.springboot.bean.bo.DemoPageRequestParam;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.bean.dto.RestRequestDTO;
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
@@ -61,6 +63,12 @@ public class DemoController {
     @ApiOperation("测试第二个数据源查询Demo表API")
     public List<Demo2> selectDemo2(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
         return demoService.selectDemo2(httpServletRequest, httpServletResponse);
+    }
+
+    @RequestMapping(value = "queryDemoByPage")
+    @ApiOperation("测试分页查询Demo表API")
+    public DemoByPageResult queryDemoByPage(@RequestBody DemoPageRequestParam demoPageRequestParam, @Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
+        return demoService.queryDemoByPage(demoPageRequestParam.getPageNum(), demoPageRequestParam.getPageSize(), httpServletRequest, httpServletResponse);
     }
 
     @RequestMapping(value = "queryAllDemo")

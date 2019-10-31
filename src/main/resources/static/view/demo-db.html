@@ -46,48 +46,53 @@
         <el-col>
             <!--列表-->
             <el-table :data="demos" highlight-current-row>
-                <el-table-column type="selection" width="55">
-                </el-table-column>
-                <el-table-column type="index" width="60">
-                </el-table-column>
-                <el-table-column prop="autoId" label="自动ID" width="100" >
-                </el-table-column>
-                <el-table-column prop="id" label="唯一ID" width="100" >
-                </el-table-column>
-                <el-table-column prop="taskId" label="批次ID" width="50" >
-                </el-table-column>
-                <el-table-column prop="execType" label="接口类型" width="50" >
-                </el-table-column>
-                <el-table-column prop="execStatus" label="执行状态" min-width="100" ></el-table-column>
-                <el-table-column prop="statusDescr" label="状态描述" min-width="100" ></el-table-column>
-                <el-table-column prop="callParam" label="调用参数" min-width="100" ></el-table-column>
-                <el-table-column prop="callClientId" label="调用客户端ID" min-width="100" ></el-table-column>
-                <el-table-column prop="collectServerId" label="采集服务器ID" min-width="100" ></el-table-column>
-                <el-table-column prop="handleServerId" label="处理服务器ID" min-width="100" ></el-table-column>
-                <el-table-column prop="createTime" label="创建时间" min-width="100" ></el-table-column>
-                <el-table-column prop="updateTime" label="更新时间" min-width="100" ></el-table-column>
-                <el-table-column prop="handleStatus" label="处理状态" min-width="100" ></el-table-column>
-                <el-table-column prop="handleDescr" label="处理描述" min-width="100" ></el-table-column>
-                <el-table-column prop="handleStartTime" label="处理开始时间" min-width="100" ></el-table-column>
-                <el-table-column prop="handleEndTime" label="处理结束时间" min-width="100" ></el-table-column>
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column type="index" width="60"></el-table-column>
+                <el-table-column prop="autoId" label="自动ID" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="id" label="唯一ID" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="taskId" label="批次ID" width="50"  show-overflow-tooltip></el-table-column>
+                <el-table-column prop="execType" label="接口类型" width="50"  show-overflow-tooltip></el-table-column>
+                <el-table-column prop="execStatus" label="执行状态" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="statusDescr" label="状态描述" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="callParam" label="调用参数" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="callClientId" label="调用客户端ID" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="collectServerId" label="采集服务器ID" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="handleServerId" label="处理服务器ID" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="createTime" label="创建时间" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="updateTime" label="更新时间" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="handleStatus" label="处理状态" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="handleDescr" label="处理描述" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="handleStartTime" label="处理开始时间" width="100" show-overflow-tooltip ></el-table-column>
+                <el-table-column prop="handleEndTime" label="处理结束时间" width="100" show-overflow-tooltip ></el-table-column>
 
             </el-table>
 
         </el-col>
+
     </el-row>
+    <el-row><el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" >
+    </el-pagination></el-row>
+
 
 </div>
 
 <script>
+    //访问restful服务器拿数据，如果是纯前端方式，请修改地址
+    var hostname = location.hostname;
+    var port = location.port;
+    var localBaseURL = "http://" + hostname + ":" + port + "/";
     const axiosInstance = axios.create({
-        baseURL: 'http://localhost:8080/',
+        baseURL: localBaseURL,
         timeout: 5000
     });
 
     var obj = {
         data() {
             return {
-                demos: []
+                demos: [],
+                total: 0,
+                page: 1,
+                pageSize: 5,
             }
 
         },
@@ -101,12 +106,22 @@
             queryAllDemo() {
 
                 const self=this;
-                axiosInstance.post('demo/selectDemo2').then(function(res){
-                    self.demos=res.data;
+                axiosInstance.post('demo/queryDemoByPage',
+                    {
+                        pageNum: self.page,
+                        pageSize: self.pageSize
+                    }
+                    ).then(function(res){
+                    self.total = res.data.totalElements;
+                    self.demos = res.data.demos;
                 }).catch(function(res){
                     console.log(res);
                 });
 
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.queryAllDemo();
             }
         }
 

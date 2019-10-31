@@ -1,5 +1,6 @@
 package com.latico.archetype.springboot.service;
 
+import com.latico.archetype.springboot.bean.bo.DemoByPageResult;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 
@@ -35,4 +36,6 @@ public interface DemoService {
     List<Demo2> selectDemo2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 
     String queryAllDemo();
+
+    DemoByPageResult queryDemoByPage(int pageNum, int pageSize, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 }
