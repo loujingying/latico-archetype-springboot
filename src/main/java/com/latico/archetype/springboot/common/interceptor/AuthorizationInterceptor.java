@@ -26,6 +26,8 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler, Exception e) throws Exception {
+//        String origin = httpServletRequest.getHeader("Origin");
+//        httpServletResponse.setHeader("Access-Control-Allow-Origin", origin);
         LOG.info("返回响应给客户端，客户端地址：{}，请求路径：{}", httpServletRequest.getRemoteHost(), httpServletRequest.getRequestURI());
     }
 }

@@ -56,6 +56,13 @@ public class JpaDataSourceConfigSecondary {
      * 数据库配置名称
      */
     public static final String dbConfigName = DbConfig.dbConfigName_secondary;
+
+    /**
+     * TODO 需要修改的地方
+     * 数据源bean名称
+     */
+    public static final String dataSourceBeanName = DbConfig.datasourceConfigPrefix_secondary;
+
     /**
      * TODO 需要修改的地方
      * 实体目录
@@ -93,7 +100,7 @@ public class JpaDataSourceConfigSecondary {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = DbConfig.datasourceConfigPrefix_primary)
+    @Resource(name = dataSourceBeanName)
     private DataSource dataSource;
 
 

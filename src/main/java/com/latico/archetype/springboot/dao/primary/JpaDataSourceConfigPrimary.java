@@ -56,6 +56,11 @@ public class JpaDataSourceConfigPrimary {
     public static final String dbConfigName = DbConfig.dbConfigName_primary;
     /**
      * TODO 需要修改的地方
+     * 数据源bean名称
+     */
+    public static final String dataSourceBeanName = DbConfig.datasourceConfigPrefix_primary;
+    /**
+     * TODO 需要修改的地方
      * 实体目录
      * 拷贝后需要修改具体的实体包路径
      */
@@ -91,7 +96,7 @@ public class JpaDataSourceConfigPrimary {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = DbConfig.datasourceConfigPrefix_primary)
+    @Resource(name = dataSourceBeanName)
     private DataSource dataSource;
 
 

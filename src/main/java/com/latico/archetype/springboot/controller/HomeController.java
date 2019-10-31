@@ -70,10 +70,14 @@ public class HomeController {
         String druidUrl = "http://" + ip + ":" + serverPort + serverContextPath + "druid";
         String druidLink = "<a href=\"" + druidUrl + "\" target=\"_blank\" title=\"druid数据源监控\">" + druidUrl + "</a>";
 
+        String indexUrl = "http://" + ip + ":" + serverPort + serverContextPath + "view/index.html";
+        String indexLink = "<a href=\"" + indexUrl + "\" target=\"_blank\" title=\"索引页面\">" + indexUrl + "</a>";
+
         StringBuilder sb = new StringBuilder();
         sb.append("Spring Boot Home!<hr/>");
         sb.append("1、Rest API调测界面: " + swaggerLink + "<hr/>");
         sb.append("2、Druid监控界面: " + druidLink + "<hr/>");
+        sb.append("3、索引界面: " + indexLink + "<hr/>");
         return sb.toString();
     }
 

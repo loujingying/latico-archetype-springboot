@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue/2.6.10/vue.min.js"></script>
+    <script src="../js/element-ui/2.12.0/index.min.js"></script>
+    <script src="../js/axios/0.19.0/axios.min.js"></script>
+    <link rel="stylesheet" href="../js/element-ui/2.12.0/index.min.css">
+</head>
+<body>
+
+<div id="demo-db">
+    <el-row>
+        <el-col :span="4">
+            <el-menu
+                    default-active="2"
+                    class="el-menu-vertical-demo"
+                    @open="handleOpen"
+                    @close="handleClose"
+                    background-color="#545c64"
+                    text-color="#fff"
+                    active-text-color="#ffd04b">
+                <el-submenu index="1">
+                    <template slot="title">
+                        <i class="el-icon-location"></i>
+                        <span>导航一</span>
+                    </template>
+                    <el-menu-item index="1-1" @click="queryAllDemo">表数据</el-menu-item>
+                    <el-menu-item index="1-2">表单</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="2">
+                    <i class="el-icon-menu"></i>
+                    <span slot="title">导航二</span>
+                </el-menu-item>
+                <el-menu-item index="3" disabled>
+                    <i class="el-icon-document"></i>
+                    <span slot="title">导航三</span>
+                </el-menu-item>
+                <el-menu-item index="4">
+                    <i class="el-icon-setting"></i>
+                    <span slot="title">导航四</span>
+                </el-menu-item>
+            </el-menu>
+        </el-col>
+        <el-col>
+            <!--列表-->
+            <el-table :data="demos" highlight-current-row>
+                <el-table-column type="selection" width="55">
+                </el-table-column>
+                <el-table-column type="index" width="60">
+                </el-table-column>
+                <el-table-column prop="autoId" label="自动ID" width="100" >
+                </el-table-column>
+                <el-table-column prop="id" label="唯一ID" width="100" >
+                </el-table-column>
+                <el-table-column prop="taskId" label="批次ID" width="50" >
+                </el-table-column>
+                <el-table-column prop="execType" label="接口类型" width="50" >
+                </el-table-column>
+                <el-table-column prop="execStatus" label="执行状态" min-width="100" ></el-table-column>
+                <el-table-column prop="statusDescr" label="状态描述" min-width="100" ></el-table-column>
+                <el-table-column prop="callParam" label="调用参数" min-width="100" ></el-table-column>
+                <el-table-column prop="callClientId" label="调用客户端ID" min-width="100" ></el-table-column>
+                <el-table-column prop="collectServerId" label="采集服务器ID" min-width="100" ></el-table-column>
+                <el-table-column prop="handleServerId" label="处理服务器ID" min-width="100" ></el-table-column>
+                <el-table-column prop="createTime" label="创建时间" min-width="100" ></el-table-column>
+                <el-table-column prop="updateTime" label="更新时间" min-width="100" ></el-table-column>
+                <el-table-column prop="handleStatus" label="处理状态" min-width="100" ></el-table-column>
+                <el-table-column prop="handleDescr" label="处理描述" min-width="100" ></el-table-column>
+                <el-table-column prop="handleStartTime" label="处理开始时间" min-width="100" ></el-table-column>
+                <el-table-column prop="handleEndTime" label="处理结束时间" min-width="100" ></el-table-column>
+
+            </el-table>
+
+        </el-col>
+    </el-row>
+
+</div>
+
+<script>
+    const axiosInstance = axios.create({
+        baseURL: 'http://localhost:8080/',
+        timeout: 5000
+    });
+
+    var obj = {
+        data() {
+            return {
+                demos: []
+            }
+
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            queryAllDemo() {
+
+                const self=this;
+                axiosInstance.post('demo/selectDemo2').then(function(res){
+                    self.demos=res.data;
+                }).catch(function(res){
+                    console.log(res);
+                });
+
+            }
+        }
+
+    };
+
+    let vm = new Vue(obj).$mount('#demo-db');
+
+</script>
+
+</body>
+
+</html>

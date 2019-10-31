@@ -29,7 +29,7 @@ public class DemoPageController {
         LOG.info("调用了页面接口");
         ModelAndView modelAndView = new ModelAndView();
         //templates目录下的
-        modelAndView.setViewName("page");
+        modelAndView.setViewName("demo-dynamic");
         modelAndView.addObject("city", "北京");
         modelAndView.addObject("name", "长城");
         return modelAndView;

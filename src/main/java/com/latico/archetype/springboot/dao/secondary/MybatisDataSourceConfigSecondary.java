@@ -47,7 +47,11 @@ public class MybatisDataSourceConfigSecondary {
      * 数据库配置名称
      */
     public static final String dbConfigName = DbConfig.dbConfigName_secondary;
-
+    /**
+     * TODO 需要修改的地方
+     * 数据源bean名称
+     */
+    public static final String dataSourceBeanName = DbConfig.datasourceConfigPrefix_secondary;
     /**
      * mapper的xml文件的位置，如果不是按照这个默认模式目录结构，需要修改
      */
@@ -76,7 +80,7 @@ public class MybatisDataSourceConfigSecondary {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = DbConfig.datasourceConfigPrefix_primary)
+    @Resource(name = dataSourceBeanName)
     private DataSource dataSource;
 
     @Bean(name = sqlSessionFactoryBeanName)

@@ -10,8 +10,8 @@ server:
 spring:
   application:
     name: ${appName}
-  mvc:   #静态文件
-    static-path-pattern: /static/**
+#  mvc:   #静态文件
+#    static-path-pattern: /static/**
   thymeleaf:
     model: HTML5
     prefix: classpath:/templates/
