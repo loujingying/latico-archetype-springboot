@@ -4,6 +4,7 @@ import com.latico.archetype.springboot.bean.bo.DemoByPageResult;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.common.util.DateTimeUtils;
 import com.latico.archetype.springboot.common.util.MD5Utils;
+import com.latico.archetype.springboot.common.util.PageHelperUtils;
 import com.latico.archetype.springboot.common.util.PageableUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
@@ -101,10 +102,14 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public String queryAllDemo() {
+        PageHelperUtils.startPage(1, 5);
         LOG.info("demoMapper 查询结果：\r\n{}", demoMapper.findAll());
-        LOG.info("demoRepository 查询结果：\n{}", demoRepository.findAll());
+        Pageable pageable = PageableUtils.createPageable(1, 5);
+        LOG.info("demoRepository 查询结果：\n{}", demoRepository.findAll(pageable));
+
+        PageHelperUtils.startPage(1, 5);
         LOG.info("demo2Mapper 查询结果：\n{}", demo2Mapper.findAll());
-        LOG.info("demo2Repository 查询结果：\n{}", demo2Repository.findAll());
+        LOG.info("demo2Repository 查询结果：\n{}", demo2Repository.findAll(pageable));
 
         return "查询成功";
     }

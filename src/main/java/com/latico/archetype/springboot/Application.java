@@ -35,8 +35,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @Date: 2019-03-13 22:06:01
  * @Version: 1.0
  */
-@SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class},
-        exclude = {PageHelperAutoConfiguration.class})
+@SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class})
 @ServletComponentScan
 @EnableFeignClients
 //EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接
