@@ -2,6 +2,7 @@ package com.latico.archetype.springboot.common.statistics;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -19,10 +20,11 @@ public class StatisticsData {
      */
     private static volatile StatisticsData instance = null;
 
+    private static final String DEFAULT_GROUP_NAME = "默认组";
     /**
-     * key是统计的key，value是统计的数量
+     * 第一维key是组名称，第二维key是统计的key，value是统计的数量
      */
-    private Map<String, AtomicLong> statisticsResult = new ConcurrentHashMap<>();
+    private Map<String, Map<String, AtomicLong>> statisticsResult = new ConcurrentHashMap<>();
 
     private StatisticsData() {
     }
@@ -45,31 +47,76 @@ public class StatisticsData {
     }
 
     /**
+     * 添加
+     * @param name
+     * @param count 指定值
+     * @return
+     */
+    public long addAndGet(String name, long count) {
+        return addAndGet(DEFAULT_GROUP_NAME, name, count);
+    }
+    /**
      * 自增一个和拿到结果
+     * @param groupName
+     * @param name
+     * @param count
+     * @return
+     */
+    public long addAndGet(String groupName, String name, long count) {
+        Map<String, AtomicLong> map = statisticsResult.get(groupName);
+        AtomicLong atomicLong = null;
+        if (map == null) {
+            map = new ConcurrentSkipListMap<>();
+            atomicLong = new AtomicLong(0);
+            map.put(name, atomicLong);
+            statisticsResult.put(groupName, map);
+        } else {
+            atomicLong = map.get(name);
+            if (atomicLong == null) {
+                atomicLong = new AtomicLong(0);
+                map.put(name, atomicLong);
+            }
+        }
+        return atomicLong.addAndGet(count);
+    }
+
+    /**
+     * 自增
      * @param name
      * @return
      */
     public long incrementAndGet(String name) {
-        AtomicLong atomicLong = statisticsResult.get(name);
-        if (atomicLong == null) {
-            atomicLong = new AtomicLong(0);
-            statisticsResult.put(name, atomicLong);
-        }
-        return atomicLong.incrementAndGet();
+        return addAndGet(DEFAULT_GROUP_NAME, name, 1);
+    }
+    /**
+     * 自增一个和拿到结果
+     * @param groupName
+     * @param name
+     * @return
+     */
+    public long incrementAndGet(String groupName, String name) {
+        return addAndGet(groupName, name, 1);
     }
 
     /**
      * 重置,清理
      * @param name
-     * @return
      */
     public void reset(String name) {
-        AtomicLong atomicLong = statisticsResult.get(name);
-        if (atomicLong == null) {
-            atomicLong = new AtomicLong(0);
-            statisticsResult.put(name, atomicLong);
-        } else {
-            atomicLong.set(0);
+        reset(DEFAULT_GROUP_NAME, name);
+    }
+    /**
+     * 重置,清理
+     * @param groupName
+     * @param name
+     */
+    public void reset(String groupName, String name) {
+        Map<String, AtomicLong> map = statisticsResult.get(groupName);
+        if (map != null) {
+            AtomicLong atomicLong = map.get(name);
+            if (atomicLong != null) {
+                atomicLong.set(0);
+            }
         }
     }
 
@@ -77,7 +124,7 @@ public class StatisticsData {
      * 拿到统计结果
      * @return
      */
-    public Map<String, AtomicLong> getStatisticsResult() {
+    public Map<String, Map<String, AtomicLong>> getStatisticsResult() {
         return statisticsResult;
     }
 

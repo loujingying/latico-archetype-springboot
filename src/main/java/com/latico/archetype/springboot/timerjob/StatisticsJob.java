@@ -1,6 +1,8 @@
 package com.latico.archetype.springboot.timerjob;
 
-import com.latico.archetype.springboot.common.statistics.StatisticsData;
+import com.latico.archetype.springboot.common.statistics.AlarmStatistics;
+import com.latico.archetype.springboot.common.util.DateTimeUtils;
+import com.latico.archetype.springboot.common.util.MapUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.quartz.Job;
@@ -29,13 +31,23 @@ public class StatisticsJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<String, AtomicLong> statisticsResult = StatisticsData.getInstance().getStatisticsResult();
+        Map<String, Map<String, AtomicLong>> statisticsResult = AlarmStatistics.getInstance().getStatisticsResult();
 
         if (!statisticsResult.isEmpty()) {
-            for (Map.Entry<String, AtomicLong> entry : statisticsResult.entrySet()) {
-                LOG.info("[{}]=[{}]", entry.getKey(), entry.getValue().get());
+            for (Map.Entry<String, Map<String, AtomicLong>> entry : statisticsResult.entrySet()) {
+                if (MapUtils.isEmpty(entry.getValue())) {
+                    continue;
+                }
+                String groupName = entry.getKey();
+                StringBuilder sb = new StringBuilder();
+                sb.append("[").append(DateTimeUtils.getSystemDate(DateTimeUtils.FORMAT_YMDHMS)).append("]");
+                sb.append("[").append(groupName).append("]").append("[");
+                sb.append(MapUtils.mapToStr(entry.getValue(), ",", "="));
+                String str = sb.toString();
+                str = str.substring(0, str.length() - 1);
+                LOG.info(str + "]");
             }
-//            可以在这里重置清除周期性统计数值
+            AlarmStatistics.getInstance().resetCurrentPeriodAlarmCount();
         }
 
     }

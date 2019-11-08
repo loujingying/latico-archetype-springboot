@@ -24,7 +24,7 @@ public class YamlBizConfig {
      * 私有单例对象，需要使用volatile，让其他线程直接可见
      */
     private static volatile YamlBizConfig instance;
-    private final DemoYamlConfig demoYamlConfigAttributes;
+    private final DemoYamlConfig demoYamlConfig;
 
     /**
      * 提供给外界获取单例的方法
@@ -49,21 +49,21 @@ public class YamlBizConfig {
      * 私有构造方法，让外界不能创建对象，在这里做初始化逻辑处理
      */
     private YamlBizConfig() {
-        this.demoYamlConfigAttributes = SpringUtils.getBean(DemoYamlConfig.class);
+        this.demoYamlConfig = SpringUtils.getBean(DemoYamlConfig.class);
     }
 
     /**
      * 获取里面的value字段
      * @return
      */
-    public String getDemoYamlConfigAttributesValue() {
-        return demoYamlConfigAttributes.getValue();
+    public String getDemoYamlConfigValue() {
+        return demoYamlConfig.getValue();
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("YamlBizConfig{");
-        sb.append("demoYamlConfigAttributes=").append(demoYamlConfigAttributes);
+        sb.append("demoYamlConfig=").append(demoYamlConfig);
         sb.append('}');
         return sb.toString();
     }
@@ -71,10 +71,10 @@ public class YamlBizConfig {
 
 /**
  * <PRE>
- *  config/application-biz.yaml中的config-attributes配置对应
+ *  config/application-biz.yaml中的demo-yaml-config配置对应
  *  该配置项，演示了众多场景下的配置情况，应该满足大部分需求
  *
- *  config-attributes的配置，因为不能让外界修改配置数据，所以把类放到这里
+ *  demo-yaml-config的配置，因为不能让外界修改配置数据，所以把类放到这里
  * </PRE>
  * @Author: latico
  * @Date: 2019-06-30 15:10:58
