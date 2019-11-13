@@ -5,9 +5,10 @@ import java.util.Map;
 
 /**
  * <PRE>
- *  枚举模板示例
+ * 枚举模板示例
  *
  * </PRE>
+ *
  * @Author: latico
  * @Date: 2019-06-06 14:15:31
  * @Version: 1.0
@@ -34,6 +35,10 @@ public enum DemoEnum {
      * idEnumMap ID值和对象的映射
      */
     private final static Map<Integer, DemoEnum> idEnumMap = new HashMap<Integer, DemoEnum>();
+    /**
+     * 值和枚举对象的映射
+     */
+    private final static Map<String, DemoEnum> valueEnumMap = new HashMap<String, DemoEnum>();
 
     static {
         DemoEnum[] values = values();
@@ -41,6 +46,7 @@ public enum DemoEnum {
             // 统一转换成小写
             nameEnumMap.put(value.getName().toLowerCase(), value);
             idEnumMap.put(value.id, value);
+            valueEnumMap.put(value.value, value);
         }
     }
 
@@ -123,4 +129,18 @@ public enum DemoEnum {
         return idEnumMap.get(id);
     }
 
+    /**
+     * 通过值查找枚举
+     *
+     * @param value
+     * @return
+     */
+    public static DemoEnum getEnumByValue(String value) {
+        if (value != null) {
+            //统一转换成小写
+            return valueEnumMap.get(value);
+        } else {
+            return null;
+        }
+    }
 }
