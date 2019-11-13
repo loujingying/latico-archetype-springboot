@@ -16,3 +16,6 @@ demo-yaml-config:
       age: 21
     - name: caven
       age: 31
+
+  #      统计任务的cron表达式
+  statsticsCron: 0/60 * * * * ?

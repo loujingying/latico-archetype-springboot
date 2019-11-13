@@ -1,5 +1,6 @@
 package com.latico.archetype.springboot.listener;
 
+import com.latico.archetype.springboot.config.yaml.YamlBizConfig;
 import com.latico.archetype.springboot.timerjob.DemoQuartzJob;
 import com.latico.archetype.springboot.timerjob.StatisticsJob;
 import com.latico.commons.common.util.logging.Logger;
@@ -36,11 +37,11 @@ public class StartupRunner implements CommandLineRunner {
 
 //        启动统计工作
         QuartzManager.getInstance().addJob(StatisticsJob.JOB_NAME,
-                StatisticsJob.class, "0 * * * * ?");
+                StatisticsJob.class, YamlBizConfig.getInstance().getStatsticsCron());
 
 //        使用最简单的构造方式，如果有特殊需求，可以使用其他更多入参的方法，配置3秒钟执行一次
         QuartzManager.getInstance().addJob(DemoQuartzJob.JOB_NAME,
-                DemoQuartzJob.class, "0/3 * * * * ?");
+                DemoQuartzJob.class, "0/5 * * * * ?");
 
         LOG.info("启动定时器QuartzManager完成");
     }

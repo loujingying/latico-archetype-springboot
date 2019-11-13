@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * <PRE>
- *     业务配置，yaml方式的配置，跟application-biz.yaml对应，一个配置文件提供一个单例统一管理，里面具体的配置项可以拆分成对象
+ * 业务配置，yaml方式的配置，跟application-biz.yaml对应，一个配置文件提供一个单例统一管理，里面具体的配置项可以拆分成对象
  * </PRE>
  *
  * @Author: latico
@@ -28,6 +28,7 @@ public class YamlBizConfig {
 
     /**
      * 提供给外界获取单例的方法
+     *
      * @return 单例对象
      */
     public static YamlBizConfig getInstance() {
@@ -54,10 +55,20 @@ public class YamlBizConfig {
 
     /**
      * 获取里面的value字段
+     *
      * @return
      */
     public String getDemoYamlConfigValue() {
         return demoYamlConfig.getValue();
+    }
+
+    /**
+     * 统计任务的表达式
+     *
+     * @return
+     */
+    public String getStatsticsCron() {
+        return demoYamlConfig.getStatsticsCron();
     }
 
     @Override
@@ -71,11 +82,12 @@ public class YamlBizConfig {
 
 /**
  * <PRE>
- *  config/application-biz.yaml中的demo-yaml-config配置对应
- *  该配置项，演示了众多场景下的配置情况，应该满足大部分需求
- *
- *  demo-yaml-config的配置，因为不能让外界修改配置数据，所以把类放到这里
+ * config/application-biz.yaml中的demo-yaml-config配置对应
+ * 该配置项，演示了众多场景下的配置情况，应该满足大部分需求
+ * <p>
+ * demo-yaml-config的配置，因为不能让外界修改配置数据，所以把类放到这里
  * </PRE>
+ *
  * @Author: latico
  * @Date: 2019-06-30 15:10:58
  * @Version: 1.0
@@ -84,6 +96,7 @@ public class YamlBizConfig {
 @Component
 @ConfigurationProperties(prefix = "demo-yaml-config")
 class DemoYamlConfig {
+    private String statsticsCron;
     private String value;
     private String[] valueArray;
     private List<String> valueList;
