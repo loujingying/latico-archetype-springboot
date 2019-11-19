@@ -1,6 +1,6 @@
 package com.latico.archetype.springboot.timerjob;
 
-import com.latico.archetype.springboot.common.statistics.AlarmStatistics;
+import com.latico.archetype.springboot.common.statistics.DataStatistics;
 import com.latico.archetype.springboot.common.util.DateTimeUtils;
 import com.latico.archetype.springboot.common.util.MapUtils;
 import com.latico.commons.common.util.logging.Logger;
@@ -31,7 +31,7 @@ public class StatisticsJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<String, Map<String, AtomicLong>> statisticsResult = AlarmStatistics.getInstance().getStatisticsResult();
+        Map<String, Map<String, AtomicLong>> statisticsResult = DataStatistics.getInstance().getStatisticsResult();
 
         if (!statisticsResult.isEmpty()) {
             for (Map.Entry<String, Map<String, AtomicLong>> entry : statisticsResult.entrySet()) {
@@ -47,7 +47,7 @@ public class StatisticsJob implements Job {
                 str = str.substring(0, str.length() - 1);
                 LOG.info(str + "]");
             }
-            AlarmStatistics.getInstance().resetCurrentPeriodAlarmCount();
+            DataStatistics.getInstance().resetCurrentPeriodCount();
         }
 
     }
