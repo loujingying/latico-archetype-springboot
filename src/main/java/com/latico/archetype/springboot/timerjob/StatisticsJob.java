@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @Version: 1.0
  */
 public class StatisticsJob implements Job {
-    private static final Logger LOG = LoggerFactory.getLogger("statistics");
+    private static final Logger LOG_STATISTICS = LoggerFactory.getLogger("statistics");
     /**
      * 作业的名称
      */
@@ -45,7 +45,7 @@ public class StatisticsJob implements Job {
                 sb.append(MapUtils.mapToStr(entry.getValue(), ",", "="));
                 String str = sb.toString();
                 str = str.substring(0, str.length() - 1);
-                LOG.info(str + "]");
+                LOG_STATISTICS.info(str + "]");
             }
             DataStatistics.getInstance().resetCurrentPeriodCount();
         }
