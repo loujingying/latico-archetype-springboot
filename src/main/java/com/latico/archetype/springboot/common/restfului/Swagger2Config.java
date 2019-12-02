@@ -1,6 +1,8 @@
 package com.latico.archetype.springboot.common.restfului;
 
 import com.latico.archetype.springboot.Application;
+import com.latico.archetype.springboot.common.util.CollectionUtils;
+import com.latico.commons.common.util.system.SystemUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 /**
  * <PRE>
@@ -77,18 +80,17 @@ public class Swagger2Config {
             serverContextPath = serverContextPath + "/";
         }
         String ip = "localhost";
-        try {
-            InetAddress localHost = InetAddress.getLocalHost();
-            ip = localHost.getHostAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
+        List<InetAddress> allPhysicsInetAddress = SystemUtils.getAllPhysicsInetAddress();
+        if (CollectionUtils.isNotEmpty(allPhysicsInetAddress)) {
+            InetAddress inetAddress = allPhysicsInetAddress.get(0);
+            ip = inetAddress.getHostAddress();
         }
         String url = "http://" + ip + ":" + serverPort + serverContextPath + "swagger-ui.html";
         String link = "<a href=\"" + url + "\" target=\"_blank\" title=\"Swagger Restful API\">" + url + "</a>";
         return new ApiInfoBuilder()
                 .title("Swagger Restful API")
                 .description("REST接口调测请访问:" + link)
-                .termsOfServiceUrl("http://localhost:" + serverPort + serverContextPath + "swagger-ui.html")
+                .termsOfServiceUrl("http://" + ip + ":" + serverPort + serverContextPath + "swagger-ui.html")
                 .contact("latico")
                 .version("1.0")
                 .build();

@@ -1,8 +1,10 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.common.util.CollectionUtils;
 import com.latico.archetype.springboot.common.util.StrUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
+import com.latico.commons.common.util.system.SystemUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 /**
  * <PRE>
@@ -58,11 +61,10 @@ public class HomeController {
         }
 
         String ip = "localhost";
-        try {
-            InetAddress localHost = InetAddress.getLocalHost();
-            ip = localHost.getHostAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
+        List<InetAddress> allPhysicsInetAddress = SystemUtils.getAllPhysicsInetAddress();
+        if (CollectionUtils.isNotEmpty(allPhysicsInetAddress)) {
+            InetAddress inetAddress = allPhysicsInetAddress.get(0);
+            ip = inetAddress.getHostAddress();
         }
         String swaggerUrl = "http://" + ip + ":" + serverPort + serverContextPath + "swagger-ui.html";
         String swaggerLink = "<a href=\"" + swaggerUrl + "\" target=\"_blank\" title=\"Swagger Restful API\">" + swaggerUrl + "</a>";
