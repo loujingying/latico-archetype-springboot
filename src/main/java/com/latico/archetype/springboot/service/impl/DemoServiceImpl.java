@@ -7,9 +7,11 @@ import com.latico.archetype.springboot.common.util.MD5Utils;
 import com.latico.archetype.springboot.common.util.PageHelperUtils;
 import com.latico.archetype.springboot.common.util.PageableUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
+import com.latico.archetype.springboot.dao.primary.jdbctemplate.DemoJdbcTemplate;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
 import com.latico.archetype.springboot.dao.primary.mapper.DemoMapper;
 import com.latico.archetype.springboot.dao.primary.repository.DemoRepository;
+import com.latico.archetype.springboot.dao.secondary.jdbctemplate.Demo2JdbcTemplate;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.archetype.springboot.dao.secondary.mapper.Demo2Mapper;
 import com.latico.archetype.springboot.dao.secondary.repository.Demo2Repository;
@@ -66,6 +68,12 @@ public class DemoServiceImpl implements DemoService {
 
     @Autowired
     Demo2Repository demo2Repository;
+
+    @Autowired
+    DemoJdbcTemplate demoJdbcTemplate;
+    @Autowired
+    Demo2JdbcTemplate demo2JdbcTemplate;
+
     @Override
     public String serverTimeStr() {
         DemoTimeParam time = new DemoTimeParam();
@@ -106,10 +114,12 @@ public class DemoServiceImpl implements DemoService {
         LOG.info("demoMapper 查询结果：\r\n{}", demoMapper.findAll());
         Pageable pageable = PageableUtils.createPageable(1, 5);
         LOG.info("demoRepository 查询结果：\n{}", demoRepository.findAll(pageable));
+        LOG.info("demoJdbcTemplate 查询结果：\n{}", demoJdbcTemplate.queryAll());
 
         PageHelperUtils.startPage(1, 5);
         LOG.info("demo2Mapper 查询结果：\n{}", demo2Mapper.findAll());
         LOG.info("demo2Repository 查询结果：\n{}", demo2Repository.findAll(pageable));
+        LOG.info("demo2JdbcTemplate 查询结果：\n{}", demo2JdbcTemplate.queryAll());
 
         return "查询成功";
     }
