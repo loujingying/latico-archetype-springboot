@@ -1,8 +1,8 @@
 package com.latico.archetype.springboot.dao.primary.jdbctemplate.impl;
 
 import com.latico.archetype.springboot.dao.primary.JdbcTemplateConfigPrimary;
-import com.latico.archetype.springboot.dao.primary.jdbctemplate.DemoJdbcTemplate;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import com.latico.archetype.springboot.dao.primary.jdbctemplate.DemoJdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,11 +24,48 @@ import java.util.List;
  */
 @Repository
 public class DemoJdbcTemplateImpl implements DemoJdbcTemplate {
+    /**
+     * 注入主数据源的模板
+     */
     @Autowired
     @Qualifier(JdbcTemplateConfigPrimary.jdbcTemplateBeanName)
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    RowMapper demoRowMapper = new DemoRowMapper();
+    /**
+     * 这里为了复用
+     */
+    private RowMapper demoRowMapper = makeRowMapper();
+
+    /**
+     * 获取一个行记录对象映射
+     *
+     * @return
+     */
+    private RowMapper getRowMapper() {
+        return demoRowMapper;
+    }
+
+    /**
+     * 制造一个行记录对象映射
+     *
+     * @return
+     */
+    private RowMapper<Demo> makeRowMapper() {
+        RowMapper<Demo> rowMapper = new RowMapper<Demo>() {
+
+            @Override
+            public Demo mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Demo obj = new Demo();
+                obj.setAutoId(rs.getInt("auto_id"));
+                obj.setId(rs.getString("id"));
+                obj.setTaskId(rs.getInt("task_id"));
+                obj.setExecType(rs.getString("exec_type"));
+
+                return obj;
+            }
+        };
+        return rowMapper;
+    }
 
     @Override
     public Demo queryById(String id) {
@@ -37,7 +74,7 @@ public class DemoJdbcTemplateImpl implements DemoJdbcTemplate {
 
         RowMapper rowMapper = getRowMapper();
 
-        List<Demo> objs = jdbcTemplate.query(sql ,params, rowMapper);
+        List<Demo> objs = jdbcTemplate.query(sql, params, rowMapper);
 
         if (objs != null && !objs.isEmpty()) {
             return objs.get(0);
@@ -45,9 +82,6 @@ public class DemoJdbcTemplateImpl implements DemoJdbcTemplate {
         return null;
     }
 
-    private RowMapper getRowMapper() {
-        return demoRowMapper;
-    }
 
     @Override
     public List<Demo> queryAll() {
@@ -59,19 +93,5 @@ public class DemoJdbcTemplateImpl implements DemoJdbcTemplate {
 
     }
 
-
 }
 
-class DemoRowMapper implements RowMapper<Demo>{
-
-    @Override
-    public Demo mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Demo obj = new Demo();
-        obj.setAutoId(rs.getInt("auto_id"));
-        obj.setId(rs.getString("id"));
-        obj.setTaskId(rs.getInt("task_id"));
-        obj.setExecType(rs.getString("exec_type"));
-
-        return obj;
-    }
-}
