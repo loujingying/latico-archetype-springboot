@@ -18,7 +18,8 @@ spring:
         - (?i).*loopback.*
         - (?i).*Virtual.*
         - 169\..*
-#  mvc:   #静态文件
+
+      #  mvc:   #静态文件
 #    static-path-pattern: /static/**
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
@@ -190,6 +191,8 @@ pagehelper:
 #   连接springcloud注册中心相关配置
 eureka:
   instance:
+    #客户端IP，因为假如存在多网卡，要明确使用某个网卡的IP跟服务端进行通信，默认是自动选择一个
+#    ip-address: 127.0.0.1
     preferIpAddress: true
     instance-id: ${displayLocalHost}:${spring.application.name}:${server.port}
 
