@@ -191,8 +191,18 @@ pagehelper:
 #   连接springcloud注册中心相关配置
 #客户端负载均衡配置，feign底层用的ribbon
 ribbon:
+  # 请求连接的超时时间
   ConnectTimeout: 10000
+  # 请求处理的超时时间
   ReadTimeout: 60000
+  # 对当前实例的重试次数
+  maxAutoRetries: 1
+  # 切换实例的重试次数
+  maxAutoRetriesNextServer: 3
+  # 对所有操作请求都进行重试
+  okToRetryOnAllOperations: true
+  # 对Http响应码进行重试
+#  retryableStatusCodes: 500,404,502
 eureka:
   instance:
     #客户端IP，因为假如存在多网卡，要明确使用某个网卡的IP跟服务端进行通信，默认是自动选择一个
