@@ -24,7 +24,7 @@ import java.util.List;
  * @Date: 2019-03-05 16:13
  * @Version: 1.0
  */
-@FeignClient("demo") //声明调用的服务名称，自带负载均衡
+@FeignClient("latico-archetype-springboot") //声明调用的服务名称，自带负载均衡
 @RequestMapping(value = "test")
 public interface TestControllerClient {
 
