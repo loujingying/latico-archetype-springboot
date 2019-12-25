@@ -203,6 +203,14 @@ ribbon:
   okToRetryOnAllOperations: true
   # 对Http响应码进行重试
 #  retryableStatusCodes: 500,404,502
+
+#目前基本使用Feign都是与ribbon结合使用的，但是feign客户端超时的优先级高于ribbon，可以二配一即可
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 60000
 eureka:
   instance:
     #客户端IP，因为假如存在多网卡，要明确使用某个网卡的IP跟服务端进行通信，默认是自动选择一个
