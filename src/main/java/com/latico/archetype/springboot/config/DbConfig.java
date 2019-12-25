@@ -2,6 +2,7 @@ package com.latico.archetype.springboot.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -95,7 +96,9 @@ public class DbConfig {
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     @ConfigurationProperties(prefix = "mybatis.configuration")
     public MybatisConfiguration mybatisConfiguration() {
-        return new MybatisConfiguration();
+        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
+        mybatisConfiguration.setJdbcTypeForNull(JdbcType.NULL);
+        return mybatisConfiguration;
     }
 
 }
