@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @ApiModel("请求传输对象")
 public class RestRequestDTO<T> implements Serializable {
-    private static final long serialVersionUID = -8147655332473090271L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 请求ID，决定请求的唯一性

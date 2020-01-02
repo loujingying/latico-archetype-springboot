@@ -34,11 +34,10 @@ public class AsyncConfigurerImpl implements AsyncConfigurer {
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        int availableProcessors = SystemUtils.getAvailableProcessors();
-        int maxAvailableProcessors = availableProcessors * 2;
-
-        threadPoolTaskExecutor.setCorePoolSize(availableProcessors);
-        threadPoolTaskExecutor.setMaxPoolSize(maxAvailableProcessors);
+        int threadSize = SystemUtils.getAvailableProcessors() - 1;
+        int maxThreadSize = threadSize * 2;
+        threadPoolTaskExecutor.setCorePoolSize(threadSize);
+        threadPoolTaskExecutor.setMaxPoolSize(maxThreadSize);
 //        队列容量一般是最大线程的2-3倍
         threadPoolTaskExecutor.setQueueCapacity(5000);
 //        使用调用者策略，当队列和最大线程满了之后，调用者线程自身加入一起工作
