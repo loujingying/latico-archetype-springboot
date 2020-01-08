@@ -38,8 +38,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan(basePackageClasses = {Demo2Mapper.class},
-        sqlSessionTemplateRef = MybatisDataSourceConfigSecondary.sqlSessionTemplateBeanName,
-        sqlSessionFactoryRef = MybatisDataSourceConfigSecondary.sqlSessionFactoryBeanName)
+        sqlSessionTemplateRef = MybatisDataSourceConfigSecondary.sqlSessionTemplateBeanName)
 public class MybatisDataSourceConfigSecondary {
 
     /**
@@ -101,7 +100,7 @@ public class MybatisDataSourceConfigSecondary {
     }
 
     @Bean(name = sqlSessionTemplateBeanName)
-    public SqlSessionTemplate sqlSessionTemplateSecondary(@Qualifier(sqlSessionFactoryBeanName) SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier(sqlSessionFactoryBeanName) SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
