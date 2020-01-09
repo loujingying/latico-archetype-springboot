@@ -7,4 +7,4 @@
  * @Date: 2020-01-02 14:20
  * @Version: 1.0
  */
-package com.latico.archetype.springboot.common.redis;
+package com.latico.archetype.springboot.config.redis.util;

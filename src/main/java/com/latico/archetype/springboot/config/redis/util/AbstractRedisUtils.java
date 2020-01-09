@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.common.redis;
+package com.latico.archetype.springboot.config.redis.util;
 
 
 import com.latico.archetype.springboot.config.redis.RedisTemplateUtils;

@@ -1,6 +1,5 @@
 package com.latico.archetype.springboot;
 
-import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import com.latico.archetype.springboot.common.util.ResourcesUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
@@ -39,7 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @ServletComponentScan
 @EnableFeignClients
 //EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接
-//@org.springframework.cloud.netflix.eureka.EnableEurekaClient
+//@EnableEurekaClient
 public class Application {
     /**
      * 日志类
