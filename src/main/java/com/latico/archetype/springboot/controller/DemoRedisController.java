@@ -1,6 +1,11 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.config.redis.RedisTemplateUtils;
+import com.latico.archetype.springboot.config.redis.lock.RedisLock;
+import com.latico.archetype.springboot.config.redis.lock.impl.RedisLockImpl;
 import com.latico.archetype.springboot.config.redis.util.*;
+import com.latico.commons.common.util.logging.Logger;
+import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +27,7 @@ import java.util.Set;
 @RequestMapping("demo/redis")
 public class DemoRedisController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(DemoRedisController.class);
     @RequestMapping(value = "get")
     public String get(@RequestParam("key") String key) {
         return RedisValueUtils.get(key);
@@ -81,6 +87,32 @@ public class DemoRedisController {
     @RequestMapping(value = "hash/put")
     public Boolean hashPut(String key, String hashKey, String hashValue) {
         RedisHashUtils.getStringValueOperations().put(key, hashKey, hashValue);
+        return true;
+    }
+
+    /**
+     * @param lockKey 锁的key
+     * @param execTime 执行时间
+     * @param expireTime 过期时间
+     * @param timeout 拿锁的超时时间
+     * @param unlock     是否解锁，为了测试不解锁时的超时自动解锁情况
+     * @return
+     */
+    @RequestMapping(value = "testLock")
+    public Boolean testLock(String lockKey, long execTime, int expireTime, long timeout, boolean unlock) {
+        RedisLock redisLock = new RedisLockImpl(RedisTemplateUtils.getStringRedisTemplate(), lockKey, expireTime);
+        boolean lock = redisLock.tryLock(timeout);
+        LOG.info("拿到锁状态:{}, {}", lock, redisLock);
+        try {
+            Thread.sleep(execTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (unlock) {
+            LOG.info("解锁:{} {}", redisLock, redisLock.unlock());
+        } else {
+            LOG.info("不解锁:{}", redisLock);
+        }
         return true;
     }
 
