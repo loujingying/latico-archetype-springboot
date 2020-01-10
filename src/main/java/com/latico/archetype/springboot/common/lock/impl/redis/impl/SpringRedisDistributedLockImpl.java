@@ -1,11 +1,12 @@
-package com.latico.archetype.springboot.config.redis.lock.impl;
+package com.latico.archetype.springboot.common.lock.impl.redis.impl;
 
-import com.latico.archetype.springboot.config.redis.lock.AbstractSpringRedisLock;
+import com.latico.archetype.springboot.common.lock.impl.redis.AbstractSpringRedisDistributedLock;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
-import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import redis.clients.jedis.*;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.commands.JedisCommands;
 import redis.clients.jedis.params.SetParams;
 
@@ -21,24 +22,29 @@ import java.util.ArrayList;
  * @Date: 2020-01-09 16:38
  * @Version: 1.0
  */
-public class RedisLockImpl extends AbstractSpringRedisLock {
+public class SpringRedisDistributedLockImpl extends AbstractSpringRedisDistributedLock {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RedisLockImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SpringRedisDistributedLockImpl.class);
 
-    public RedisLockImpl(org.springframework.data.redis.core.StringRedisTemplate redisTemplate, String lockKey) {
+    public SpringRedisDistributedLockImpl(StringRedisTemplate redisTemplate, String lockKey) {
         super(redisTemplate, lockKey);
     }
 
-    public RedisLockImpl(org.springframework.data.redis.core.StringRedisTemplate redisTemplate, String lockKey, String lockValue) {
+    public SpringRedisDistributedLockImpl(StringRedisTemplate redisTemplate, String lockKey, String lockValue) {
         super(redisTemplate, lockKey, lockValue);
     }
 
-    public RedisLockImpl(StringRedisTemplate redisTemplate, String lockKey, String lockValue, int expireTime) {
+    public SpringRedisDistributedLockImpl(StringRedisTemplate redisTemplate, String lockKey, String lockValue, int expireTime) {
         super(redisTemplate, lockKey, lockValue, expireTime);
     }
 
-    public RedisLockImpl(StringRedisTemplate redisTemplate, String lockKey, int expireTime) {
+    public SpringRedisDistributedLockImpl(StringRedisTemplate redisTemplate, String lockKey, int expireTime) {
         super(redisTemplate, lockKey, expireTime);
+    }
+
+    @Override
+    public void close() {
+
     }
 
     @Override
@@ -60,6 +66,8 @@ public class RedisLockImpl extends AbstractSpringRedisLock {
         setParams.ex(expireTime);
 
         final long startTime = System.currentTimeMillis();
+
+        refreshLockValue();
         try {
             while (true) {
                 //判断是否达到超时，不是无限的达到了超时
@@ -93,6 +101,7 @@ public class RedisLockImpl extends AbstractSpringRedisLock {
         SetParams setParams = new SetParams();
         setParams.nx();
         setParams.ex(expireTime);
+        refreshLockValue();
         //不存在则添加 且设置过期时间（单位ms）
         String result = executeSet(lockKey, lockValue, setParams);
         locked = OK.equalsIgnoreCase(result);
@@ -127,8 +136,8 @@ public class RedisLockImpl extends AbstractSpringRedisLock {
                 values.add(lockValue);
 
                 // 集群模式
-                if (nativeConnection instanceof redis.clients.jedis.JedisCluster) {
-                    result = (Long) ((redis.clients.jedis.JedisCluster) nativeConnection).eval(UNLOCK_LUA_SCRIPT, keys, values);
+                if (nativeConnection instanceof JedisCluster) {
+                    result = (Long) ((JedisCluster) nativeConnection).eval(UNLOCK_LUA_SCRIPT, keys, values);
                 }
 
                 // 单机模式
@@ -197,8 +206,8 @@ public class RedisLockImpl extends AbstractSpringRedisLock {
             public String doInRedis(org.springframework.data.redis.connection.RedisConnection connection) throws org.springframework.dao.DataAccessException {
                 Object nativeConnection = connection.getNativeConnection();
                 String result = null;
-                if (nativeConnection instanceof redis.clients.jedis.commands.JedisCommands) {
-                    result = ((redis.clients.jedis.commands.JedisCommands) nativeConnection).set(key, value, setParams);
+                if (nativeConnection instanceof JedisCommands) {
+                    result = ((JedisCommands) nativeConnection).set(key, value, setParams);
                 }
 
                 if (OK.equals(result)) {
@@ -222,7 +231,7 @@ public class RedisLockImpl extends AbstractSpringRedisLock {
         return redisTemplate.execute((org.springframework.data.redis.connection.RedisConnection connection) -> {
             Object nativeConnection = connection.getNativeConnection();
             Object result = null;
-            if (nativeConnection instanceof redis.clients.jedis.commands.JedisCommands) {
+            if (nativeConnection instanceof JedisCommands) {
                 result = ((JedisCommands) nativeConnection).get(key);
             }
             return (T) result;

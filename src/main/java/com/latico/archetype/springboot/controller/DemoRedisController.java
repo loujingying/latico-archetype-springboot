@@ -1,8 +1,8 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.common.lock.DistributedLock;
+import com.latico.archetype.springboot.common.lock.impl.redis.impl.SpringRedisDistributedLockImpl;
 import com.latico.archetype.springboot.config.redis.RedisTemplateUtils;
-import com.latico.archetype.springboot.config.redis.lock.RedisLock;
-import com.latico.archetype.springboot.config.redis.lock.impl.RedisLockImpl;
 import com.latico.archetype.springboot.config.redis.util.*;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
@@ -100,7 +100,7 @@ public class DemoRedisController {
      */
     @RequestMapping(value = "testLock")
     public Boolean testLock(String lockKey, long execTime, int expireTime, long timeout, boolean unlock) {
-        RedisLock redisLock = new RedisLockImpl(RedisTemplateUtils.getStringRedisTemplate(), lockKey, expireTime);
+        DistributedLock redisLock = new SpringRedisDistributedLockImpl(RedisTemplateUtils.getStringRedisTemplate(), lockKey, expireTime);
         boolean lock = redisLock.tryLock(timeout);
         LOG.info("拿到锁状态:{}, {}", lock, redisLock);
         try {
