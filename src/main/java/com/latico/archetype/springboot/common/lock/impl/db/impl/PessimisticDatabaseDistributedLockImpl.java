@@ -13,6 +13,18 @@ import com.latico.archetype.springboot.common.lock.impl.db.AbstractDatabaseDistr
  * @Version: 1.0
  */
 public class PessimisticDatabaseDistributedLockImpl extends AbstractDatabaseDistributedLock {
+    public PessimisticDatabaseDistributedLockImpl(String lockKey) {
+        super(lockKey);
+    }
+
+    public PessimisticDatabaseDistributedLockImpl(String lockKey, int expireTime) {
+        super(lockKey, expireTime);
+    }
+
+    public PessimisticDatabaseDistributedLockImpl(String lockKey, String lockValue, int expireTime) {
+        super(lockKey, lockValue, expireTime);
+    }
+
     @Override
     public boolean tryLock(long timeout) {
         return false;

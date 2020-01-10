@@ -38,7 +38,7 @@ public class DatabaseLock implements Serializable {
 	@Column(name = "lock_holder")
 	private String lockHolder;
 
-	@Column(name = "create_time")
+	@Column(name = "create_time", updatable = false)
 	private java.util.Date createTime;
 
 	@Column(name = "update_time")
