@@ -41,10 +41,22 @@ public class JpaDatabaseLockDao {
             return false;
         }
 
-        //锁已经被获取
+        //锁已经被获取，但是检测是否过期
         if (1 == databaseLock.getLockStatus()) {
-            LOG.warn("获取锁失败，该锁被使用中:{}", databaseLock);
-            return false;
+            if (databaseLock.getExpireTime() != null && databaseLock.getExpireTime() >= 1) {
+                long currentTimeSeconds = System.currentTimeMillis() / 1000;
+                if (currentTimeSeconds > databaseLock.getExpireTime()) {
+                    LOG.info("本次能获得锁，因为数据库的锁过期:{}", databaseLock);
+
+                } else {
+                    LOG.warn("获取锁失败，该锁被使用中并且未过期:{}", databaseLock);
+                    return false;
+                }
+            } else {
+                LOG.warn("获取锁失败，该锁被使用中，并且该锁没有过期时间:{}", databaseLock);
+                return false;
+            }
+
         }
 
         databaseLock.setLockStatus(1);
