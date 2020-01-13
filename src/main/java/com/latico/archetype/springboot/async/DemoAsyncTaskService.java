@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * <PRE>
- *
+ * 需要结合{@link AsyncConfigurerImpl}使用
  * </PRE>
  *
  * @Author: latico

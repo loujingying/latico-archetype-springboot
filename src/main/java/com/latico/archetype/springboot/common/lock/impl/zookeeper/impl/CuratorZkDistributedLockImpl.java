@@ -117,9 +117,9 @@ public class CuratorZkDistributedLockImpl extends AbstractZkDistributedLock {
 
     private void printGetLockInfo() {
         if (locked) {
-            LOG.info("获取锁成功:{},时间:{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+            LOG.info("获取锁成功:{},时间:{}", getLockInfo(), getTimestampStr());
         } else {
-            LOG.info("获取锁失败:{},时间:{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+            LOG.warn("获取锁失败:{},时间:{}", getLockInfo(), getTimestampStr());
         }
     }
 

@@ -31,22 +31,22 @@ public class DemoScheduled {
 
     @Autowired
     DemoAsyncTaskService demoAsyncTaskService;
-
+/*
     @Scheduled(fixedRate = 10000)
     public void reportCurrentTimeFixedRate() {
         Timestamp sysTimestamp = DateTimeUtils.getSysTimestamp();
         LOG.info("固定10秒执行一次报告当前时间:{}", sysTimestamp);
 
         demoAsyncTaskService.asyncExec(sysTimestamp);
-    }
+    }*/
 
-    @Scheduled(fixedDelay = 15000)
+  /*  @Scheduled(fixedDelay = 15000)
     public void reportCurrentTimeFixedDelay() {
         Timestamp sysTimestamp = DateTimeUtils.getSysTimestamp();
         LOG.info("执行完后15秒执行一次,报告当前时间:{}", sysTimestamp);
 
         demoAsyncTaskService.asyncExec(sysTimestamp);
-    }
+    }*/
 
     @Scheduled(cron = "0/20 * * * * ?")
     public void reportCurrentTimeCron() {

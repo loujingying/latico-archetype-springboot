@@ -149,9 +149,9 @@ public class SpringRedisDistributedLockImpl extends AbstractSpringRedisDistribut
                 boolean succ = result == 1;
                 if (succ) {
                     locked = false;
-                    LOG.info("Redis分布式锁，解锁{}成功！解锁时间：{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+                    LOG.info("Redis分布式锁，解锁{}成功！解锁时间：{}", getLockInfo(), getTimestampStr());
                 } else {
-                    LOG.error("Redis分布式锁，解锁{}失败！解锁时间：{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+                    LOG.error("Redis分布式锁，解锁{}失败！解锁时间：{}", getLockInfo(), getTimestampStr());
                 }
 
                 return succ;
@@ -179,9 +179,9 @@ public class SpringRedisDistributedLockImpl extends AbstractSpringRedisDistribut
             LOG.error("", e);
         }
         if (!locked) {
-            LOG.info("Redis分布式锁，解锁{}成功！解锁时间：{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+            LOG.info("Redis分布式锁，解锁{}成功！解锁时间：{}", getLockInfo(), getTimestampStr());
         } else {
-            LOG.error("Redis分布式锁，解锁{}失败！解锁时间：{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+            LOG.error("Redis分布式锁，解锁{}失败！解锁时间：{}", getLockInfo(), getTimestampStr());
         }
     }
 
@@ -211,9 +211,9 @@ public class SpringRedisDistributedLockImpl extends AbstractSpringRedisDistribut
                 }
 
                 if (OK.equals(result)) {
-                    LOG.info("尝试获取锁成功:{},时间:{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+                    LOG.info("尝试获取锁成功:{},时间:{}", getLockInfo(), getTimestampStr());
                 } else {
-                    LOG.debug("尝试获取锁失败:{},时间:{}", getLockInfo(), new Timestamp(System.currentTimeMillis()));
+                    LOG.debug("尝试获取锁失败:{},时间:{}", getLockInfo(), getTimestampStr());
                 }
 
                 return result;

@@ -26,7 +26,7 @@ public class StartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         LOG.info("程序启动完成后执行任务");
-        startTimer();
+        // startTimer();
     }
 
     /**

@@ -67,10 +67,16 @@ public class JpaDatabaseDistributedLockImpl extends AbstractDatabaseDistributedL
         } catch (Exception e) {
             LOG.error("", e);
         }
-
+        printGetLockInfo();
         return locked;
     }
-
+    private void printGetLockInfo() {
+        if (locked) {
+            LOG.info("获取锁成功:{},时间:{}", getLockInfo(), getTimestampStr());
+        } else {
+            LOG.warn("获取锁失败:{},时间:{}", getLockInfo(), getTimestampStr());
+        }
+    }
     private long getExpireTimestamp() {
         return System.currentTimeMillis() / 1000 + expireTime;
     }
@@ -90,6 +96,8 @@ public class JpaDatabaseDistributedLockImpl extends AbstractDatabaseDistributedL
         } catch (Exception e) {
             LOG.error("", e);
         }
+
+        printGetLockInfo();
         return locked;
     }
 

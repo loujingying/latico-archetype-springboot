@@ -1,5 +1,6 @@
 package com.latico.archetype.springboot.common.lock;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -64,4 +65,21 @@ public abstract class AbstractDistributedLock implements DistributedLock {
         return tryInterval;
     }
 
+    /**
+     * 时间戳字符串
+     * @return
+     */
+    protected String getTimestampStr() {
+        return new Timestamp(System.currentTimeMillis()).toString();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("AbstractDistributedLock{");
+        sb.append("expireTime=").append(expireTime);
+        sb.append(", locked=").append(locked);
+        sb.append(", tryInterval=").append(tryInterval);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -63,4 +63,17 @@ public abstract class AbstractDatabaseDistributedLock extends AbstractDistribute
     protected String getLockInfo() {
         return "[" + lockKey + "||" + lockValue + "]";
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("AbstractDatabaseDistributedLock{");
+        sb.append("lockKey='").append(lockKey).append('\'');
+        sb.append(", lockValue='").append(lockValue).append('\'');
+        sb.append(", fixedLockValue=").append(fixedLockValue);
+        sb.append(", expireTime=").append(expireTime);
+        sb.append(", locked=").append(locked);
+        sb.append(", tryInterval=").append(tryInterval);
+        sb.append('}');
+        return sb.toString();
+    }
 }
