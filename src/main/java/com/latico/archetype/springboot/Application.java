@@ -3,6 +3,7 @@ package com.latico.archetype.springboot;
 import com.latico.archetype.springboot.common.util.ResourcesUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
+import com.latico.commons.common.util.version.VersionUtils;
 import com.latico.commons.spring.extend.ApplicationContextAwareImpl;
 import com.latico.commons.spring.util.SpringUtils;
 import org.springframework.boot.SpringApplication;
@@ -65,8 +66,7 @@ public class Application {
         LOG.info("开始启动程序,时间点:" + new Timestamp(startTime));
 
         //打印版本信息
-        Version version = new Version();
-        System.out.println(version.getVersionInfosByMarkdown());
+        System.out.println(VersionUtils.getVersionInfosToMarkdown());
 
         //启动程序
         startShutDownHook();
@@ -80,7 +80,7 @@ public class Application {
         application.run(args);
 
         //打印版本信息
-        LOG.info(version.getVersionInfosByMarkdown());
+        LOG.info(VersionUtils.getVersionInfosToMarkdown());
 
         long endTime = System.currentTimeMillis();
         long useTime = endTime - startTime;

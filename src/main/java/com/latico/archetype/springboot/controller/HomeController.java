@@ -5,6 +5,7 @@ import com.latico.archetype.springboot.common.util.CollectionUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.common.util.system.SystemUtils;
+import com.latico.commons.common.util.version.VersionUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
@@ -85,22 +86,19 @@ public class HomeController {
     @RequestMapping(value = "version")
     @ApiOperation("查询程序版本信息，默认格式")
     public String version() {
-        Version version = new Version();
-        return version.getVersionInfosByMarkdown();
+        return VersionUtils.getVersionInfosToMarkdown();
     }
 
     @RequestMapping(value = "version/md")
     @ApiOperation("查询程序版本信息，markdown格式")
     public String versionMd() {
-        Version version = new Version();
-        return version.getVersionInfosByMarkdown();
+        return VersionUtils.getVersionInfosToMarkdown();
     }
 
     @RequestMapping(value = "version/html")
     @ApiOperation("查询程序版本信息，HTML表格式")
-    public String versionHtmlTable() {
-        Version version = new Version();
-        return version.getVersionInfosByHtml();
+    public String versionHtml() {
+        return VersionUtils.getVersionInfosToHtml();
     }
 
 }
