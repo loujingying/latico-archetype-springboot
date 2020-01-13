@@ -1,6 +1,8 @@
 package com.latico.archetype.springboot;
 
 
+import com.latico.commons.common.util.logging.Logger;
+import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.common.util.version.VersionUtils;
 
 /**
@@ -16,10 +18,18 @@ import com.latico.commons.common.util.version.VersionUtils;
  */
 public class Version {
 
+    private static final Logger LOG = LoggerFactory.getLogger(Version.class);
     /**
      * 初始化版本信息
      */
     public static void init() {
+        //初始化这里什么也不做，目的是为了初始化同步代码块
+        System.out.println("初始化版本信息");
+        LOG.info("初始化版本信息");
+    }
+
+    //为了实现只加载一次，这里使用静态代码块
+    static {
         VersionUtils.addVersionInfo("项目名称","1.0", "latico", "2020-01-13", "构建项目");
     }
 
