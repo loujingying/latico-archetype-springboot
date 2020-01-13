@@ -16,7 +16,10 @@ import com.latico.commons.common.util.version.VersionUtils;
  */
 public class Version {
 
-    static {
+    /**
+     * 初始化版本信息
+     */
+    public static void init() {
         VersionUtils.addVersionInfo("项目名称","1.0", "latico", "2020-01-13", "构建项目");
     }
 

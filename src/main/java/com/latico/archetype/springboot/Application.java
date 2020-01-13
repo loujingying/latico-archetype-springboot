@@ -65,7 +65,8 @@ public class Application {
         System.out.println("开始启动程序,时间点:" + new Timestamp(startTime));
         LOG.info("开始启动程序,时间点:" + new Timestamp(startTime));
 
-        //打印版本信息
+        //初始化并打印版本信息
+        Version.init();
         System.out.println(VersionUtils.getVersionInfosToMarkdown());
 
         //启动程序
