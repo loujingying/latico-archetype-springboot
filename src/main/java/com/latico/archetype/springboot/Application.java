@@ -63,6 +63,11 @@ public class Application {
         long startTime = System.currentTimeMillis();
         System.out.println("开始启动程序,时间点:" + new Timestamp(startTime));
         LOG.info("开始启动程序,时间点:" + new Timestamp(startTime));
+
+        //打印版本信息
+        Version version = new Version();
+        System.out.println(version.getVersionInfosByMarkdown());
+
         //启动程序
         startShutDownHook();
 
@@ -71,7 +76,11 @@ public class Application {
 //        添加监听器
         addListeners(application);
 
+        //启动springboot
         application.run(args);
+
+        //打印版本信息
+        LOG.info(version.getVersionInfosByMarkdown());
 
         long endTime = System.currentTimeMillis();
         long useTime = endTime - startTime;

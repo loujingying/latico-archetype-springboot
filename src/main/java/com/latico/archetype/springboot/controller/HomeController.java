@@ -1,7 +1,7 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.Version;
 import com.latico.archetype.springboot.common.util.CollectionUtils;
-import com.latico.archetype.springboot.common.util.StrUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.common.util.system.SystemUtils;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.List;
 
 /**
@@ -81,6 +80,27 @@ public class HomeController {
         sb.append("2、Druid监控界面: " + druidLink + "<hr/>");
         sb.append("3、索引界面: " + indexLink + "<hr/>");
         return sb.toString();
+    }
+
+    @RequestMapping(value = "version")
+    @ApiOperation("查询程序版本信息，默认格式")
+    public String version() {
+        Version version = new Version();
+        return version.getVersionInfosByMarkdown();
+    }
+
+    @RequestMapping(value = "version/md")
+    @ApiOperation("查询程序版本信息，markdown格式")
+    public String versionMd() {
+        Version version = new Version();
+        return version.getVersionInfosByMarkdown();
+    }
+
+    @RequestMapping(value = "version/html")
+    @ApiOperation("查询程序版本信息，HTML表格式")
+    public String versionHtmlTable() {
+        Version version = new Version();
+        return version.getVersionInfosByHtml();
     }
 
 }
