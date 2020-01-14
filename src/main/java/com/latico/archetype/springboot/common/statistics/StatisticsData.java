@@ -1,5 +1,10 @@
 package com.latico.archetype.springboot.common.statistics;
 
+import com.latico.commons.common.util.collections.MapUtils;
+import com.latico.commons.common.util.logging.Logger;
+import com.latico.commons.common.util.logging.LoggerFactory;
+import com.latico.commons.common.util.time.DateTimeUtils;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -15,6 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @Version: 1.0
  */
 public class StatisticsData {
+    private static final Logger LOG_STATISTICS = LoggerFactory.getLogger("statistics");
     /**
      * instance 单例实例
      */
@@ -128,4 +134,26 @@ public class StatisticsData {
         return statisticsResult;
     }
 
+    /**
+     * 打印数据到统计日志到statistics.log中，需要检查logback-spring.xml是否配置了statistics日志
+     * @param statisticsResult 第一维key是组分类，第二维是组内的任务名称，值是数量
+     */
+    public static void printLog(Map<String, Map<String, AtomicLong>> statisticsResult) {
+        if (!statisticsResult.isEmpty()) {
+            String systemDate = DateTimeUtils.getSystemDate(DateTimeUtils.FORMAT_YMDHMS);
+            for (Map.Entry<String, Map<String, AtomicLong>> entry : statisticsResult.entrySet()) {
+                if (MapUtils.isEmpty(entry.getValue())) {
+                    continue;
+                }
+                String groupName = entry.getKey();
+                StringBuilder sb = new StringBuilder();
+                sb.append("[").append(systemDate).append("]");
+                sb.append("[").append(groupName).append("]").append("[");
+                sb.append(MapUtils.mapToStr(entry.getValue(), ",", "="));
+                String str = sb.toString();
+                str = str.substring(0, str.length() - 1);
+                LOG_STATISTICS.info(str + "]");
+            }
+        }
+    }
 }
