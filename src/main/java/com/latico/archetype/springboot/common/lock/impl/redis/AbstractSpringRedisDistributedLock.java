@@ -120,10 +120,12 @@ public abstract class AbstractSpringRedisDistributedLock extends AbstractDistrib
     }
 
 
+    @Override
     public String getLockKey() {
         return lockKey;
     }
 
+    @Override
     public String getLockValue() {
         return lockValue;
     }

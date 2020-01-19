@@ -51,4 +51,15 @@ public interface DistributedLock {
      * @param expireTime
      */
     void setExpireTime(int expireTime);
+
+    /**
+     * @return 锁的Key
+     */
+    String getLockKey();
+
+    /**
+     * @return 锁的值
+     */
+    String getLockValue();
+
 }

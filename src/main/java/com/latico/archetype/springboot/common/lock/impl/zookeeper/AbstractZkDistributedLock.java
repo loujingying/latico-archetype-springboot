@@ -14,6 +14,15 @@ import com.latico.archetype.springboot.common.lock.AbstractDistributedLock;
 public abstract class AbstractZkDistributedLock extends AbstractDistributedLock {
     protected String connectString;
     protected String lockNodePath = "/lock_node";
+    @Override
+    public String getLockKey() {
+        return lockNodePath;
+    }
+
+    @Override
+    public String getLockValue() {
+        return null;
+    }
 
     @Override
     public String toString() {

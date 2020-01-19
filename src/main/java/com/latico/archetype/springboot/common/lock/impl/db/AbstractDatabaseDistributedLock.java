@@ -63,7 +63,15 @@ public abstract class AbstractDatabaseDistributedLock extends AbstractDistribute
     protected String getLockInfo() {
         return "[" + lockKey + "||" + lockValue + "]";
     }
+    @Override
+    public String getLockKey() {
+        return lockKey;
+    }
 
+    @Override
+    public String getLockValue() {
+        return lockValue;
+    }
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("AbstractDatabaseDistributedLock{");

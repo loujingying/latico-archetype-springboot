@@ -44,7 +44,14 @@ public class CuratorZkDistributedLockImpl extends AbstractZkDistributedLock {
         }
 
     }
-
+    @Override
+    public String getLockValue() {
+        if (curatorLock != null) {
+            return curatorLock.getLockPath();
+        } else {
+            return null;
+        }
+    }
     /**
      * @param connectString  连接字符串，支持多个，逗号隔开     localhost:2181,localhost:2182,localhost:2183
      * @param lockNodePath      必须/开头  建议是 /lock_node

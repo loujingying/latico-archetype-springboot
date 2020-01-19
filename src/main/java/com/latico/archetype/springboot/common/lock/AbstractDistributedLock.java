@@ -74,6 +74,16 @@ public abstract class AbstractDistributedLock implements DistributedLock {
     }
 
     @Override
+    public String getLockKey() {
+        return null;
+    }
+
+    @Override
+    public String getLockValue() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("AbstractDistributedLock{");
         sb.append("expireTime=").append(expireTime);
