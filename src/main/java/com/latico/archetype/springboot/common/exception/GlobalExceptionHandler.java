@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
         RestResponseDTO result = new RestResponseDTO();
         result.setStatus(false);
         result.setName("服务器异常！");
-        result.setDesc(e.getMessage());
+        result.setDescr(e.getMessage());
         LOG.error(e);
         return result;
     }
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
         RestResponseDTO result = new RestResponseDTO();
         result.setStatus(false);
         result.setName("服务器异常！");
-        result.setDesc(e.getMessage());
+        result.setDescr(e.getMessage());
         LOG.error(e);
         return result;
     }
@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
         RestResponseDTO result = new RestResponseDTO();
         result.setStatus(false);
         result.setName("服务器异常！");
-        result.setDesc(e.getMessage());
+        result.setDescr(e.getMessage());
         LOG.error(e);
         return result;
     }

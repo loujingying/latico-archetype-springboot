@@ -33,7 +33,7 @@ public class RestResponseDTO<T> implements Serializable {
      * 描述
      */
     @ApiModelProperty("对象描述")
-    private String desc;
+    private String descr;
 
     /**
      * 总状态，成功/失败，true/false
