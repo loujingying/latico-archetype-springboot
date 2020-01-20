@@ -28,9 +28,15 @@ public class Version {
         LOG.info("初始化版本信息");
     }
 
+    /**
+     * 项目名称
+     */
+    private static final String projectName = "latico-archetype-springboot";
+
     //为了实现只加载一次，这里使用静态代码块
     static {
-        VersionUtils.addVersionInfo("项目名称","1.0", "latico", "2020-01-13", "构建项目");
+        VersionUtils.addVersionInfo(projectName,"1.0", "latico", "2020-01-13",
+                "构建项目");
     }
 
 }
