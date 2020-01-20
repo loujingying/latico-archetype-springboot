@@ -1,3 +1,32 @@
+
+一、创建项目骨架项目
+使用IDEA、eclipse或者进入到项目根目录执行：mvn archetype:create-from-project
+
+二、把骨架项目安装到本地仓库中(读取的是maven程序的conf/settings.xml文件)
+方式1：如果是使用IDEA，可以再maven执行命令的地方选择要执行命令时所在的目录target\generated-sources\archetype，执行命令：mvn clean install
+方式2：先进入骨架项目的pom文件目录：
+
+2、进入骨架项目包所在的目录target\generated-sources\archetype，
+在目录、子目录、生成的发布jar包里，找出并删除.idea、logs里等无用文件夹，同时用压缩软件打开target/generated-sources/archetype/target/latico-archetype-springboot.jar，同样删除里面的无用文件夹。
+在target\generated-sources\archetype目录执行命令安装骨架到本地：mvn clean install
+
+三、把骨架项目发布到私服中（作用是让‘别人’根据骨架文件可以拉下来项目）
+1、在target/generated-sources/archetype/pom.xml中添加发布到私服的地址，从项目的pom文件拷贝distributionManagement节点到发布的pom中。
+
+2、进入骨架项目包所在的目录target\generated-sources\archetype，
+在目录、子目录、生成的发布jar包里，找出并删除.idea、logs里等无用文件夹，如果前面已经删除过，这步可以忽略
+
+3、在target\generated-sources\archetype目录执行命令：mvn deploy
+
+四、把骨架添加到IDE中
+1、对于IDEA工具：创建新的maven工程，选择Add Archetype,填写刚才添加的骨架工程坐标,点击OK，这是会生成一个新的骨架选项，选中它。再按正常流程创建项目。
+2、对于eclipse，添加配置骨架文件，骨架文件在本地maven仓库的根目录下的archetype-catalog.xml就是，其实就是配置了要引用骨架的maven坐标；
+
+五、项目添加成功后，可能需要刷新一下项目的maven配置，让maven生效；
+
+六、目前不需要这步骤，更改版本号，先更改父的版本号后，执行命令即可更新所有模块的版本号：mvn -N versions:update-child-modules
+
+
 注意事项：
     1、模块中不能有名称为config的文件夹，要不然安装骨架的时候会报如下错误：
 maven-archetype-plugin:3.0.1:integration-test failed: String index out of range: -6
@@ -12,19 +41,7 @@ pe:
 [ERROR] Archetype IT 'basic' failed: org.dom4j.DocumentException: Error on line 270 of document  : 在注释中找到无效的 XML 字符 (Unicode: 0xd84e)。 Nested exception
 : 在注释中找到无效的 XML 字符 (Unicode: 0xd84e)。
 
-一、创建项目骨架项目
-使用IDEA、eclipse或者进入到项目根目录执行：mvn archetype:create-from-project
-
-二、把骨架项目安装到本地仓库中(读取的是maven程序的conf/settings.xml文件)
-方式1：如果是使用IDEA，可以再maven执行命令的地方选择要执行命令时所在的目录target\generated-sources\archetype，执行命令：mvn clean install
-方式2：先进入骨架项目的pom文件目录：
-
-2、进入骨架项目包所在的目录target\generated-sources\archetype，
-在目录和子目录找出并删除.idea等无用文件夹，同时用压缩软件打开target/generated-sources/archetype/target/latico-archetype-springboot.jar，同样删除里面的无用文件夹。
-在target\generated-sources\archetype目录执行命令安装骨架到本地：mvn clean install
-
-三、把骨架项目发布到私服中（作用是让‘别人’根据骨架文件可以拉下来项目）
-1、注意：因为生成的骨架项目中的pom.xml文件（target/generated-sources/archetype/pom.xml）没有配置distributionManagement，所以需要手工添加，要不然会报如下错误：
+3、注意：因为生成的骨架项目中的pom.xml文件（target/generated-sources/archetype/pom.xml）没有配置distributionManagement，所以需要手工添加，从项目的pom文件拷贝distributionManagement节点到发布的pom中，要不然会报如下错误：
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-deploy-plugin:3.0.0-M1:deploy (default-deploy) on project catt-springboot-archetype: Deployment failed: repository element was not specified in the POM inside distributionManagement element or in -DaltDeploymentRepository=id::layout::url parameter -> [Help 1]
 [ERROR]
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
@@ -32,17 +49,3 @@ pe:
 [ERROR]
 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
-
-2、进入骨架项目包所在的目录target\generated-sources\archetype，
-在目录和子目录找出并删除.idea、logs等无用文件夹，
-
-3、在target\generated-sources\archetype目录执行命令：mvn deploy
-
-四、把骨架添加到IDE中
-1、对于IDEA工具：创建新的maven工程，选择Add Archetype,填写刚才添加的骨架工程坐标,点击OK，这是会生成一个新的骨架选项，选中它。再按正常流程创建项目。
-2、对于eclipse，添加配置骨架文件，骨架文件在本地maven仓库的根目录下的archetype-catalog.xml就是，其实就是配置了要引用骨架的maven坐标；
-
-五、项目添加成功后，可能需要刷新一下项目的maven配置，让maven生效；
-
-六、更改版本号，先更改父的版本号后，执行命令即可更新所有模块的版本号：mvn -N versions:update-child-modules
-

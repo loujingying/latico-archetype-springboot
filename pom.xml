@@ -116,6 +116,11 @@
         <janino.version>3.0.11</janino.version>
         <springcloud.version>Hoxton.RELEASE</springcloud.version>
         <springboot.version>2.2.1.RELEASE</springboot.version>
+
+        <!--旧版本的springboot和springcloud组合，因为新版的JPA对bean对象格式规范检测很严格，程序启动会报错提示修改字段为规范-->
+        <!--<springcloud.version>Finchley.RELEASE</springcloud.version>
+        <springboot.version>2.1.4.RELEASE</springboot.version>-->
+
         <swagger.version>2.6.1</swagger.version>
         <feign.version>10.2.0</feign.version>
     </properties>
