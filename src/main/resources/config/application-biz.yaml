@@ -2,20 +2,24 @@
 
 #示例配置
 demo-yaml-config:
-  value: 345                          #对应单个值
-  valueArray: 1,2,3,4,5,6,7,8,9      #对应数组
-  valueList:                         #对应list
+  #对应单个值
+  value: 345
+  #对应数组
+  valueArray: 1,2,3,4,5,6,7,8,9
+  #对应list
+  valueList:
     - 13579
     - 246810
-  valueMap:                          #对应map
+  # 对应map
+  valueMap:
     name: lili
     age: 20
     sex: female
-  valueMapList:                      #对应list<map>
+    #对应list<map>
+  valueMapList:
     - name: bob
       age: 21
     - name: caven
       age: 31
-
   #      统计任务的cron表达式
   statsticsCron: 0 * * * * ?
