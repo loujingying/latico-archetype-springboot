@@ -2,15 +2,19 @@ package com.latico.archetype.springboot.async;
 
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
-import com.latico.commons.common.util.system.SystemUtils;
+import com.latico.commons.common.util.thread.ThreadUtils;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <PRE>
@@ -34,7 +38,7 @@ public class AsyncConfigurerImpl implements AsyncConfigurer {
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        int threadSize = SystemUtils.getAvailableProcessors() - 1;
+        int threadSize = ThreadUtils.getBestThreadSize();
         int maxThreadSize = threadSize * 2;
         threadPoolTaskExecutor.setCorePoolSize(threadSize);
         threadPoolTaskExecutor.setMaxPoolSize(maxThreadSize);
@@ -51,5 +55,36 @@ public class AsyncConfigurerImpl implements AsyncConfigurer {
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         LOG.error("异步执行发生异常");
         return null;
+    }
+
+    /**
+     * 等待所有的future完成
+     * @param futureList
+     * @param <T>
+     */
+    public static <T> void waitFuturesDone(List<Future<T>> futureList) {
+        if (futureList.isEmpty()) {
+            return;
+        }
+        while (true) {
+            boolean isEndFlag = true;
+            Iterator<Future<T>> iterator = futureList.iterator();
+            while (iterator.hasNext()) {
+                Future<T> next = iterator.next();
+                if (next.isDone()) {
+                    iterator.remove();
+                } else {
+                    isEndFlag = false;
+                }
+            }
+            if (isEndFlag) {
+                break;
+            }
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+
+            }
+        }
     }
 }

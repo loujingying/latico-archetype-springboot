@@ -2,8 +2,8 @@ package com.latico.archetype.springboot.controller;
 
 import com.latico.archetype.springboot.common.lock.DistributedLock;
 import com.latico.archetype.springboot.common.lock.impl.redis.impl.SpringRedisDistributedLockImpl;
-import com.latico.archetype.springboot.config.redis.RedisTemplateUtils;
-import com.latico.archetype.springboot.config.redis.util.*;
+import com.latico.archetype.springboot.redis.util.RedisTemplateUtils;
+import com.latico.archetype.springboot.redis.util.*;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,7 @@
 package com.latico.archetype.springboot.controller;
 
-import com.latico.archetype.springboot.dao.elasticsearch.entity.DemoElasticsearchBean;
-import com.latico.archetype.springboot.service.DemoElasticsearchService;
+import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticsearchBean;
+import com.latico.archetype.springboot.elasticsearch.service.DemoElasticsearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

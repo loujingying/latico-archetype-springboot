@@ -708,6 +708,14 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
         </dependency>
 
         <!--elasticsearch-->
+
+        <!--kafka-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <!--kafka-->
+
     </dependencies>
 
 </project>

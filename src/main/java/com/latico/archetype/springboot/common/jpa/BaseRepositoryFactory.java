@@ -1,13 +1,8 @@
 package com.latico.archetype.springboot.common.jpa;
 
 import com.latico.archetype.springboot.common.jpa.impl.BaseRepositoryImpl;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
-import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
-import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
