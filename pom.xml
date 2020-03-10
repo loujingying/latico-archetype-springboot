@@ -123,6 +123,9 @@
 
         <swagger.version>2.6.1</swagger.version>
         <feign.version>10.2.0</feign.version>
+        <elasticsearch.version>7.6.1</elasticsearch.version>
+        <spring.data.elasticsearch.version>3.2.5.RELEASE</spring.data.elasticsearch.version>
+        <starter-data-elasticsearch.version>2.2.5.RELEASE</starter-data-elasticsearch.version>
     </properties>
 
     <!-- 打包配置 -->
@@ -671,6 +674,40 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
               <scope>system</scope>
               <systemPath>${project.basedir}/lib/demo-1.0.jar</systemPath>
           </dependency>-->
+
+        <!--elasticsearch-->
+     <!--  <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.plugin</groupId>
+            <artifactId>transport-netty4-client</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+           <dependency>
+              <groupId>org.springframework.data</groupId>
+              <artifactId>spring-data-elasticsearch</artifactId>
+              <version>${spring.data.elasticsearch.version}</version>
+          </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <!--<version>${starter-data-elasticsearch.version}</version>-->
+        </dependency>
+
+        <!--elasticsearch-->
     </dependencies>
 
 </project>

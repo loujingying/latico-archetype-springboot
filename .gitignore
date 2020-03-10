@@ -1,3 +1,5 @@
+!**/src/main/**
+!**/src/test/**
 HELP.md
 /target/
 .mvn/
