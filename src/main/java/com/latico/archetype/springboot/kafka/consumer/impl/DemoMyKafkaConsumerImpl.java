@@ -1,14 +1,12 @@
 package com.latico.archetype.springboot.kafka.consumer.impl;
 
 import com.latico.archetype.springboot.kafka.common.KafkaConstants;
-import com.latico.archetype.springboot.kafka.consumer.DemoKafkaConsumer;
+import com.latico.archetype.springboot.kafka.consumer.MyKafkaConsumer;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * <PRE>
@@ -20,18 +18,13 @@ import java.util.Optional;
  * @Version: 1.0
  */
 @Service
-public class DemoKafkaConsumerImpl implements DemoKafkaConsumer {
+public class DemoMyKafkaConsumerImpl implements MyKafkaConsumer<String, String> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DemoKafkaConsumerImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DemoMyKafkaConsumerImpl.class);
+
     @Override
     @KafkaListener(topics = {KafkaConstants.topic_demo})
-    public void listen(ConsumerRecord<?, ?> record) {
-        Optional<?> kafkaMessage = Optional.ofNullable(record.value());
-        if (kafkaMessage.isPresent()) {
-            Object message = kafkaMessage.get();
-            LOG.info("record =" + record);
-            LOG.info("message =" + message);
-
-        }
+    public void listen(ConsumerRecord<String, String> record) {
+        LOG.info("收到消息:record ={}", record);
     }
 }

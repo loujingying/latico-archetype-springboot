@@ -3,7 +3,7 @@ package com.latico.archetype.springboot.kafka.producer.impl;
 import com.latico.archetype.springboot.common.util.JsonUtils;
 import com.latico.archetype.springboot.kafka.bean.DemoKafkaMsg;
 import com.latico.archetype.springboot.kafka.common.KafkaConstants;
-import com.latico.archetype.springboot.kafka.producer.DemoKafkaProducer;
+import com.latico.archetype.springboot.kafka.producer.MyKafkaProducer;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +25,14 @@ import java.util.concurrent.ExecutionException;
  */
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
-public class DemoKafkaProducerImpl implements DemoKafkaProducer {
-    private static final Logger LOG = LoggerFactory.getLogger(DemoKafkaProducerImpl.class);
+public class DemoMyKafkaProducerImpl implements MyKafkaProducer<DemoKafkaMsg, String, String> {
+    private static final Logger LOG = LoggerFactory.getLogger(DemoMyKafkaProducerImpl.class);
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
-    public SendResult<String, String> send(DemoKafkaMsg msg) {
+    public boolean send(DemoKafkaMsg msg) {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(KafkaConstants.topic_demo, JsonUtils.objToJson(msg));
-
-        // try {
-        //     waitForDone(future);
-        // } catch (Exception e) {
-        //     LOG.error("", e);
-        // }
 
         SendResult<String, String> sendResult = null;
         try {
@@ -46,11 +40,9 @@ public class DemoKafkaProducerImpl implements DemoKafkaProducer {
         } catch (Exception e) {
             LOG.error("", e);
         }
+        LOG.info("打印发送结果:{}", sendResult);
 
-        return sendResult;
+        return true;
     }
 
-    private void waitForDone(ListenableFuture<SendResult<String, String>> future) throws ExecutionException, InterruptedException {
-        SendResult<String, String> sendResult = future.get();
-    }
 }
