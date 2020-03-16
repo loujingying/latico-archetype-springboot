@@ -46,6 +46,7 @@
                 <include>application*</include>
                 <include>config.xml</include>
                 <include>bootstrap.yaml</include>
+                <include>bootstrap.yml</include>
             </includes>
         </fileSet>
 
