@@ -1,8 +1,9 @@
 #!/bin/bash
 # ${project.build.finalName}
-export programname=$(cat ./programname.cfg)
-export javapath=$(cat ./javapath-with-pp.cfg)
+
 workdir=$(cd $(dirname $0); pwd)
+export programname=$(cat ${workdir}/programname.cfg)
+export javapath=$(cat ${workdir}/javapath-with-pp.cfg)
 
 PID=`ps -ef|grep ${workdir}|grep ${programname}|grep -v grep|awk '{print $2}'`
 

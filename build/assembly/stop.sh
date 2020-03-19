@@ -1,7 +1,8 @@
 #!/bin/bash
 # ${project.build.finalName}
-export programname=$(cat ./programname.cfg)
+
 workdir=$(cd $(dirname $0); pwd)
+export programname=$(cat ${workdir}/programname.cfg)
 
 PID=`ps -ef|grep ${workdir}|grep ${programname}|grep -v grep|awk '{print $2}'`
 if [[ -z ${PID} ]];then
