@@ -7,34 +7,34 @@ import org.springframework.data.redis.core.ListOperations;
  *     List的操作
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-02 11:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-02 11:55
+ * @version: 1.0
  */
 public class RedisListUtils extends AbstractRedisUtils {
 
     /**
      * 字符串的值操作对象
      */
-    private static final org.springframework.data.redis.core.ListOperations<String, String> stringValueOperations = RedisTemplateUtils.getStringRedisTemplate().opsForList();
+    private static final ListOperations<String, String> STRING_VALUE_OPERATIONS = RedisTemplateUtils.getStringRedisTemplate().opsForList();
     /**
      * int的值操作
      */
-    private static final org.springframework.data.redis.core.ListOperations<String, Integer> intValueOperations = RedisTemplateUtils.getIntRedisTemplate().opsForList();
+    private static final ListOperations<String, Integer> INT_VALUE_OPERATIONS = RedisTemplateUtils.getIntRedisTemplate().opsForList();
     /**
      * long值操作
      */
-    private static final org.springframework.data.redis.core.ListOperations<String, Long> longValueOperations = RedisTemplateUtils.getLongRedisTemplate().opsForList();
+    private static final ListOperations<String, Long> LONG_VALUE_OPERATIONS = RedisTemplateUtils.getLongRedisTemplate().opsForList();
 
     public static ListOperations<String, String> getStringValueOperations() {
-        return stringValueOperations;
+        return STRING_VALUE_OPERATIONS;
     }
 
     public static ListOperations<String, Integer> getIntValueOperations() {
-        return intValueOperations;
+        return INT_VALUE_OPERATIONS;
     }
 
     public static ListOperations<String, Long> getLongValueOperations() {
-        return longValueOperations;
+        return LONG_VALUE_OPERATIONS;
     }
 }

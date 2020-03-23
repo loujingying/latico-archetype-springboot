@@ -15,9 +15,9 @@ import com.lmax.disruptor.dsl.Disruptor;
  * 中间件
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-07 1:09
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-07 1:09
+ * @version: 1.0
  */
 public class DemoPcQueueMiddleware {
     /**

@@ -10,8 +10,8 @@
  这个类会读取测试资源目录下的generator/mybatis-plus-generator.properties配置进行mybatis代码自动生成。
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-24 21:35
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-24 21:35
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.dao;

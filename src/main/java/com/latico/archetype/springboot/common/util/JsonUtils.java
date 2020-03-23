@@ -7,9 +7,9 @@ import com.latico.commons.common.util.json.FastJsonUtils;
  * JSON工具
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-03-27 9:10
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-03-27 9:10
+ * @version: 1.0
  */
 public class JsonUtils extends FastJsonUtils {
 }

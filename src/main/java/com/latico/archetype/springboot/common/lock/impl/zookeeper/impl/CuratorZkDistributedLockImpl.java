@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit;
  * 释放锁就是删除自己的节点，后面的节点会监听到自己前面的节点被删除，然后判断自己是不是最小的节点。
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 14:43
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 14:43
+ * @version: 1.0
  */
 public class CuratorZkDistributedLockImpl extends AbstractZkDistributedLock {
 

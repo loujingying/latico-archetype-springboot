@@ -10,9 +10,9 @@ import java.util.UUID;
  * spring的redis抽象锁
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-09 16:41
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-09 16:41
+ * @version: 1.0
  */
 public abstract class AbstractSpringRedisDistributedLock extends AbstractDistributedLock {
 

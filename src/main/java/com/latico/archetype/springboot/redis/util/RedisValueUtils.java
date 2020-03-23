@@ -7,35 +7,35 @@ import org.springframework.data.redis.core.ValueOperations;
  * 普通的操作
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-02 11:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-02 11:55
+ * @version: 1.0
  */
 public class RedisValueUtils extends AbstractRedisUtils {
 
     /**
      * 字符串的值操作对象
      */
-    private static final org.springframework.data.redis.core.ValueOperations<String, String> stringValueOperations = RedisTemplateUtils.getStringRedisTemplate().opsForValue();
+    private static final ValueOperations<String, String> STRING_VALUE_OPERATIONS = RedisTemplateUtils.getStringRedisTemplate().opsForValue();
     /**
      * int的值操作
      */
-    private static final org.springframework.data.redis.core.ValueOperations<String, Integer> intValueOperations = RedisTemplateUtils.getIntRedisTemplate().opsForValue();
+    private static final ValueOperations<String, Integer> INT_VALUE_OPERATIONS = RedisTemplateUtils.getIntRedisTemplate().opsForValue();
     /**
      * long值操作
      */
-    private static final org.springframework.data.redis.core.ValueOperations<String, Long> longValueOperations = RedisTemplateUtils.getLongRedisTemplate().opsForValue();
+    private static final ValueOperations<String, Long> LONG_VALUE_OPERATIONS = RedisTemplateUtils.getLongRedisTemplate().opsForValue();
 
     public static ValueOperations<String, String> getStringValueOperations() {
-        return stringValueOperations;
+        return STRING_VALUE_OPERATIONS;
     }
 
     public static ValueOperations<String, Integer> getIntValueOperations() {
-        return intValueOperations;
+        return INT_VALUE_OPERATIONS;
     }
 
     public static ValueOperations<String, Long> getLongValueOperations() {
-        return longValueOperations;
+        return LONG_VALUE_OPERATIONS;
     }
 
     /**
@@ -45,7 +45,7 @@ public class RedisValueUtils extends AbstractRedisUtils {
      * @return 返回字符串格式值
      */
     public static String get(String key) {
-        return stringValueOperations.get(key);
+        return STRING_VALUE_OPERATIONS.get(key);
     }
 
     /**
@@ -55,19 +55,19 @@ public class RedisValueUtils extends AbstractRedisUtils {
      * @return 返回Integer类型的值
      */
     public static Integer getInt(String key) {
-        return intValueOperations.get(key);
+        return INT_VALUE_OPERATIONS.get(key);
     }
 
     public static Long getLong(String key) {
-        return longValueOperations.get(key);
+        return LONG_VALUE_OPERATIONS.get(key);
     }
 
     public static void set(String key, String value) {
-        stringValueOperations.set(key, value);
+        STRING_VALUE_OPERATIONS.set(key, value);
     }
 
     public static Boolean setIfAbsent(String key, String value) {
-        return stringValueOperations.setIfAbsent(key, value);
+        return STRING_VALUE_OPERATIONS.setIfAbsent(key, value);
     }
 
 }

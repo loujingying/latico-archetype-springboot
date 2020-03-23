@@ -9,12 +9,17 @@ import org.springframework.stereotype.Repository;
  * <PRE>
  *  数据库锁
  * </PRE>
- * @Author: latico
- * @Date: 2020-01-10 17:28:44
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 17:28:44
+ * @version: 1.0
  */
 @Repository
 public interface DatabaseLockRepository extends BaseRepository<DatabaseLock, String> {
 
+    /**
+     * 查询锁
+     * @param lockKey
+     * @return
+     */
     DatabaseLock queryByLockKey(String lockKey);
 }

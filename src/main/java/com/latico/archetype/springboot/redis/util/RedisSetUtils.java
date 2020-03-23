@@ -7,34 +7,34 @@ import org.springframework.data.redis.core.SetOperations;
  *    set的操作
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-02 11:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-02 11:55
+ * @version: 1.0
  */
 public class RedisSetUtils extends AbstractRedisUtils {
 
     /**
      * 字符串的值操作对象
      */
-    private static final org.springframework.data.redis.core.SetOperations<String, String> stringValueOperations = RedisTemplateUtils.getStringRedisTemplate().opsForSet();
+    private static final SetOperations<String, String> STRING_VALUE_OPERATIONS = RedisTemplateUtils.getStringRedisTemplate().opsForSet();
     /**
      * int的值操作
      */
-    private static final org.springframework.data.redis.core.SetOperations<String, Integer> intValueOperations = RedisTemplateUtils.getIntRedisTemplate().opsForSet();
+    private static final SetOperations<String, Integer> INT_VALUE_OPERATIONS = RedisTemplateUtils.getIntRedisTemplate().opsForSet();
     /**
      * long值操作
      */
-    private static final org.springframework.data.redis.core.SetOperations<String, Long> longValueOperations = RedisTemplateUtils.getLongRedisTemplate().opsForSet();
+    private static final SetOperations<String, Long> LONG_VALUE_OPERATIONS = RedisTemplateUtils.getLongRedisTemplate().opsForSet();
 
     public static SetOperations<String, String> getStringValueOperations() {
-        return stringValueOperations;
+        return STRING_VALUE_OPERATIONS;
     }
 
     public static SetOperations<String, Integer> getIntValueOperations() {
-        return intValueOperations;
+        return INT_VALUE_OPERATIONS;
     }
 
     public static SetOperations<String, Long> getLongValueOperations() {
-        return longValueOperations;
+        return LONG_VALUE_OPERATIONS;
     }
 }

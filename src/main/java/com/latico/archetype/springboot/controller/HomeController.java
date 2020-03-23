@@ -23,13 +23,13 @@ import java.util.List;
  * 默认主页
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-03-15 10:34:32
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-03-15 10:34:32
+ * @version: 1.0
  */
 @RestController
 @Configuration
-@Api(description = "主页API")
+@Api("主页API")
 public class HomeController {
     private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
@@ -48,16 +48,17 @@ public class HomeController {
     @RequestMapping("")
     @ApiOperation("默认主页API")
     public String home(@Context HttpServletRequest httpServletRequest) {
-        String requestURI = httpServletRequest.getRequestURI();
+        String requestUri = httpServletRequest.getRequestURI();
         String remoteHost = httpServletRequest.getRemoteHost();
-        LOG.info("调用的客户端信息,地址:{} 请求路径:{}", remoteHost, requestURI);
+        LOG.info("调用的客户端信息,地址:{} 请求路径:{}", remoteHost, requestUri);
 
         String serverContextPath = this.serverContextPath;
-        if (!serverContextPath.startsWith("/")) {
-            serverContextPath = "/" + serverContextPath;
+        final String slashStr = "/";
+        if (!serverContextPath.startsWith(slashStr)) {
+            serverContextPath =slashStr + serverContextPath;
         }
-        if (!serverContextPath.endsWith("/")) {
-            serverContextPath = serverContextPath + "/";
+        if (!serverContextPath.endsWith(slashStr)) {
+            serverContextPath = serverContextPath + slashStr;
         }
 
         String ip = "localhost";

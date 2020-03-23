@@ -9,7 +9,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+/**
+ * <PRE>
+ *
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:56:12
+ * @version: 1.0
+ */
 @Repository
 public interface Demo2Repository extends BaseRepository<Demo2, String> {
     /**
@@ -33,7 +40,7 @@ public interface Demo2Repository extends BaseRepository<Demo2, String> {
      * @return
      */
     @Modifying
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Query("update Demo2 obj set obj.execStatus = :#{#newObj.execStatus}, obj.statusDescr = :#{#newObj.statusDescr},obj.updateTime = :#{#newObj.updateTime} where obj.taskId = :#{#newObj.taskId}")
     int updateStatusAndTime(@Param("newObj") Demo2 newObj);
 

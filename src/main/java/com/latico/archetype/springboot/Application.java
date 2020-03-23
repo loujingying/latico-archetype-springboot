@@ -31,9 +31,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-03-13 22:06:01
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-03-13 22:06:01
+ * @version: 1.0
  */
 @SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class})
 @ServletComponentScan

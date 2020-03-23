@@ -7,9 +7,9 @@ import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-07 14:52
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-07 14:52
+ * @version: 1.0
  */
 public interface DemoConvert {
 

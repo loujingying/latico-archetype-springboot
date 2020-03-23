@@ -19,9 +19,9 @@ import javax.sql.DataSource;
  * 数据源配置
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-20 15:22
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-20 15:22
+ * @version: 1.0
  */
 @EnableTransactionManagement
 @Configuration
@@ -31,24 +31,24 @@ public class DbConfig {
      * TODO 可能需要修改的地方
      * 主数据库配置名称
      */
-    public static final String dbConfigName_primary = "primary";
+    public static final String DB_CONFIG_NAME_PRIMARY = "primary";
 
     /**
      * TODO 可能需要修改的地方
      * 第二个数据库配置名称
      */
-    public static final String dbConfigName_secondary = "secondary";
+    public static final String DB_CONFIG_NAME_SECONDARY = "secondary";
 
     /**
      * 主数据源配置
      * 数据源配置前缀，跟application配置文件的要对应上
      */
-    public static final String datasourceConfigPrefix_primary = "spring.datasource." + dbConfigName_primary;
+    public static final String DATASOURCE_CONFIG_PREFIX_PRIMARY = "spring.datasource." + DB_CONFIG_NAME_PRIMARY;
 
     /**
      * 第二个数据源配置配置前缀，默认通过组拼字符串方式获取，如果不是，请修改
      */
-    public static final String datasourceConfigPrefix_secondary = "spring.datasource." + dbConfigName_secondary;
+    public static final String DATASOURCE_CONFIG_PREFIX_SECONDARY = "spring.datasource." + DB_CONFIG_NAME_SECONDARY;
 
     /**
      * 在这里，用了什么数据源就返回什么数据源，如果是返回{@link DataSource}，那么springboot2.0会默认使用HikariCP作为数据源
@@ -57,8 +57,8 @@ public class DbConfig {
      * @return 主数据源
      */
     @Primary
-    @Bean(name = datasourceConfigPrefix_primary)
-    @ConfigurationProperties(prefix = datasourceConfigPrefix_primary)
+    @Bean(name = DATASOURCE_CONFIG_PREFIX_PRIMARY)
+    @ConfigurationProperties(prefix = DATASOURCE_CONFIG_PREFIX_PRIMARY)
     public DataSource primaryDatasource() {
         //默认方式，springboot2.0会默认使用HikariCP作为数据源
 //        return DataSourceBuilder.create().build();
@@ -70,8 +70,8 @@ public class DbConfig {
     /**
      * @return 第二个数据源
      */
-    @Bean(name = datasourceConfigPrefix_secondary)
-    @ConfigurationProperties(prefix = datasourceConfigPrefix_secondary)
+    @Bean(name = DATASOURCE_CONFIG_PREFIX_SECONDARY)
+    @ConfigurationProperties(prefix = DATASOURCE_CONFIG_PREFIX_SECONDARY)
     public DataSource secondaryDatasource() {
         //默认方式，springboot2.0会默认使用HikariCP作为数据源
 //        return DataSourceBuilder.create().build();

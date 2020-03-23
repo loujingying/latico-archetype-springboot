@@ -8,9 +8,9 @@ import org.springframework.data.redis.serializer.SerializationException;
  * int的序列号
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-02 11:00
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-02 11:00
+ * @version: 1.0
  */
 public class IntRedisSerializer implements RedisSerializer<Integer> {
 

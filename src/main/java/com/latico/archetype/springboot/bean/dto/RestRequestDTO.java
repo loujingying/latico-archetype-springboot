@@ -11,9 +11,9 @@ import java.io.Serializable;
  * 请求参数
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-03-20 15:56
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-03-20 15:56
+ * @version: 1.0
  */
 @Data
 @ApiModel("请求传输对象")

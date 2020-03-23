@@ -5,9 +5,9 @@ package com.latico.archetype.springboot.common.util;
  * Spring容器操作工具
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-07-05 10:03
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-07-05 10:03
+ * @version: 1.0
  */
 public class SpringUtils extends com.latico.commons.spring.util.SpringUtils {
 }

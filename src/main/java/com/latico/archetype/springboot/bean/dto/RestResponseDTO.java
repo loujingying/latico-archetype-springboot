@@ -11,9 +11,9 @@ import java.io.Serializable;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-03-20 16:09
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-03-20 16:09
+ * @version: 1.0
  */
 @Data
 @ApiModel("响应传输对象")

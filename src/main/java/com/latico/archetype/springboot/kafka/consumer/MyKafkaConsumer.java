@@ -6,9 +6,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
  * <PRE>
  *  消费者
  * </PRE>
- * @Author: latico
- * @Date: 2020-03-10 16:19:00
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-03-10 16:19:00
+ * @version: 1.0
  */
 public interface MyKafkaConsumer<K, V> {
 

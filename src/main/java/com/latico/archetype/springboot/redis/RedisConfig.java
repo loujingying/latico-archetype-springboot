@@ -15,9 +15,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * redis的配置类
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-12-31 16:29
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-12-31 16:29
+ * @version: 1.0
  */
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Configuration

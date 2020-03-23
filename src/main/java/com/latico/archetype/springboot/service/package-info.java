@@ -6,8 +6,8 @@
  * 具体的采集设备MAC的编写，这个是脱离业务的单个功能，就写到convert层，convert层一般就是使用公共包等实现
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-06 10:29
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-06 10:29
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.service;

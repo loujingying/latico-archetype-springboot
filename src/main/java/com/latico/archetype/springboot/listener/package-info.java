@@ -8,8 +8,8 @@
 
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-05-09 18:56
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-05-09 18:56
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.listener;

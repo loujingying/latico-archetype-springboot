@@ -6,9 +6,9 @@ import java.lang.annotation.*;
  * <PRE>
  *  示例Aspect日志记录注解
  * </PRE>
- * @Author: latico
- * @Date: 2019-07-12 16:28:25
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-07-12 16:28:25
+ * @version: 1.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -9,9 +9,9 @@ import org.apache.curator.framework.recipes.locks.LockInternalsDriver;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 16:09
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 16:09
+ * @version: 1.0
  */
 public class InterProcessMutexImpl extends InterProcessMutex {
 

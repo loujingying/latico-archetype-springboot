@@ -6,8 +6,8 @@
  * 注 ：在struts中，用ActionForm做VO，需要做一个转换，因为PO是面向对象的，而ActionForm是和view对应的，要将几个PO要显示的属性合成一个ActionForm，可以使用BeanUtils的copy方法。
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-21 22:54
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-21 22:54
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.bean.vo;

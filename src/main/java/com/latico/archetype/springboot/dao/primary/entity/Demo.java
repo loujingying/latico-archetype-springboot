@@ -7,7 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
+/**
+ * <PRE>
+ *
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:55:39
+ * @version: 1.0
+ */
 @Data
 @Entity
 @Table(name = "demo")
@@ -17,8 +24,6 @@ public class Demo implements Serializable {
 	@Column(name = "auto_id", insertable = false, updatable = false)
 	private Integer autoId;
 
-//	@GenericGenerator(name = "uniqueId", strategy = "assigned")
-//	@GeneratedValue(generator = "uniqueId")
 	@Id
 	private String id;
 

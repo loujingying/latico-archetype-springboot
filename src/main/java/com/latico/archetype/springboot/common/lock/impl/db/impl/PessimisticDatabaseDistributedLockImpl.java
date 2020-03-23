@@ -8,9 +8,9 @@ import com.latico.archetype.springboot.common.lock.impl.db.AbstractDatabaseDistr
  * 该方式不需要使用过期时间，因为会一直阻塞到拿到锁为止
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 10:43
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 10:43
+ * @version: 1.0
  */
 public class PessimisticDatabaseDistributedLockImpl extends AbstractDatabaseDistributedLock {
     public PessimisticDatabaseDistributedLockImpl(String lockKey) {

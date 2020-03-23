@@ -7,8 +7,8 @@
  * 3 ．PO中不应该包含任何对数据库的操作。
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-21 22:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-21 22:55
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.bean.po;

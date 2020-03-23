@@ -1,6 +1,7 @@
 package com.latico.archetype.springboot.controller.aspect.pkg;
 
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
+import com.latico.archetype.springboot.common.aspect.DemoPkgAspect;
 import com.latico.archetype.springboot.service.DemoService;
 import com.latico.commons.common.util.json.JacksonUtils;
 import io.swagger.annotations.Api;
@@ -14,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
  * 包目录方式的aspect
  * 访问该目录下所有方法都会被切面监听，因为在{@link DemoPkgAspect}中配置了扫描该目录
  * </PRE>
- * @Author: latico
- * @Date: 2019-06-07 01:33:49
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-07 01:33:49
+ * @version: 1.0
  */
 @RestController
 @RequestMapping("aspect-pkg")
-@Api(description = "包目录方式的aspect演示API")
+@Api("包目录方式的aspect演示API")
 public class DemoPkgAspectController {
 
     @Autowired

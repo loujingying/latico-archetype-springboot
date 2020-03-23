@@ -8,10 +8,12 @@ import javax.persistence.EntityManager;
 import java.io.Serializable;
 
 /**
- * 自定义RepositoryFactoryBean
- * @param <R>
- * @param <T>
- * @param <I>
+ * <PRE>
+ *  自定义RepositoryFactoryBean
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:12:02
+ * @version: 1.0
  */
 public class BaseRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I extends Serializable>
     extends JpaRepositoryFactoryBean<R, T, I> {

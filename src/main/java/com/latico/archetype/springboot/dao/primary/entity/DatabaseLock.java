@@ -9,6 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * <PRE>
+ *
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:55:17
+ * @version: 1.0
+ */
 @Data
 @Entity
 @Table(name = "database_lock")

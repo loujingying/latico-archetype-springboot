@@ -16,9 +16,9 @@ import java.util.List;
  * 基本持久化实现类
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-23 14:48
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-23 14:48
+ * @version: 1.0
  */
 @SuppressWarnings("ALL")
 @Transactional(readOnly = true)
@@ -60,20 +60,20 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public T insert(T entity) {
         entityManager.persist(entity);
         return entity;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public T update(T entity) {
         return entityManager.merge(entity);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public <S extends T> List<S> insertBatch(Iterable<S> entitys, final int batchSize) {
         List<S> result = new ArrayList<S>();
@@ -94,7 +94,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
         return result;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public <S extends T> List<S> updateBatch(Iterable<S> entitys, final int batchSize) {
         Iterator<S> iterator = entitys.iterator();

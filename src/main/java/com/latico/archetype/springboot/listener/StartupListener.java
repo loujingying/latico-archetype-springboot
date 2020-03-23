@@ -11,9 +11,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
  * <PRE>
  * 默认的启动监听器，如果有需要，可以多个，继承ApplicationListener即可
  * </PRE>
- * @Author: latico
- * @Date: 2019-05-09 18:21:03
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-05-09 18:21:03
+ * @version: 1.0
  */
 public class StartupListener implements ApplicationListener<ContextRefreshedEvent> {
 

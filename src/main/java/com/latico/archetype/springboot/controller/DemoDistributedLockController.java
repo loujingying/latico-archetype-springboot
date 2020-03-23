@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  测试时，可以在redis手工创建对应的列表等
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-12-31 16:34
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-12-31 16:34
+ * @version: 1.0
  */
 @RestController
 @RequestMapping("demo/lock")

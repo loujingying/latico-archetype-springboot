@@ -12,16 +12,14 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.concurrent.ExecutionException;
-
 /**
  * <PRE>
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-03-10 16:25
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-03-10 16:25
+ * @version: 1.0
  */
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
@@ -32,7 +30,7 @@ public class DemoMyKafkaProducerImpl implements MyKafkaProducer<DemoKafkaMsg, St
 
     @Override
     public boolean send(DemoKafkaMsg msg) {
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(KafkaConstants.topic_demo, JsonUtils.objToJson(msg));
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(KafkaConstants.TOPIC_DEMO, JsonUtils.objToJson(msg));
 
         SendResult<String, String> sendResult = null;
         try {

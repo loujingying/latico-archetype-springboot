@@ -5,9 +5,9 @@ package com.latico.archetype.springboot.common.lock;
  * 分布式锁
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 9:26
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 9:26
+ * @version: 1.0
  */
 public interface DistributedLock {
 
@@ -36,6 +36,7 @@ public interface DistributedLock {
     boolean unlock();
 
     /**
+     * 是不是已经拿到锁
      * @return 是否锁定状态
      */
     boolean isLocked();
@@ -53,11 +54,13 @@ public interface DistributedLock {
     void setExpireTime(int expireTime);
 
     /**
+     * 获取锁的key
      * @return 锁的Key
      */
     String getLockKey();
 
     /**
+     * 获取锁key的值
      * @return 锁的值
      */
     String getLockValue();

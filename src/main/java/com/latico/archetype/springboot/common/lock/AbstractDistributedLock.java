@@ -8,9 +8,9 @@ import java.util.UUID;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 14:46
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 14:46
+ * @version: 1.0
  */
 public abstract class AbstractDistributedLock implements DistributedLock {
     /**

@@ -3,8 +3,8 @@
  * druid的监控界面专用配置
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-03-15 14:11
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-03-15 14:11
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.config.druid;

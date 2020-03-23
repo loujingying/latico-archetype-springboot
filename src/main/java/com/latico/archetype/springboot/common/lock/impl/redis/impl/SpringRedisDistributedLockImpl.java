@@ -18,9 +18,9 @@ import java.util.ArrayList;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-09 16:38
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-09 16:38
+ * @version: 1.0
  */
 public class SpringRedisDistributedLockImpl extends AbstractSpringRedisDistributedLock {
 

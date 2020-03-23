@@ -1,8 +1,8 @@
 package com.latico.archetype.springboot.elasticsearch.service.impl;
 
-import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticsearchBean;
+import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticSearchBean;
 import com.latico.archetype.springboot.elasticsearch.repository.DemoElasticsearchRepository;
-import com.latico.archetype.springboot.elasticsearch.service.DemoElasticsearchService;
+import com.latico.archetype.springboot.elasticsearch.service.DemoElasticSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +13,16 @@ import org.springframework.stereotype.Service;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <PRE>
+ *  
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:42:41
+ * @version: 1.0
+ */
 @Service
-public class DemoElasticsearchServiceImpl implements DemoElasticsearchService {
+public class DemoElasticSearchServiceImpl implements DemoElasticSearchService {
 
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
@@ -23,7 +31,7 @@ public class DemoElasticsearchServiceImpl implements DemoElasticsearchService {
 
     @Override
     public void createIndex() {
-        elasticsearchRestTemplate.createIndex(DemoElasticsearchBean.class);
+        elasticsearchRestTemplate.createIndex(DemoElasticSearchBean.class);
     }
 
     @Override
@@ -32,40 +40,40 @@ public class DemoElasticsearchServiceImpl implements DemoElasticsearchService {
     }
 
     @Override
-    public void save(DemoElasticsearchBean DemoElasticsearchBean) {
-        demoElasticsearchRepository.save(DemoElasticsearchBean);
+    public void save(DemoElasticSearchBean DemoElasticSearchBean) {
+        demoElasticsearchRepository.save(DemoElasticSearchBean);
     }
 
     @Override
-    public void saveAll(List<DemoElasticsearchBean> list) {
+    public void saveAll(List<DemoElasticSearchBean> list) {
         demoElasticsearchRepository.saveAll(list);
     }
 
     @Override
-    public Iterator<DemoElasticsearchBean> findAll() {
+    public Iterator<DemoElasticSearchBean> findAll() {
         return demoElasticsearchRepository.findAll().iterator();
     }
 
     @Override
-    public Page<DemoElasticsearchBean> findByContent(String content) {
+    public Page<DemoElasticSearchBean> findByContent(String content) {
         Pageable pageable = PageRequest.of(0, 10);
         return demoElasticsearchRepository.findByContent(content, pageable);
     }
 
     @Override
-    public Page<DemoElasticsearchBean> findByFirstCode(String firstCode) {
+    public Page<DemoElasticSearchBean> findByFirstCode(String firstCode) {
         Pageable pageable = PageRequest.of(0, 10);
         return demoElasticsearchRepository.findByFirstCode(firstCode, pageable);
     }
 
     @Override
-    public Page<DemoElasticsearchBean> findBySecordCode(String secordCode) {
+    public Page<DemoElasticSearchBean> findBySecordCode(String secordCode) {
         Pageable pageable = PageRequest.of(0, 10);
         return demoElasticsearchRepository.findBySecordCode(secordCode, pageable);
     }
 
     @Override
-    public Page<DemoElasticsearchBean> query(String key) {
+    public Page<DemoElasticSearchBean> query(String key) {
         Pageable pageable = PageRequest.of(0, 10);
         return demoElasticsearchRepository.findByContent(key, pageable);
     }

@@ -15,9 +15,9 @@ import java.sql.Timestamp;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 17:30
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 17:30
+ * @version: 1.0
  */
 @Repository
 public class JpaDatabaseLockDao {
@@ -33,7 +33,7 @@ public class JpaDatabaseLockDao {
      * @param expireTime
      * @return
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean getLock(String lockKey, String lockValue, long expireTime) {
         DatabaseLock databaseLock = databaseLockRepository.queryByLockKey(lockKey);
         if (databaseLock == null) {
@@ -74,7 +74,7 @@ public class JpaDatabaseLockDao {
      * @param lockKey
      * @return
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean releaseLock(String lockKey, String lockValue) {
         DatabaseLock databaseLock = databaseLockRepository.queryByLockKey(lockKey);
         if (databaseLock == null) {

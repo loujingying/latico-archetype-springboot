@@ -36,13 +36,13 @@ import java.util.Map;
  *  4、SoapUI
  *
  * </PRE>
- * @Author: latico
- * @Date: 2019-06-07 01:33:49
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-07 01:33:49
+ * @version: 1.0
  */
 @RestController
 @RequestMapping("demo")
-@Api(description = "演示API")
+@Api("演示API")
 public class DemoController {
 
     private static final Logger LOG = LoggerFactory.getLogger(DemoController.class);
@@ -104,9 +104,9 @@ public class DemoController {
     @RequestMapping("serverTime")
     @ApiOperation("获取服务器时间参数API")
     public DemoTimeParam serverTime(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
-        String requestURI = httpServletRequest.getRequestURI();
+        String requestUri = httpServletRequest.getRequestURI();
         String remoteHost = httpServletRequest.getRemoteHost();
-        LOG.info("调用的客户端信息,地址:{} 请求路径:{}", remoteHost, requestURI);
+        LOG.info("调用的客户端信息,地址:{} 请求路径:{}", remoteHost, requestUri);
 
         return demoService.serverTime();
     }

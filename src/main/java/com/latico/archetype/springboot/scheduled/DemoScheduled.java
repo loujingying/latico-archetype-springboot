@@ -19,9 +19,9 @@ import java.sql.Timestamp;
  * 用@EnableScheduling注解打开调度器，如果不需要，就关了，默认打开
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-24 14:52
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-24 14:52
+ * @version: 1.0
  */
 @Configuration
 @EnableScheduling

@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-03-10 16:19
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-03-10 16:19
+ * @version: 1.0
  */
 @Service
 public class DemoMyKafkaConsumerImpl implements MyKafkaConsumer<String, String> {
@@ -23,7 +23,7 @@ public class DemoMyKafkaConsumerImpl implements MyKafkaConsumer<String, String> 
     private static final Logger LOG = LoggerFactory.getLogger(DemoMyKafkaConsumerImpl.class);
 
     @Override
-    @KafkaListener(topics = {KafkaConstants.topic_demo})
+    @KafkaListener(topics = {KafkaConstants.TOPIC_DEMO})
     public void listen(ConsumerRecord<String, String> record) {
         LOG.info("收到消息:record ={}", record);
     }

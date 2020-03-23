@@ -8,10 +8,12 @@ import javax.persistence.EntityManager;
 import java.io.Serializable;
 
 /**
- * 自定义持久化工厂
- *
- * @param <T>
- * @param <I>
+ * <PRE>
+ *  自定义持久化工厂
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:11:50
+ * @version: 1.0
  */
 public class BaseRepositoryFactory<T, I extends Serializable> extends JpaRepositoryFactory {
 
@@ -21,8 +23,7 @@ public class BaseRepositoryFactory<T, I extends Serializable> extends JpaReposit
         super(em);
         this.em = em;
     }
-
-//    @Override
+    //    @Override
 //    protected JpaRepositoryImplementation<?, ?> getTargetRepository(RepositoryInformation information,
 //                                                                    EntityManager entityManager) {
 //        return new BaseRepositoryImpl(information.getDomainType(), entityManager);

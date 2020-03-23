@@ -11,9 +11,9 @@ import java.util.List;
  * 扩展JpaRepository
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-23 14:46
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-23 14:46
+ * @version: 1.0
  */
 @NoRepositoryBean
 public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {

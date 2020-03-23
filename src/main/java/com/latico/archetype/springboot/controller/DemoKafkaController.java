@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
  * <PRE>
  *
  * </PRE>
- * @Author: latico
- * @Date: 2020-03-10 17:08:47
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-03-10 17:08:47
+ * @version: 1.0
  */
 @RestController
 @RequestMapping("demo/kafka")

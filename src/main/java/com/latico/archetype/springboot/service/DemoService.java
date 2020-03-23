@@ -2,6 +2,7 @@ package com.latico.archetype.springboot.service;
 
 import com.latico.archetype.springboot.bean.bo.DemoByPageResult;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
+import com.latico.archetype.springboot.dao.primary.entity.Demo;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,20 +23,46 @@ import java.util.List;
 public interface DemoService {
 
     /**
+     * 查询
      * @return 字符串类型
      */
     String serverTimeStr();
 
     /**
+     * 查询
      * @return 对象类型
      */
     DemoTimeParam serverTime();
 
-    List<com.latico.archetype.springboot.dao.primary.entity.Demo> insertAndSelectDemo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
+    /**
+     * 插入和查询
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return
+     */
+    List<Demo> insertAndSelectDemo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 
+    /**
+     * 查询
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return
+     */
     List<Demo2> selectDemo2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 
+    /**
+     * 查询
+     * @return
+     */
     String queryAllDemo();
 
+    /**
+     * 分页查询
+     * @param pageNum
+     * @param pageSize
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return
+     */
     DemoByPageResult queryDemoByPage(int pageNum, int pageSize, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 }

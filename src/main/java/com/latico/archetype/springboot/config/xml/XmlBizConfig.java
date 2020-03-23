@@ -53,9 +53,9 @@ import java.util.Map;
  * writeFieldValueToCurrentInstance(childsNameValueMap);
  *
  * </PRE>
- * @Author: latico
- * @Date: 2019-02-19 15:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-19 15:55
+ * @version: 1.0
  */
 public class XmlBizConfig extends AbstractConfig {
     /**

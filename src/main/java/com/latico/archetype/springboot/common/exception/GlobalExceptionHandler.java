@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <PRE>
  * 全局异常拦截器
  * </PRE>
- * @Author: latico
- * @Date: 2019-04-18 09:06:05
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-04-18 09:06:05
+ * @version: 1.0
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

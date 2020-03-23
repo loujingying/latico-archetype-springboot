@@ -7,9 +7,9 @@ import com.latico.commons.common.util.system.SystemUtils;
  * 系统工具
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-06 14:37
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-06 14:37
+ * @version: 1.0
  */
 public class SysUtils extends SystemUtils {
 }

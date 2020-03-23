@@ -3,7 +3,7 @@ package com.latico.archetype.springboot.service.impl;
 import com.latico.archetype.springboot.bean.bo.DemoByPageResult;
 import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.common.util.DateTimeUtils;
-import com.latico.archetype.springboot.common.util.MD5Utils;
+import com.latico.archetype.springboot.common.util.Md5Utils;
 import com.latico.archetype.springboot.common.util.PageHelperUtils;
 import com.latico.archetype.springboot.common.util.PageableUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
@@ -140,7 +140,7 @@ public class DemoServiceImpl implements DemoService {
         return demoByPage;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     protected void insert(HttpServletRequest httpServletRequest) {
         Demo demo = new Demo();
         Integer taskIdMax = demoRepository.getTaskIdMax();
@@ -154,7 +154,7 @@ public class DemoServiceImpl implements DemoService {
         demo.setCallClientId(httpServletRequest.getRemoteHost());
         demo.setCreateTime(DateTimeUtils.getSysDate());
         demo.setUpdateTime(demo.getCreateTime());
-        demo.setId(MD5Utils.toLowerCaseMd5(demo.getTaskId()));
+        demo.setId(Md5Utils.toLowerCaseMd5(demo.getTaskId()));
         demo.setHandleStatus(0);
 
         LOG.info("准备插入:{}", demo);
@@ -162,7 +162,7 @@ public class DemoServiceImpl implements DemoService {
         LOG.info("插入成功:{}", save);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     protected void insertDemo(HttpServletRequest httpServletRequest) {
         List<Demo> list = new ArrayList<>();
         Integer taskIdMax = demoRepository.getTaskIdMax();
@@ -178,7 +178,7 @@ public class DemoServiceImpl implements DemoService {
         demo.setCallClientId(httpServletRequest.getRemoteHost());
         demo.setCreateTime(DateTimeUtils.getSysDate());
         demo.setUpdateTime(demo.getCreateTime());
-        demo.setId(MD5Utils.toLowerCaseMd5(demo.getTaskId()));
+        demo.setId(Md5Utils.toLowerCaseMd5(demo.getTaskId()));
         demo.setHandleStatus(0);
         demo = new Demo();
         list.add(demo);
@@ -189,7 +189,7 @@ public class DemoServiceImpl implements DemoService {
         demo.setCallClientId(httpServletRequest.getRemoteHost());
         demo.setCreateTime(DateTimeUtils.getSysDate());
         demo.setUpdateTime(demo.getCreateTime());
-        demo.setId(MD5Utils.toLowerCaseMd5(demo.getTaskId()));
+        demo.setId(Md5Utils.toLowerCaseMd5(demo.getTaskId()));
         demo.setHandleStatus(0);
 
         demoRepository.insertBatch(list, 500);

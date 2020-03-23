@@ -13,9 +13,9 @@ import java.util.concurrent.atomic.AtomicLong;
  * 统计打印
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-03-17 11:27
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-03-17 11:27
+ * @version: 1.0
  */
 @Configuration
 public class StatisticsScheduled {

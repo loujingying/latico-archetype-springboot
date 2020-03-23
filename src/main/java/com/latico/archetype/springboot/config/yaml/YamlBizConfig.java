@@ -14,9 +14,9 @@ import java.util.Map;
  * 业务配置，yaml方式的配置，跟application-biz.yaml对应，一个配置文件提供一个单例统一管理，里面具体的配置项可以拆分成对象
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-19 15:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-19 15:55
+ * @version: 1.0
  */
 public class YamlBizConfig {
 
@@ -88,9 +88,9 @@ public class YamlBizConfig {
  * demo-yaml-config的配置，因为不能让外界修改配置数据，所以把类放到这里
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-30 15:10:58
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-30 15:10:58
+ * @version: 1.0
  */
 @Data
 @Component

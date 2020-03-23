@@ -45,8 +45,8 @@
  }
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-05-09 15:09
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-05-09 15:09
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.invoker;

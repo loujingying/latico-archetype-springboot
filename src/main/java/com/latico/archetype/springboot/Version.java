@@ -12,9 +12,9 @@ import com.latico.commons.common.util.version.VersionUtils;
  * 把版本记录通过 addVersionInfo写进 VersionUtils 中，然后通过 VersionUtils.getVersionInfosToMarkdown()读取
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-13 10:07
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-13 10:07
+ * @version: 1.0
  */
 public class Version {
 
@@ -31,11 +31,11 @@ public class Version {
     /**
      * 项目名称
      */
-    private static final String projectName = "latico-archetype-springboot";
+    private static final String PROJECT_NAME = "latico-archetype-springboot";
 
     //为了实现只加载一次，这里使用静态代码块
     static {
-        VersionUtils.addVersionInfo(projectName,"1.0", "latico", "2020-01-13",
+        VersionUtils.addVersionInfo(PROJECT_NAME,"1.0", "latico", "2020-01-13",
                 "构建项目");
     }
 

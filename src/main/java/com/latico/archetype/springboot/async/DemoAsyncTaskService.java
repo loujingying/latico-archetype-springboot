@@ -15,9 +15,9 @@ import java.util.concurrent.Future;
  * 需要结合{@link AsyncConfigurerImpl}使用
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-24 15:16
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-24 15:16
+ * @version: 1.0
  */
 @Component
 public class DemoAsyncTaskService {

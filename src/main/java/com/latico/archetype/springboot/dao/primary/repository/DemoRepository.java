@@ -10,7 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+/**
+ * <PRE>
+ *
+ * </PRE>
+ * @author: latico
+ * @date: 2020-03-23 11:56:41
+ * @version: 1.0
+ */
 @Repository
 public interface DemoRepository extends BaseRepository<Demo, String> {
     /**
@@ -34,7 +41,7 @@ public interface DemoRepository extends BaseRepository<Demo, String> {
      * @return
      */
     @Modifying
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Query("update Demo obj set obj.execStatus = :#{#newObj.execStatus}, obj.statusDescr = :#{#newObj.statusDescr},obj.updateTime = :#{#newObj.updateTime} where obj.taskId = :#{#newObj.taskId}")
     int updateStatusAndTime(@Param("newObj") Demo newObj);
 

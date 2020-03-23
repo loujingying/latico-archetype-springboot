@@ -17,16 +17,16 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  * 注意：elasticsearch7以上，不支持type
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-03-10 10:47
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-03-10 10:47
+ * @version: 1.0
  */
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
 // @Document(indexName = "idx_demo", type="demo", shards = 5, replicas = 1)
 @Document(indexName = "idx_demo", shards = 5, replicas = 1)
-public class DemoElasticsearchBean {
+public class DemoElasticSearchBean {
 
     @Id
     private String id;
@@ -44,7 +44,7 @@ public class DemoElasticsearchBean {
     @Field(type = FieldType.Integer)
     private Integer type;
 
-    public DemoElasticsearchBean(String id,String firstCode,String secordCode,String content,Integer type){
+    public DemoElasticSearchBean(String id, String firstCode, String secordCode, String content, Integer type){
         this.id=id;
         this.firstCode=firstCode;
         this.secordCode=secordCode;

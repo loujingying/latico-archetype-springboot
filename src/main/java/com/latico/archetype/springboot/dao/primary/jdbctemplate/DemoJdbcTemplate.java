@@ -9,11 +9,21 @@ import java.util.List;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-12-03 15:44
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-12-03 15:44
+ * @version: 1.0
  */
 public interface DemoJdbcTemplate {
+    /**
+     * 查询
+     * @param id
+     * @return
+     */
     Demo queryById(String id);
+
+    /**
+     * 查询
+     * @return
+     */
     List<Demo> queryAll();
 }

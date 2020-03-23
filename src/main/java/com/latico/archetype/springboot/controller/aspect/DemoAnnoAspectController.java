@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
  * <PRE>
  * 注解方式的aspect监听，增加了{@link DemoAspectAnnotation}注解的方法会被监听
  * </PRE>
- * @Author: latico
- * @Date: 2019-06-07 01:33:49
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-07 01:33:49
+ * @version: 1.0
  */
 @RestController
 @RequestMapping("aspect-anno")
-@Api(description = "注解方式的aspect演示API")
+@Api("注解方式的aspect演示API")
 public class DemoAnnoAspectController {
 
     @Autowired

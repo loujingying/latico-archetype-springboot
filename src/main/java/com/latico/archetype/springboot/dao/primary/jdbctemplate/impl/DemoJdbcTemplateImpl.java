@@ -18,9 +18,9 @@ import java.util.List;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-12-03 15:44
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-12-03 15:44
+ * @version: 1.0
  */
 @Repository
 public class DemoJdbcTemplateImpl implements DemoJdbcTemplate {
@@ -28,7 +28,7 @@ public class DemoJdbcTemplateImpl implements DemoJdbcTemplate {
      * 注入主数据源的模板
      */
     @Autowired
-    @Qualifier(JdbcTemplateConfigPrimary.jdbcTemplateBeanName)
+    @Qualifier(JdbcTemplateConfigPrimary.JDBC_TEMPLATE_BEAN_NAME)
     private JdbcTemplate jdbcTemplate;
 
     /**

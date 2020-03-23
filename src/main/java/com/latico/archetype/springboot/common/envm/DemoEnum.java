@@ -9,9 +9,9 @@ import java.util.Map;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-06 14:15:31
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-06 14:15:31
+ * @version: 1.0
  */
 public enum DemoEnum {
 
@@ -29,24 +29,24 @@ public enum DemoEnum {
     /**
      * nameEnumMap 名字和枚举对象的映射
      */
-    private final static Map<String, DemoEnum> nameEnumMap = new HashMap<String, DemoEnum>();
+    private final static Map<String, DemoEnum> NAME_ENUM_MAP = new HashMap<String, DemoEnum>();
 
     /**
      * idEnumMap ID值和对象的映射
      */
-    private final static Map<Integer, DemoEnum> idEnumMap = new HashMap<Integer, DemoEnum>();
+    private final static Map<Integer, DemoEnum> ID_ENUM_MAP = new HashMap<Integer, DemoEnum>();
     /**
      * 值和枚举对象的映射
      */
-    private final static Map<String, DemoEnum> valueEnumMap = new HashMap<String, DemoEnum>();
+    private final static Map<String, DemoEnum> VALUE_ENUM_MAP = new HashMap<String, DemoEnum>();
 
     static {
         DemoEnum[] values = values();
         for (DemoEnum value : values) {
             // 统一转换成小写
-            nameEnumMap.put(value.getName().toLowerCase(), value);
-            idEnumMap.put(value.id, value);
-            valueEnumMap.put(value.value, value);
+            NAME_ENUM_MAP.put(value.getName().toLowerCase(), value);
+            ID_ENUM_MAP.put(value.id, value);
+            VALUE_ENUM_MAP.put(value.value, value);
         }
     }
 
@@ -113,7 +113,7 @@ public enum DemoEnum {
     public static DemoEnum getEnumByName(String name) {
         if (name != null) {
             //统一转换成小写
-            return nameEnumMap.get(name.toLowerCase());
+            return NAME_ENUM_MAP.get(name.toLowerCase());
         } else {
             return null;
         }
@@ -126,7 +126,7 @@ public enum DemoEnum {
      * @return
      */
     public static DemoEnum getEnumById(int id) {
-        return idEnumMap.get(id);
+        return ID_ENUM_MAP.get(id);
     }
 
     /**
@@ -138,7 +138,7 @@ public enum DemoEnum {
     public static DemoEnum getEnumByValue(String value) {
         if (value != null) {
             //统一转换成小写
-            return valueEnumMap.get(value);
+            return VALUE_ENUM_MAP.get(value);
         } else {
             return null;
         }

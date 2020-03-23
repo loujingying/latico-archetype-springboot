@@ -15,6 +15,7 @@ import java.util.List;
  */
 public interface Demo2Mapper extends BaseMapper<Demo2> {
     /**
+     * 查询
      * @return
      */
     List<Demo2> findAll();

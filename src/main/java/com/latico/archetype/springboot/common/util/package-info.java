@@ -5,8 +5,8 @@
  * 同时扩展增加了项目业务相关的项目内部通用方法，而不是全球通用
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-21 22:51
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-21 22:51
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.common.util;

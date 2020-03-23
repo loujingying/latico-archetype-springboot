@@ -54,11 +54,11 @@ public class DemoQuartzJob implements Job {
     /**
      * 设置最多执行几次，因为Job对象会被重建，所以使用静态对象来保持
      */
-    private static final AtomicInteger count = new AtomicInteger(2);
+    private static final AtomicInteger COUNT = new AtomicInteger(2);
     /**
      * 判断是否已经关闭，因为Job对象会被重建，所以使用静态对象来保持
      */
-    private static final AtomicBoolean close = new AtomicBoolean(false);
+    private static final AtomicBoolean CLOSE = new AtomicBoolean(false);
 
     /**
      * 创建一个中间件，因为Job对象会被重建，所以使用静态对象来保持
@@ -67,14 +67,14 @@ public class DemoQuartzJob implements Job {
     /**
      * 通过中间件拿到一个生产者，因为Job对象会被重建，所以使用静态对象来保持
      */
-    private static final EventProducerDefault<DemoTimeParam> producer = DEMO_PC_QUEUE_MIDDLEWARE.getProducer();
+    private static final EventProducerDefault<DemoTimeParam> PRODUCER = DEMO_PC_QUEUE_MIDDLEWARE.getProducer();
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
 //        次数执行完成后，不再生产数据,但是该调度器仍然会执行空
-        if (count.get() <= 0) {
-            if (!close.get()) {
+        if (COUNT.get() <= 0) {
+            if (!CLOSE.get()) {
 
 //                移除定时器工作任务
                 QuartzManager.getInstance().removeJob(JOB_NAME);
@@ -82,7 +82,7 @@ public class DemoQuartzJob implements Job {
 //                关闭并发器
                 DEMO_PC_QUEUE_MIDDLEWARE.close();
 
-                close.set(true);
+                CLOSE.set(true);
             }
 
         } else {
@@ -92,10 +92,10 @@ public class DemoQuartzJob implements Job {
             //            生产者生产数据
             DemoTimeParam obj = new DemoTimeParam();
             obj.setTime(timestamp);
-            producer.publishEvent(obj);
+            PRODUCER.publishEvent(obj);
 
 //            统计加1
-            count.decrementAndGet();
+            COUNT.decrementAndGet();
             LOG.info("====== 定时任务执行完成======");
         }
 

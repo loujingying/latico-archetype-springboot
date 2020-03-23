@@ -13,13 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-27 22:10
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-27 22:10
+ * @version: 1.0
  */
 @Controller
 @RequestMapping(value = "demo")
-@Api(description = "演示返回网页API")
+@Api("演示返回网页API")
 public class DemoPageController {
     private static final Logger LOG = LoggerFactory.getLogger(DemoPageController.class);
 

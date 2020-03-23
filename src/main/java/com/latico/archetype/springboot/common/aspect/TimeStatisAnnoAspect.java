@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
  * 时间统计切面
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-07-12 16:28:33
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-07-12 16:28:33
+ * @version: 1.0
  */
 @Component
 @Aspect

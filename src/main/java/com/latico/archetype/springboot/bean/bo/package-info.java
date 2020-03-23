@@ -10,8 +10,8 @@
  * 在实际使用中，认为哪一种概念正确并不重要，关键是实际应用中适合自己项目的需要。
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-21 22:55
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-21 22:55
+ * @version: 1.0
  */
 package com.latico.archetype.springboot.bean.bo;

@@ -10,9 +10,9 @@ import java.util.List;
  * 资源工具类
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-07 3:39
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-07 3:39
+ * @version: 1.0
  */
 public class ResourcesUtils extends com.latico.commons.common.util.reflect.ResourcesUtils {
 

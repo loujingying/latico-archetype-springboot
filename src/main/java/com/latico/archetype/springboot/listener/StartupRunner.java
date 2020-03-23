@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
  * 程序启动完成后执行任务,如果有多个，可以指定执行顺序
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-25 22:05
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-25 22:05
+ * @version: 1.0
  */
 @Component
 @Order(value=1)

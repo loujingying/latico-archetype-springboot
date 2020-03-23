@@ -12,9 +12,9 @@ import com.latico.commons.spring.util.SpringUtils;
  * 该方式需要使用单独线程扫描是否锁过期，进行处理
  * </PRE>
  *
- * @Author: latico
- * @Date: 2020-01-10 10:43
- * @Version: 1.0
+ * @author: latico
+ * @date: 2020-01-10 10:43
+ * @version: 1.0
  */
 public class JpaDatabaseDistributedLockImpl extends AbstractDatabaseDistributedLock {
 

@@ -10,6 +10,7 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -25,9 +26,9 @@ import java.util.List;
  * 2、网页介绍信息
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-25 17:14:23
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-25 17:14:23
+ * @version: 1.0
  */
 @Configuration
 @EnableSwagger2
@@ -73,11 +74,12 @@ public class Swagger2Config {
      */
     private ApiInfo apiInfo() {
         String serverContextPath = this.serverContextPath;
-        if (!serverContextPath.startsWith("/")) {
-            serverContextPath = "/" + serverContextPath;
+        final String slashStr = "/";
+        if (!serverContextPath.startsWith(slashStr)) {
+            serverContextPath = slashStr + serverContextPath;
         }
-        if (!serverContextPath.endsWith("/")) {
-            serverContextPath = serverContextPath + "/";
+        if (!serverContextPath.endsWith(slashStr)) {
+            serverContextPath = serverContextPath + slashStr;
         }
         String ip = "localhost";
         List<InetAddress> allPhysicsInetAddress = SystemUtils.getAllPhysicsInetAddress();
@@ -91,7 +93,7 @@ public class Swagger2Config {
                 .title("Swagger Restful API")
                 .description("REST接口调测请访问:" + link)
                 .termsOfServiceUrl("http://" + ip + ":" + serverPort + serverContextPath + "swagger-ui.html")
-                .contact("latico")
+                .contact(new Contact("latico", "", "latico@qq.com"))
                 .version("1.0")
                 .build();
     }

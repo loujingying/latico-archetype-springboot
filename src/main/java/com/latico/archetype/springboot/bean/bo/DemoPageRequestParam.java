@@ -9,9 +9,9 @@ import java.io.Serializable;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-10-31 11:21
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-10-31 11:21
+ * @version: 1.0
  */
 @Data
 public class DemoPageRequestParam implements Serializable {

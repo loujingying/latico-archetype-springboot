@@ -16,9 +16,9 @@ import com.lmax.disruptor.EventHandler;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-06-06 18:55:35
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-06-06 18:55:35
+ * @version: 1.0
  */
 public class DemoCustomerEventHandler3Impl implements EventHandler<OneArgEventDefault<DemoTimeParam>> {
     private static final Logger LOG = LoggerFactory.getLogger(DemoCustomerEventHandler3Impl.class);

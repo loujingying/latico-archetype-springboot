@@ -22,9 +22,9 @@ import java.util.concurrent.TimeUnit;
  * 注解来启动，如果不想启动，就关掉这个注解@EnableAsync
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-09-24 15:06
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-09-24 15:06
+ * @version: 1.0
  */
 @Configuration
 @EnableAsync

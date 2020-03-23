@@ -37,14 +37,14 @@ import java.util.Map;
  *
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-02-26 09:24:06
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-02-26 09:24:06
+ * @version: 1.0
  */
 @Configuration
 @EnableJpaRepositories(
-        entityManagerFactoryRef = JpaDataSourceConfigPrimary.entityManagerFactoryBeanName,
-        transactionManagerRef = JpaDataSourceConfigPrimary.transactionManagerBeanName,
+        entityManagerFactoryRef = JpaDataSourceConfigPrimary.ENTITY_MANAGER_FACTORY_BEAN_NAME,
+        transactionManagerRef = JpaDataSourceConfigPrimary.TRANSACTION_MANAGER_BEAN_NAME,
         basePackageClasses = {DemoRepository.class},
         repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 public class JpaDataSourceConfigPrimary {
@@ -53,12 +53,12 @@ public class JpaDataSourceConfigPrimary {
      * TODO 需要修改的地方
      * 数据库配置名称
      */
-    public static final String dbConfigName = DbConfig.dbConfigName_primary;
+    public static final String DB_CONFIG_NAME = DbConfig.DB_CONFIG_NAME_PRIMARY;
     /**
      * TODO 需要修改的地方
      * 数据源bean名称
      */
-    public static final String dataSourceBeanName = DbConfig.datasourceConfigPrefix_primary;
+    public static final String DATA_SOURCE_BEAN_NAME = DbConfig.DATASOURCE_CONFIG_PREFIX_PRIMARY;
     /**
      * TODO 需要修改的地方
      * 实体目录
@@ -69,23 +69,23 @@ public class JpaDataSourceConfigPrimary {
     /**
      * 实体管理器bean名称
      */
-    public static final String entityManagerBeanName = "jpa.entityManager." + dbConfigName;
+    public static final String ENTITY_MANAGER_BEAN_NAME = "jpa.entityManager." + DB_CONFIG_NAME;
     /**
      * 实体管理器工厂建造器bean名称
      */
-    public static final String entityManagerFactoryBuilderBeanName = "jpa.entityManagerFactoryBuilder." + dbConfigName;
+    public static final String ENTITY_MANAGER_FACTORY_BUILDER_BEAN_NAME = "jpa.entityManagerFactoryBuilder." + DB_CONFIG_NAME;
     /**
      * 实体管理器工厂bean名称
      */
-    public static final String entityManagerFactoryBeanName = "jpa.entityManagerFactory." + dbConfigName;
+    public static final String ENTITY_MANAGER_FACTORY_BEAN_NAME = "jpa.entityManagerFactory." + DB_CONFIG_NAME;
     /**
      * 持久化单元bean名称
      */
-    public static final String persistenceUnitBeanName = "jpa.persistenceUnit." + dbConfigName;
+    public static final String PERSISTENCE_UNIT_BEAN_NAME = "jpa.persistenceUnit." + DB_CONFIG_NAME;
     /**
      * 事务管理器bean名称
      */
-    public static final String transactionManagerBeanName = "jpa.transactionManager." + dbConfigName;
+    public static final String TRANSACTION_MANAGER_BEAN_NAME = "jpa.transactionManager." + DB_CONFIG_NAME;
 
     /**
      * JPA配置
@@ -96,7 +96,7 @@ public class JpaDataSourceConfigPrimary {
     /**
      * 数据源，拷贝后需要修改bean名称
      */
-    @Resource(name = dataSourceBeanName)
+    @Resource(name = DATA_SOURCE_BEAN_NAME)
     private DataSource dataSource;
 
 
@@ -111,19 +111,19 @@ public class JpaDataSourceConfigPrimary {
      */
     private Map<String, String> getJpaProperties() {
         if (jpaProperties == null) {
-            return new HashMap<>();
+            return new HashMap<>(16);
         }
         return jpaProperties.getProperties();
     }
 
     @Primary
-    @Bean(name = entityManagerBeanName)
-    public EntityManager entityManager(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
+    @Bean(name = ENTITY_MANAGER_BEAN_NAME)
+    public EntityManager entityManager(@Qualifier(ENTITY_MANAGER_FACTORY_BUILDER_BEAN_NAME) EntityManagerFactoryBuilder builder) {
         return entityManagerFactory(builder).getObject().createEntityManager();
     }
 
     @Primary
-    @Bean(name = entityManagerFactoryBuilderBeanName)
+    @Bean(name = ENTITY_MANAGER_FACTORY_BUILDER_BEAN_NAME)
     public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 //        创建hibernate适配器
         JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -134,19 +134,19 @@ public class JpaDataSourceConfigPrimary {
      * 设置实体类所在位置
      */
     @Primary
-    @Bean(name = entityManagerFactoryBeanName)
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
+    @Bean(name = ENTITY_MANAGER_FACTORY_BEAN_NAME)
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(ENTITY_MANAGER_FACTORY_BUILDER_BEAN_NAME) EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource)
                 .packages(ENTITY_PREFIX)
-                .persistenceUnit(persistenceUnitBeanName)
+                .persistenceUnit(PERSISTENCE_UNIT_BEAN_NAME)
                 .properties(getJpaProperties())
                 .build();
     }
 
     @Primary
-    @Bean(name = transactionManagerBeanName)
-    public PlatformTransactionManager transactionManager(@Qualifier(entityManagerFactoryBuilderBeanName) EntityManagerFactoryBuilder builder) {
+    @Bean(name = TRANSACTION_MANAGER_BEAN_NAME)
+    public PlatformTransactionManager transactionManager(@Qualifier(ENTITY_MANAGER_FACTORY_BUILDER_BEAN_NAME) EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactory(builder).getObject());
     }
 

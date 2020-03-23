@@ -19,9 +19,9 @@ import java.util.Set;
  测试时，可以在redis手工创建对应的列表等
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-12-31 16:34
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-12-31 16:34
+ * @version: 1.0
  */
 @RestController
 @RequestMapping("demo/redis")
@@ -56,17 +56,17 @@ public class DemoRedisController {
 
     @RequestMapping(value = "zset/add")
     public Boolean listRightPush(String key, String value, double score) {
-        return RedisZSetUtils.getStringValueOperations().add(key, value, score);
+        return RedisZsetUtils.getStringValueOperations().add(key, value, score);
     }
 
     @RequestMapping(value = "zset/range")
     public Set<String> zsetRange(String zsetkey, long indexStart, long indexEnd) {
-        return RedisZSetUtils.getStringValueOperations().range(zsetkey, indexStart, indexEnd);
+        return RedisZsetUtils.getStringValueOperations().range(zsetkey, indexStart, indexEnd);
     }
 
     @RequestMapping(value = "zset/rangeByScore")
     public Set<String> zsetRangeByScore(String zsetkey, double minScore, double maxScore) {
-        return RedisZSetUtils.getStringValueOperations().rangeByScore(zsetkey, minScore, maxScore);
+        return RedisZsetUtils.getStringValueOperations().rangeByScore(zsetkey, minScore, maxScore);
     }
 
     @RequestMapping(value = "set/add")

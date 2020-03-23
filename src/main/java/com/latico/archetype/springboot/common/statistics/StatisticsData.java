@@ -15,9 +15,9 @@ import java.util.concurrent.atomic.AtomicLong;
  * 统计数据
  * </PRE>
  *
- * @Author: latico
- * @Date: 2019-11-06 10:47
- * @Version: 1.0
+ * @author: latico
+ * @date: 2019-11-06 10:47
+ * @version: 1.0
  */
 public class StatisticsData {
     private static final Logger LOG_STATISTICS = LoggerFactory.getLogger("statistics");

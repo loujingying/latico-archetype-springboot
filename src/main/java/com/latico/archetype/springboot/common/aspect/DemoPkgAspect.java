@@ -1,7 +1,5 @@
 package com.latico.archetype.springboot.common.aspect;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.latico.archetype.springboot.common.util.StrUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -15,7 +13,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 /**
  * <PRE>
@@ -52,49 +49,61 @@ public class DemoPkgAspect {
 
         //aop代理对象
         Object aThis = joinPoint.getThis();
-        LOG.info(aThis.toString()); //com.xhx.springboot.controller.HelloController@69fbbcdd
+        //com.xhx.springboot.controller.HelloController@69fbbcdd
+        LOG.info(aThis.toString());
 
         //被代理对象
         Object target = joinPoint.getTarget();
-        LOG.info(target.toString()); //com.xhx.springboot.controller.HelloController@69fbbcdd
+        //com.xhx.springboot.controller.HelloController@69fbbcdd
+        LOG.info(target.toString());
 
         //获取连接点的方法签名对象
         Signature signature = joinPoint.getSignature();
-        LOG.info(signature.toLongString()); //public java.lang.String com.xhx.springboot.controller.HelloController.getName(java.lang.String)
-        LOG.info(signature.toShortString()); //HelloController.getName(..)
-        LOG.info(signature.toString()); //String com.xhx.springboot.controller.HelloController.getName(String)
+        //public java.lang.String com.xhx.springboot.controller.HelloController.getName(java.lang.String)
+        LOG.info(signature.toLongString());
+        //HelloController.getName(..)
+        LOG.info(signature.toShortString());
+        //String com.xhx.springboot.controller.HelloController.getName(String)
+        LOG.info(signature.toString());
         //获取方法名
-        LOG.info(signature.getName()); //getName
+        //getName
+        LOG.info(signature.getName());
         //获取声明类型名
-        LOG.info(signature.getDeclaringTypeName()); //com.xhx.springboot.controller.HelloController
+        //com.xhx.springboot.controller.HelloController
+        LOG.info(signature.getDeclaringTypeName());
         //获取声明类型  方法所在类的class对象
-        LOG.info(signature.getDeclaringType().toString()); //class com.xhx.springboot.controller.HelloController
+        //class com.xhx.springboot.controller.HelloController
+        LOG.info(signature.getDeclaringType().toString());
         //和getDeclaringTypeName()一样
-        LOG.info(signature.getDeclaringType().getName());//com.xhx.springboot.controller.HelloController
+        //com.xhx.springboot.controller.HelloController
+        LOG.info(signature.getDeclaringType().getName());
 
         //连接点类型
         String kind = joinPoint.getKind();
-        LOG.info(kind);//method-execution
+        //method-execution
+        LOG.info(kind);
 
         //返回连接点方法所在类文件中的位置  打印报异常
         SourceLocation sourceLocation = joinPoint.getSourceLocation();
         LOG.info(sourceLocation.toString());
-        //LOG.info(sourceLocation.getFileName());
-        //LOG.info(sourceLocation.getLine()+"");
-        //LOG.info(sourceLocation.getWithinType().toString()); //class com.xhx.springboot.controller.HelloController
 
         ///返回连接点静态部分
         JoinPoint.StaticPart staticPart = joinPoint.getStaticPart();
-        LOG.info(staticPart.toLongString());  //execution(public java.lang.String com.xhx.springboot.controller.HelloController.getName(java.lang.String))
+        //execution(public java.lang.String com.xhx.springboot.controller.HelloController.getName(java.lang.String))
+        LOG.info(staticPart.toLongString());
 
 
         //attributes可以获取request信息 session信息等
         ServletRequestAttributes attributes =
                 (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        LOG.info(request.getRequestURL().toString()); //http://127.0.0.1:8080/hello/getName
-        LOG.info(request.getRemoteAddr()); //127.0.0.1
-        LOG.info(request.getMethod()); //GET
+        //http://127.0.0.1:8080/hello/getName
+        LOG.info(request.getRequestURL().toString());
+        //127.0.0.1
+        LOG.info(request.getRemoteAddr());
+
+        //GET
+        LOG.info(request.getMethod());
 
         LOG.info("PKG before通知执行结束");
     }
@@ -155,7 +164,8 @@ public class DemoPkgAspect {
         LOG.info("PKG @Around环绕通知：" + proceedingJoinPoint.getSignature().toString());
         Object obj = null;
         try {
-            obj = proceedingJoinPoint.proceed(); //可以加参数
+            //可以加参数
+            obj = proceedingJoinPoint.proceed();
             LOG.info(obj.toString());
         } catch (Throwable throwable) {
             throwable.printStackTrace();
