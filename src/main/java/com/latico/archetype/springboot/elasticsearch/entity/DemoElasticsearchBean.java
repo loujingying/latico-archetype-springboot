@@ -26,7 +26,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Accessors(chain = true)
 // @Document(indexName = "idx_demo", type="demo", shards = 5, replicas = 1)
 @Document(indexName = "idx_demo", shards = 5, replicas = 1)
-public class DemoElasticSearchBean {
+public class DemoElasticsearchBean {
 
     @Id
     private String id;
@@ -44,7 +44,7 @@ public class DemoElasticSearchBean {
     @Field(type = FieldType.Integer)
     private Integer type;
 
-    public DemoElasticSearchBean(String id, String firstCode, String secordCode, String content, Integer type){
+    public DemoElasticsearchBean(String id, String firstCode, String secordCode, String content, Integer type){
         this.id=id;
         this.firstCode=firstCode;
         this.secordCode=secordCode;

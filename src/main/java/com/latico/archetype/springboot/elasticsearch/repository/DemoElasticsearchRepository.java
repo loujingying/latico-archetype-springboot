@@ -1,6 +1,6 @@
 package com.latico.archetype.springboot.elasticsearch.repository;
 
-import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticSearchBean;
+import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticsearchBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  * @version: 1.0
  */
 @Repository
-public interface DemoElasticsearchRepository extends ElasticsearchRepository<DemoElasticSearchBean, String> {
+public interface DemoElasticsearchRepository extends ElasticsearchRepository<DemoElasticsearchBean, String> {
     /**
      * 查找
      * @param content
@@ -25,7 +25,7 @@ public interface DemoElasticsearchRepository extends ElasticsearchRepository<Dem
      * @return
      */
     //@Query("{\"bool\" : {\"must\" : {\"field\" : {\"content\" : \"?\"}}}}")
-    Page<DemoElasticSearchBean> findByContent(String content, Pageable pageable);
+    Page<DemoElasticsearchBean> findByContent(String content, Pageable pageable);
 
     /**
      * 查询
@@ -34,7 +34,7 @@ public interface DemoElasticsearchRepository extends ElasticsearchRepository<Dem
      * @return
      */
     @Query("{\"bool\" : {\"must\" : {\"field\" : {\"firstCode.keyword\" : \"?\"}}}}")
-    Page<DemoElasticSearchBean> findByFirstCode(String firstCode, Pageable pageable);
+    Page<DemoElasticsearchBean> findByFirstCode(String firstCode, Pageable pageable);
 
     /**
      * 查询
@@ -43,5 +43,5 @@ public interface DemoElasticsearchRepository extends ElasticsearchRepository<Dem
      * @return
      */
     @Query("{\"bool\" : {\"must\" : {\"field\" : {\"secordCode.keyword\" : \"?\"}}}}")
-    Page<DemoElasticSearchBean> findBySecordCode(String secordCode, Pageable pageable);
+    Page<DemoElasticsearchBean> findBySecordCode(String secordCode, Pageable pageable);
 }

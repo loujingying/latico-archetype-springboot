@@ -1,7 +1,7 @@
 package com.latico.archetype.springboot.controller;
 
-import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticSearchBean;
-import com.latico.archetype.springboot.elasticsearch.service.DemoElasticSearchService;
+import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticsearchBean;
+import com.latico.archetype.springboot.elasticsearch.service.DemoElasticsearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,21 +24,21 @@ import java.util.List;
 public class DemoElasticsearchController {
 
     @Autowired
-    private DemoElasticSearchService demoElasticsearchService;
+    private DemoElasticsearchService demoElasticsearchService;
 
     @GetMapping("/init")
     public void init(){
         demoElasticsearchService.createIndex();
-        List<DemoElasticSearchBean> list =new ArrayList<>();
-        list.add(new DemoElasticSearchBean("1","XX0193","XX8064","内容1",1));
-        list.add(new DemoElasticSearchBean("2","XX0210","XX7475","内容2",1));
-        list.add(new DemoElasticSearchBean("3","XX0257","XX8097","内容3",1));
+        List<DemoElasticsearchBean> list =new ArrayList<>();
+        list.add(new DemoElasticsearchBean("1","XX0193","XX8064","内容1",1));
+        list.add(new DemoElasticsearchBean("2","XX0210","XX7475","内容2",1));
+        list.add(new DemoElasticsearchBean("3","XX0257","XX8097","内容3",1));
         demoElasticsearchService.saveAll(list);
 
     }
 
     @GetMapping("/all")
-    public Iterator<DemoElasticSearchBean> all(){
+    public Iterator<DemoElasticsearchBean> all(){
         return demoElasticsearchService.findAll();
     }
 

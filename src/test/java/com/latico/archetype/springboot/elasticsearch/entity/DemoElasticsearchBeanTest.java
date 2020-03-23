@@ -9,7 +9,7 @@ public class DemoElasticsearchBeanTest {
      */
     @Test
     public void test(){
-        DemoElasticSearchBean demoElasticsearchBean = new DemoElasticSearchBean();
+        DemoElasticsearchBean demoElasticsearchBean = new DemoElasticsearchBean();
         demoElasticsearchBean.setContent("ajjg");
     }
 }
