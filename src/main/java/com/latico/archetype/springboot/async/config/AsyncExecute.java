@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.async;
+package com.latico.archetype.springboot.async.config;
 
 /**
  * <PRE>

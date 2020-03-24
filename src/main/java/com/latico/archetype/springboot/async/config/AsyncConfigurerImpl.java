@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.async;
+package com.latico.archetype.springboot.async.config;
 
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;

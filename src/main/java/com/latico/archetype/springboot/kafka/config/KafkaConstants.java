@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.kafka.common;
+package com.latico.archetype.springboot.kafka.config;
 
 /**
  * <PRE>

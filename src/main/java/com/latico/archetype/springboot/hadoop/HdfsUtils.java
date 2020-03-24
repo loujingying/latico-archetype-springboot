@@ -6,21 +6,16 @@ import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.common.util.string.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
-import org.apache.hadoop.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <PRE>
- *
+ * 一个FileSystem对象，可以打开多个不同的文件，使用完要关闭那个文件的流
  * </PRE>
  *
  * @author: latico
@@ -147,7 +142,7 @@ public class HdfsUtils {
         if (StringUtils.isEmpty(path)) {
             return false;
         }
-        if (existFile(fs, path)) {
+        if (existPath(fs, path)) {
             return true;
         }
         // 目标路径
@@ -164,13 +159,12 @@ public class HdfsUtils {
      * @return
      * @throws Exception
      */
-    public static boolean existFile(FileSystem fs, String path) throws Exception {
+    public static boolean existPath(FileSystem fs, String path) throws Exception {
         if (StringUtils.isEmpty(path)) {
             return false;
         }
         Path srcPath = new Path(path);
-        boolean isExists = fs.exists(srcPath);
-        return isExists;
+        return fs.exists(srcPath);
     }
 
     /**
@@ -181,28 +175,18 @@ public class HdfsUtils {
      * @return
      * @throws Exception
      */
-    public static List<Map<String, Object>> readPathInfo(FileSystem fs, String path) throws Exception {
+    public static FileStatus[] readPathInfo(FileSystem fs, String path) throws Exception {
         if (StringUtils.isEmpty(path)) {
             return null;
         }
-        if (!existFile(fs, path)) {
+        if (!existPath(fs, path)) {
             return null;
         }
         // 目标路径
         Path newPath = new Path(path);
         FileStatus[] statusList = fs.listStatus(newPath);
-        List<Map<String, Object>> list = new ArrayList<>();
-        if (null != statusList && statusList.length > 0) {
-            for (FileStatus fileStatus : statusList) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("filePath", fileStatus.getPath());
-                map.put("fileStatus", fileStatus.toString());
-                list.add(map);
-            }
-            return list;
-        } else {
-            return null;
-        }
+
+        return statusList;
     }
 
     /**
@@ -213,51 +197,23 @@ public class HdfsUtils {
      * @param file
      * @throws Exception
      */
-    public static void createFile(FileSystem fs, String path, MultipartFile file) throws Exception {
-        if (StringUtils.isEmpty(path) || null == file.getBytes()) {
-            return;
+    public static void createFile(FileSystem fs, String path, MultipartFile file) throws IOException {
+        FSDataOutputStream outputStream = null;
+        try {
+            if (StringUtils.isEmpty(path) || null == file.getBytes()) {
+                return;
+            }
+            String fileName = file.getOriginalFilename();
+            // 上传时默认当前目录，后面自动拼接文件的目录
+            Path newPath = new Path(path + "/" + fileName);
+            // 打开一个输出流
+            outputStream = fs.create(newPath);
+            outputStream.write(file.getBytes());
+        } finally {
+            com.latico.commons.common.util.io.IOUtils.close(outputStream);
         }
-        String fileName = file.getOriginalFilename();
-        // 上传时默认当前目录，后面自动拼接文件的目录
-        Path newPath = new Path(path + "/" + fileName);
-        // 打开一个输出流
-        FSDataOutputStream outputStream = fs.create(newPath);
-        outputStream.write(file.getBytes());
-        outputStream.close();
     }
 
-    /**
-     * 读取HDFS文件内容
-     *
-     * @param fs
-     * @param path
-     * @return
-     * @throws Exception
-     */
-    public static String readFile(FileSystem fs, String path) throws Exception {
-        if (StringUtils.isEmpty(path)) {
-            return null;
-        }
-        if (!existFile(fs, path)) {
-            return null;
-        }
-        // 目标路径
-        Path srcPath = new Path(path);
-        FSDataInputStream inputStream = null;
-        try {
-            inputStream = fs.open(srcPath);
-            // 防止中文乱码
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String lineTxt = "";
-            StringBuilder sb = new StringBuilder();
-            while ((lineTxt = reader.readLine()) != null) {
-                sb.append(lineTxt);
-            }
-            return sb.toString();
-        } finally {
-            inputStream.close();
-        }
-    }
 
     /**
      * 读取HDFS文件列表
@@ -267,11 +223,11 @@ public class HdfsUtils {
      * @return
      * @throws Exception
      */
-    public static List<Map<String, String>> listFile(FileSystem fs, String path) throws Exception {
+    public static RemoteIterator<LocatedFileStatus> listFile(FileSystem fs, String path) throws Exception {
         if (StringUtils.isEmpty(path)) {
             return null;
         }
-        if (!existFile(fs, path)) {
+        if (!existPath(fs, path)) {
             return null;
         }
 
@@ -279,17 +235,7 @@ public class HdfsUtils {
         Path srcPath = new Path(path);
         // 递归找到所有文件
         RemoteIterator<LocatedFileStatus> filesList = fs.listFiles(srcPath, true);
-        List<Map<String, String>> returnList = new ArrayList<>();
-        while (filesList.hasNext()) {
-            LocatedFileStatus next = filesList.next();
-            String fileName = next.getPath().getName();
-            Path filePath = next.getPath();
-            Map<String, String> map = new HashMap<>();
-            map.put("fileName", fileName);
-            map.put("filePath", filePath.toString());
-            returnList.add(map);
-        }
-        return returnList;
+        return filesList;
     }
 
     /**
@@ -314,7 +260,7 @@ public class HdfsUtils {
     }
 
     /**
-     * 删除HDFS文件
+     * 删除HDFS路径
      *
      * @param fs
      * @param path
@@ -325,7 +271,7 @@ public class HdfsUtils {
         if (StringUtils.isEmpty(path)) {
             return false;
         }
-        if (!existFile(fs, path)) {
+        if (!existPath(fs, path)) {
             return false;
         }
         Path srcPath = new Path(path);
@@ -334,42 +280,64 @@ public class HdfsUtils {
     }
 
     /**
-     * 上传HDFS文件
+     * 删除HDFS路径
+     *
      *
      * @param fs
      * @param path
-     * @param uploadPath
+     * @param recursive 永久性删除指定的文件或目录，如果f是一个空目录或者文件，那么recursive的值就会被忽略。只有recursive＝true时，一个非空目录及其内容才会被删除。
+     * @return
      * @throws Exception
      */
-    public static void uploadFile(FileSystem fs, String path, String uploadPath) throws Exception {
-        if (StringUtils.isEmpty(path) || StringUtils.isEmpty(uploadPath)) {
-            return;
+    public static boolean deleteFile(FileSystem fs, String path, boolean recursive) throws Exception {
+        if (StringUtils.isEmpty(path)) {
+            return false;
         }
-        // 上传路径
-        Path clientPath = new Path(path);
-        // 目标路径
-        Path serverPath = new Path(uploadPath);
-
-        // 调用文件系统的文件复制方法，第一个参数是否删除原文件true为删除，默认为false
-        fs.copyFromLocalFile(false, clientPath, serverPath);
+        if (!existPath(fs, path)) {
+            return false;
+        }
+        Path srcPath = new Path(path);
+        boolean isOk = fs.delete(srcPath, recursive);
+        return isOk;
     }
 
     /**
-     * 下载HDFS文件
+     * 上传HDFS文件
      *
      * @param fs
-     * @param path
-     * @param downloadPath
+     * @param localFilePath
+     * @param hdfsFilePath
      * @throws Exception
      */
-    public static void downloadFile(FileSystem fs, String path, String downloadPath) throws Exception {
-        if (StringUtils.isEmpty(path) || StringUtils.isEmpty(downloadPath)) {
+    public static void uploadFile(FileSystem fs, String localFilePath, String hdfsFilePath) throws Exception {
+        if (StringUtils.isEmpty(localFilePath) || StringUtils.isEmpty(hdfsFilePath)) {
             return;
         }
         // 上传路径
-        Path clientPath = new Path(path);
+        Path localPath = new Path(localFilePath);
         // 目标路径
-        Path serverPath = new Path(downloadPath);
+        Path serverPath = new Path(hdfsFilePath);
+
+        // 调用文件系统的文件复制方法，第一个参数是否删除原文件true为删除，默认为false
+        fs.copyFromLocalFile(false, localPath, serverPath);
+    }
+
+    /**
+     * 下载HDFS文件到本地文件
+     *
+     * @param fs
+     * @param localFilePath
+     * @param hdfsFilePath
+     * @throws Exception
+     */
+    public static void downloadFile(FileSystem fs, String localFilePath, String hdfsFilePath) throws Exception {
+        if (StringUtils.isEmpty(localFilePath) || StringUtils.isEmpty(hdfsFilePath)) {
+            return;
+        }
+        // 上传路径
+        Path clientPath = new Path(localFilePath);
+        // 目标路径
+        Path serverPath = new Path(hdfsFilePath);
 
         // 调用文件系统的文件复制方法，第一个参数是否删除原文件true为删除，默认为false
         fs.copyToLocalFile(false, clientPath, serverPath);
@@ -377,6 +345,7 @@ public class HdfsUtils {
 
     /**
      * HDFS文件复制
+     * 把HDFS中的一个文件复制到HDFS中的另外一个文件中
      *
      * @param fs
      * @param sourcePath
@@ -398,11 +367,7 @@ public class HdfsUtils {
         try {
             inputStream = fs.open(oldPath);
             outputStream = fs.create(newPath);
-
-            IOUtils.copyBytes(inputStream, outputStream, bufferSize, false);
-        } catch (Exception e) {
-            LOG.error("", e);
-
+            org.apache.hadoop.io.IOUtils.copyBytes(inputStream, outputStream, bufferSize, false);
         } finally {
             com.latico.commons.common.util.io.IOUtils.close(inputStream);
             com.latico.commons.common.util.io.IOUtils.close(outputStream);
@@ -417,24 +382,58 @@ public class HdfsUtils {
      * @return
      * @throws Exception
      */
-    public static byte[] openFileToBytes(FileSystem fs, String path) throws Exception {
+    public static byte[] readFileDataToBytes(FileSystem fs, String path) throws Exception {
         if (StringUtils.isEmpty(path)) {
             return null;
         }
-        if (!existFile(fs, path)) {
+        if (!existPath(fs, path)) {
             return null;
         }
         // 目标路径
         Path srcPath = new Path(path);
+        FSDataInputStream inputStream = null;
         try {
-            FSDataInputStream inputStream = fs.open(srcPath);
-            return IOUtils.readFullyToByteArray(inputStream);
-        } catch (Exception e) {
-            LOG.error("", e);
+            inputStream = fs.open(srcPath);
+            return org.apache.hadoop.io.IOUtils.readFullyToByteArray(inputStream);
+        } finally {
+            com.latico.commons.common.util.io.IOUtils.close(inputStream);
         }
 
-        return null;
     }
+
+    /**
+     * 读取HDFS文件内容
+     *
+     * @param fs
+     * @param path
+     * @return
+     * @throws Exception
+     */
+    public static String readFileDataToString(FileSystem fs, String path) throws Exception {
+        if (StringUtils.isEmpty(path)) {
+            return null;
+        }
+        if (!existPath(fs, path)) {
+            return null;
+        }
+        // 目标路径
+        Path srcPath = new Path(path);
+        FSDataInputStream inputStream = null;
+        try {
+            inputStream = fs.open(srcPath);
+            // 防止中文乱码
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String lineTxt = "";
+            StringBuilder sb = new StringBuilder();
+            while ((lineTxt = reader.readLine()) != null) {
+                sb.append(lineTxt);
+            }
+            return sb.toString();
+        }  finally {
+            com.latico.commons.common.util.io.IOUtils.close(inputStream);
+        }
+    }
+
 
     /**
      * 打开HDFS上的文件并返回java对象
@@ -446,14 +445,14 @@ public class HdfsUtils {
      * @throws Exception
      * @param <T>
      */
-    public static <T extends Object> T openFileToObject(FileSystem fs, String path, Class<T> clazz) throws Exception {
+    public static <T extends Object> T readFileDataToObject(FileSystem fs, String path, Class<T> clazz) throws Exception {
         if (StringUtils.isEmpty(path)) {
             return null;
         }
-        if (!existFile(fs, path)) {
+        if (!existPath(fs, path)) {
             return null;
         }
-        String jsonStr = readFile(fs, path);
+        String jsonStr = readFileDataToString(fs, path);
         return JsonUtils.jsonToObj(jsonStr, clazz);
     }
 
@@ -469,7 +468,7 @@ public class HdfsUtils {
         if (StringUtils.isEmpty(path)) {
             return null;
         }
-        if (!existFile(fs, path)) {
+        if (!existPath(fs, path)) {
             return null;
         }
         // 目标路径

@@ -1,15 +1,12 @@
-package com.latico.archetype.springboot.scheduled;
+package com.latico.archetype.springboot.scheduled.service;
 
-import com.latico.archetype.springboot.async.DemoAsyncTaskService;
+import com.latico.archetype.springboot.async.service.DemoAsyncTaskService;
 import com.latico.archetype.springboot.common.util.DateTimeUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 

@@ -2,7 +2,7 @@ package com.latico.archetype.springboot.kafka.producer.impl;
 
 import com.latico.archetype.springboot.common.util.JsonUtils;
 import com.latico.archetype.springboot.kafka.bean.DemoKafkaMsg;
-import com.latico.archetype.springboot.kafka.common.KafkaConstants;
+import com.latico.archetype.springboot.kafka.config.KafkaConstants;
 import com.latico.archetype.springboot.kafka.producer.MyKafkaProducer;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;

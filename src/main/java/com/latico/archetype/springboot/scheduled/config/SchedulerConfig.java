@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.scheduled;
+package com.latico.archetype.springboot.scheduled.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

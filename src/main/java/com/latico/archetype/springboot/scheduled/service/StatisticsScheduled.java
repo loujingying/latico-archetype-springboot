@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.scheduled;
+package com.latico.archetype.springboot.scheduled.service;
 
 import com.latico.archetype.springboot.common.statistics.DataStatistics;
 import com.latico.archetype.springboot.common.statistics.StatisticsData;

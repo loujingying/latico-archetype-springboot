@@ -1,5 +1,7 @@
-package com.latico.archetype.springboot.async;
+package com.latico.archetype.springboot.async.service;
 
+import com.latico.archetype.springboot.async.config.AsyncConfigurerImpl;
+import com.latico.archetype.springboot.async.config.AsyncExecute;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;

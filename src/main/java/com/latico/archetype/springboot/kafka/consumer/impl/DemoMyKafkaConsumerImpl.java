@@ -1,6 +1,6 @@
 package com.latico.archetype.springboot.kafka.consumer.impl;
 
-import com.latico.archetype.springboot.kafka.common.KafkaConstants;
+import com.latico.archetype.springboot.kafka.config.KafkaConstants;
 import com.latico.archetype.springboot.kafka.consumer.MyKafkaConsumer;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.latico.archetype.springboot.redis;
+package com.latico.archetype.springboot.redis.config;
 
 
 import com.latico.archetype.springboot.redis.serializer.IntRedisSerializer;
