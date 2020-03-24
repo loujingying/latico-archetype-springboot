@@ -1,10 +1,11 @@
 # springboot配置，开发环境配置
 ###########################################################
 ###########################################################
-spring:
+server:
   port: 8080
   servlet:
     context-path: /
+spring:
   ###########################################################
   ###########################################################
 
@@ -27,8 +28,8 @@ spring:
     ###########################################################
     #      第二个数据源，可以跟第一个数据源一样，这里因为大多数项目都是默认一样
     secondary:
-      driver-class-name: ${spring.redis.datasource.primary.driver-class-name}
-      url: ${spring.redis.datasource.primary.url}
+      driver-class-name: ${spring.datasource.primary.driver-class-name}
+      url: ${spring.datasource.primary.url}
       username: ${spring.datasource.primary.username}
       password: ${spring.datasource.primary.password}
 
@@ -58,8 +59,12 @@ spring:
 
   ###########################################################
   ###########################################################
-
   ##REST方式配置
+  #elasticsearch配置
+  ##TCP方式配置
+  #spring.data.elasticsearch.cluster-name=elasticsearch
+  #spring.data.elasticsearch.cluster-nodes=127.0.0.1:9300
+
   elasticsearch:
     rest:
       uris: http://172.168.10.7:9200
@@ -89,8 +94,6 @@ hdfs:
 eureka:
   instance:
     #客户端IP，因为假如存在多网卡，要明确使用某个网卡的IP跟服务端进行通信，默认是自动选择一个
-    #    ip-address: 127.0.0.1
-    preferIpAddress: true
     #springcloud上面显示本地客户端信息，建议是本机的IP，默认认为客户端程序跟服务端部署到同一个机器，所以跟注册中心一样
     instance-id: localhost:${spring.application.name}:${server.port}
   client:
