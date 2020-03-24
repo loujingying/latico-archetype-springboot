@@ -556,10 +556,10 @@
 
         <!-- =====================springcloud相关开始 ===================== -->
         <!--注册服务客户端，默认注释掉，如果要连接springcloud注册中心，那么要打开此依赖-->
-        <!-- <dependency>
+         <dependency>
              <groupId>org.springframework.cloud</groupId>
              <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-         </dependency>-->
+         </dependency>
         <!--注册服务客户端，默认注释掉，如果要连接springcloud注册中心，那么要打开此依赖-->
 
         <!-- 配置中心服务 -->
@@ -716,6 +716,33 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
         </dependency>
         <!--kafka-->
 
+        <!--hadoop配置-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.bestwu</groupId>
+            <artifactId>ik-analyzers</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <!--hadoop配置-->
     </dependencies>
 
 </project>

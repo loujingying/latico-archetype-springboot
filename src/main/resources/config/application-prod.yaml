@@ -2,14 +2,17 @@
 ###########################################################
 ###########################################################
 server:
-  port: ${appPort}
+  port: 8080
   servlet:
-    context-path: ${appContextPath}
+    context-path: /
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 ###########################################################
 ###########################################################
 spring:
   application:
-    name: ${appName}
+    name: latico-archetype-springboot
   zipkin:
     base-url: http://springcloud-sleuth-zipkin/
     # 默认关闭，不发送
@@ -27,7 +30,8 @@ spring:
         - (?i).*loopback.*
         - (?i).*Virtual.*
         - 169\..*
-  #  mvc:   #静态文件
+
+      #  mvc:   #静态文件
   #    static-path-pattern: /static/**
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
@@ -68,6 +72,24 @@ spring:
   ###########################################################
   #  配置redis不常用参数
   redis:
+
+    # ============单机模式============
+    # Redis数据库ID（默认为0）
+    database: 0
+    # Redis服务器地址和端口
+    host: 127.0.0.1
+    port: 6379
+      # ============单机模式============
+
+    # ============哨兵模式============
+    sentinel:
+      # 哨兵模型主节点别名，在redis配置文件的sentinel monitor
+      master: master1
+      # 哨兵节点
+      nodes: 127.0.0.1:26380,127.0.0.1:26381
+    # ============哨兵模式============
+
+    password: 123456
     # 连接超时时间（毫秒）
     timeout: 5000ms
     # 未知原因，哨兵使用lettuce池会无法连接，要使用jedis池
@@ -81,17 +103,27 @@ spring:
         min-idle: 0
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: 15000ms
+
+  # redis配置
   ###########################################################
   ###########################################################
+  ### 数据库配置,如果没有指定驱动，那么springboot会自动智能选择
+  # mysql 驱动类 新： com.mysql.cj.jdbc.Driver
+  # mysql 驱动类 旧： com.mysql.jdbc.Driver
+  # oracle 驱动类 新：oracle.jdbc.OracleDriver
+  # oracle 驱动类 旧：oracle.jdbc.driver.OracleDriver
+  # mysql URL: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+  # oracle URL: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+
   #配置数据源
   datasource:
     #    默认数据源，主数据源
     primary:
       name: primary
-      driver-class-name: ${jdbcDriverClassNamePrimary}
-      url: ${jdbcUrlPrimary}
-      username: ${jdbcUsernamePrimary}
-      password: ${jdbcPasswordPrimary}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
 
       #      mysql的查询校验
       #      validation-query: SELECT 'x'
@@ -131,10 +163,10 @@ spring:
     #      第二个数据源，可以跟第一个数据源一样，这里因为大多数项目都是默认一样
     secondary:
       name: secondary
-      driver-class-name: ${jdbcDriverClassNameSecondary}
-      url: ${jdbcUrlSecondary}
-      username: ${jdbcUsernameSecondary}
-      password: ${jdbcPasswordSecondary}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
       #      mysql的查询校验
       #      validation-query: SELECT 'x'
       #      oracle的查询校验
@@ -167,14 +199,47 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
       #      type，目前没发现能起什么作用
       type: com.alibaba.druid.pool.DruidDataSource
+
+  #elasticsearch配置
+  ##TCP方式配置
+  #spring.data.elasticsearch.cluster-name=elasticsearch
+  #spring.data.elasticsearch.cluster-nodes=127.0.0.1:9300
+
+  ##REST方式配置
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+      username:
+      password:
+  #elasticsearch配置
+
+  #kafka配置
+  kafka:
+    bootstrap-servers: localhost:9092
+    ## 对于每个topic，会发送到每个组一份，如果在同一个组内有多个机器，只会有一个机器收到消息
+    consumer:
+      group-id: group-demo
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      missing-topics-fatal: false
+#kafka配置
+
+#hadoop配置
+hdfs:
+  url: hdfs://localhost:9000
+  username: latico
+#hadoop配置
+
 ###########################################################
 ###########################################################
 ##  指定mybatis映射文件的地址，多数据源已经在java代码处理
 mybatis:
   configuration:
     map-underscore-to-camel-case: false
-##  mapper-locations: classpath:mybatis/mapper/**/*.xml
-##  type-aliases-package: com.latico.archetype.springboot.dao.secondary
 ###########################################################
 ###########################################################
 logging:
@@ -238,13 +303,13 @@ feign:
       default:
         connectTimeout: 10000
         readTimeout: 60000
-
 eureka:
   instance:
     #客户端IP，因为假如存在多网卡，要明确使用某个网卡的IP跟服务端进行通信，默认是自动选择一个
-#    ip-address: 127.0.0.1
+    #    ip-address: 127.0.0.1
     preferIpAddress: true
-    instance-id: ${displayLocalHost}:${spring.application.name}:${server.port}
+    #springcloud上面显示本地客户端信息，建议是本机的IP，默认认为客户端程序跟服务端部署到同一个机器，所以跟注册中心一样
+    instance-id: localhost:${spring.application.name}:${server.port}
 
     # 每隔10s发送一次心跳
     lease-renewal-interval-in-seconds: 10
@@ -255,6 +320,6 @@ eureka:
   client:
     serviceUrl:
       #      可以多个，用逗号分割，逗号跟实际内容之间不能有空格
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${springcloudRegisterHost}:${springcloudRegisterPort}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:5000/eureka/
   ###########################################################
   ###########################################################

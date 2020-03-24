@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 /**
  * <PRE>
  *     演示调度器
- * 用@EnableScheduling注解打开调度器，如果不需要，就关了，默认打开
  * </PRE>
  *
  * @author: latico
@@ -24,7 +23,6 @@ import java.sql.Timestamp;
  * @version: 1.0
  */
 @Configuration
-@EnableScheduling
 public class DemoScheduled {
 
     private static final Logger LOG = LoggerFactory.getLogger(DemoScheduled.class);

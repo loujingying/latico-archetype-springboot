@@ -9,6 +9,7 @@ import com.latico.commons.spring.util.SpringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationListener;
 
@@ -29,6 +30,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * <p>
  * 排除掉PageHelperAutoConfiguration.class，目的是不让mybatis分页插件重复注册报错
  *
+ * EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接
  * </PRE>
  *
  * @author: latico
@@ -38,8 +40,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @SpringBootApplication(scanBasePackageClasses = {Application.class, ApplicationContextAwareImpl.class})
 @ServletComponentScan
 @EnableFeignClients
-//EnableEurekaClient在启动连接Eureka注册中心时用到，甚至可以完全用不到，因为添加了Eureka的client包，会自动连接
-//@EnableEurekaClient
+@EnableEurekaClient
 public class Application {
     /**
      * 日志类
