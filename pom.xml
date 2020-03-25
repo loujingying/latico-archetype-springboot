@@ -559,6 +559,12 @@
          <dependency>
              <groupId>org.springframework.cloud</groupId>
              <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+             <exclusions>
+                 <exclusion>
+                     <artifactId>guava</artifactId>
+                     <groupId>com.google.guava</groupId>
+                 </exclusion>
+             </exclusions>
          </dependency>
         <!--注册服务客户端，默认注释掉，如果要连接springcloud注册中心，那么要打开此依赖-->
 
@@ -718,29 +724,9 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
 
         <!--hadoop配置-->
         <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-mapreduce-client-core</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.bestwu</groupId>
-            <artifactId>ik-analyzers</artifactId>
-            <version>5.1.0</version>
+            <groupId>com.latico.commons</groupId>
+            <artifactId>latico-commons-hadoop</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <!--hadoop配置-->
     </dependencies>

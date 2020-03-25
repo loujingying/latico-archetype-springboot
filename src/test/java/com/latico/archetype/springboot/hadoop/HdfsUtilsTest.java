@@ -1,7 +1,10 @@
 package com.latico.archetype.springboot.hadoop;
 
+import com.latico.commons.hadoop.HdfsUtils;
 import org.apache.hadoop.fs.FileSystem;
 import org.junit.Test;
+
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -41,5 +44,13 @@ public class HdfsUtilsTest {
         }finally {
             HdfsUtils.close(fileSystem);
         }
+    }
+
+    /**org.apache.hadoop.mapred.Mapper
+     *
+     */
+    @Test
+    public void test3(){
+        System.out.println(new Date().getTime());
     }
 }

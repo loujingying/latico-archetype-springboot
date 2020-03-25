@@ -1,12 +1,12 @@
 package com.latico.archetype.springboot.hadoop.service.impl;
 
 import com.latico.archetype.springboot.common.util.JsonUtils;
-import com.latico.archetype.springboot.hadoop.HdfsUtils;
 import com.latico.archetype.springboot.hadoop.config.HdfsConfig;
 import com.latico.archetype.springboot.hadoop.service.HdfsService;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import com.latico.commons.common.util.string.StringUtils;
+import com.latico.commons.hadoop.HdfsUtils;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +60,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public boolean mkdir(String path) throws Exception {
         return HdfsUtils.mkdir(fs, path);
     }
@@ -70,6 +71,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public boolean existFile(String path) throws Exception {
         return HdfsUtils.existPath(fs, path);
     }
@@ -80,6 +82,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public FileStatus[] readPathInfo(String path) throws Exception {
         return HdfsUtils.readPathInfo(fs, path);
     }
@@ -90,8 +93,20 @@ public class HdfsServiceImpl implements HdfsService {
      * @param file
      * @throws Exception
      */
+    @Override
     public void createFile(String path, MultipartFile file) throws Exception {
-        HdfsUtils.createFile(fs, path, file);
+        HdfsUtils.createFile(fs, path, file.getOriginalFilename(), file.getBytes());
+    }
+
+    /**
+     * @param path
+     * @param fileName
+     * @param data
+     * @throws Exception
+     */
+    @Override
+    public void createFile(String path, String fileName, byte[] data) throws Exception {
+        HdfsUtils.createFile(fs, path, fileName, data);
     }
 
     /**
@@ -100,6 +115,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public String readFile(String path) throws Exception {
         return HdfsUtils.readFileDataToString(fs, path);
     }
@@ -110,6 +126,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public RemoteIterator<LocatedFileStatus> listFile(String path) throws Exception {
         return HdfsUtils.listFile(fs, path);
     }
@@ -121,6 +138,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public boolean renameFile(String oldName, String newName) throws Exception {
         return HdfsUtils.renameFile(fs, oldName, newName);
     }
@@ -131,6 +149,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public boolean deleteFile(String path) throws Exception {
         return HdfsUtils.deleteFile(fs, path);
     }
@@ -141,6 +160,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @param uploadPath
      * @throws Exception
      */
+    @Override
     public void uploadFile(String path, String uploadPath) throws Exception {
         HdfsUtils.uploadFile(fs, path, uploadPath);
     }
@@ -151,6 +171,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @param hdfsFilePath
      * @throws Exception
      */
+    @Override
     public void downloadFile(String localFilePath, String hdfsFilePath) throws Exception {
         HdfsUtils.downloadFile(fs, localFilePath, hdfsFilePath);
     }
@@ -161,6 +182,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @param hdfsFilePath
      * @throws Exception
      */
+    @Override
     public void copyFile(String localFilePath, String hdfsFilePath) throws Exception {
         HdfsUtils.copyFile(fs, localFilePath, hdfsFilePath, bufferSize);
     }
@@ -171,6 +193,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public byte[] readFileDataToBytes(String path) throws Exception {
         return HdfsUtils.readFileDataToBytes(fs, path);
     }
@@ -183,6 +206,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @throws Exception
      * @param <T>
      */
+    @Override
     public <T extends Object> T readFileDataToObject(String path, Class<T> clazz) throws Exception {
         return HdfsUtils.readFileDataToObject(fs, path, clazz);
     }
@@ -193,6 +217,7 @@ public class HdfsServiceImpl implements HdfsService {
      * @return
      * @throws Exception
      */
+    @Override
     public BlockLocation[] getFileBlockLocations(String path) throws Exception {
         return HdfsUtils.getFileBlockLocations(fs, path);
     }
