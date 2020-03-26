@@ -24,7 +24,7 @@ public class DemoMyKafkaConsumerImpl implements MyKafkaConsumer<String, String> 
 
     @Override
     @KafkaListener(topics = {KafkaConstants.TOPIC_DEMO})
-    public void listen(ConsumerRecord<String, String> record) {
+    public void listenReceiveMsg(ConsumerRecord<String, String> record) {
         LOG.info("收到消息:record ={}", record);
     }
 }

@@ -737,6 +737,23 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
         </dependency>
         <!--集成Mongo的依赖-->
 
+        <!--集成ActiveMQ-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+        <!--消息队列连接池，使用springboot2.0及以下版本时候，maven配置依赖是-->
+       <!-- <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>5.15.12</version>
+        </dependency>-->
+        <!--消息队列连接池，使用springboot2.1+时候，maven配置依赖是-->
+        <dependency>
+            <groupId>org.messaginghub</groupId>
+            <artifactId>pooled-jms</artifactId>
+        </dependency>
+        <!--集成ActiveMQ-->
     </dependencies>
 
 </project>

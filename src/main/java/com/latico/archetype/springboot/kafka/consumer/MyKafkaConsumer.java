@@ -14,7 +14,7 @@ public interface MyKafkaConsumer<K, V> {
 
     /**
      * 监听接收消息
-     * @param record
+     * @param record 收到的消息
      */
-    public void listen(ConsumerRecord<K, V> record);
+    public void listenReceiveMsg(ConsumerRecord<K, V> record);
 }

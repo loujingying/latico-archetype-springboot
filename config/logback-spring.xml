@@ -165,17 +165,17 @@
         </encoder>
     </appender>
     <!-- mybatis程序日志 -->
-    <logger name="org.mybatis" level="debug" additivity="true">
+    <logger name="org.mybatis" level="info" additivity="true">
         <appender-ref ref="mybatis"/>
     </logger>
-    <logger name="org.apache.ibatis" level="debug" additivity="true">
+    <logger name="org.apache.ibatis" level="info" additivity="true">
         <appender-ref ref="mybatis"/>
     </logger>
-    <logger name="com.baomidou.mybatisplus" level="debug" additivity="true">
+    <logger name="com.baomidou.mybatisplus" level="info" additivity="true">
         <appender-ref ref="mybatis"/>
     </logger>
 
-    <!-- mybatis程序日志器 -->
+    <!-- mybatis 程序日志器 -->
 
     <!-- elasticsearch程序日志器 -->
     <appender name="elasticsearch"
@@ -195,7 +195,7 @@
             <pattern>${PATTERN_DEF}</pattern>
         </encoder>
     </appender>
-    <logger name="org.elasticsearch" level="debug" additivity="true">
+    <logger name="org.elasticsearch" level="info" additivity="true">
         <appender-ref ref="elasticsearch"/>
     </logger>
     <!-- elasticsearch程序日志 -->
@@ -223,6 +223,29 @@
     </logger>
     <!-- kafka 程序日志 -->
 
+    <!-- activemq 程序日志器 -->
+    <appender name="activemq"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>false</prudent> <!-- 如果是 true，日志会被安全的写入文件（多线程同步），但效率低，默认是 false。 -->
+        <file>${LOG_HOME}/activemq.log</file> <!-- 可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${BACKUP}/activemq_%d{yyyy-MM-dd}-%i.log.zip
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>64MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>${CHARSET}</charset>
+            <pattern>${PATTERN_DEF}</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.apache.activemq" level="info" additivity="true">
+        <appender-ref ref="activemq"/>
+    </logger>
+    <!-- activemq 程序日志 -->
+
     <!-- quartz 程序日志器 -->
     <appender name="quartz"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -246,7 +269,30 @@
     </logger>
     <!-- quartz 程序日志 -->
 
-    <!-- mybatis程序日志器 -->
+    <!-- mongodb 程序日志器 -->
+    <appender name="mongodb"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>false</prudent> <!-- 如果是 true，日志会被安全的写入文件（多线程同步），但效率低，默认是 false。 -->
+        <file>${LOG_HOME}/mongodb.log</file> <!-- 可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${BACKUP}/mongodb_%d{yyyy-MM-dd}-%i.log.zip
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>64MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>${CHARSET}</charset>
+            <pattern>${PATTERN_DEF}</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.mongodb" level="info" additivity="true">
+        <appender-ref ref="mongodb"/>
+    </logger>
+    <!-- mongodb 程序日志 -->
+
+    <!-- other程序日志 -->
     <appender name="other"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <prudent>false</prudent> <!-- 如果是 true，日志会被安全的写入文件（多线程同步），但效率低，默认是 false。 -->
@@ -264,16 +310,17 @@
             <pattern>${PATTERN_DEF}</pattern>
         </encoder>
     </appender>
-    <!-- other程序日志 -->
-    <logger name="org.apache.http" level="debug" additivity="true">
+
+    <logger name="org.apache.http" level="info" additivity="true">
         <appender-ref ref="other"/>
     </logger>
     <logger name="com.netflix" level="info" additivity="true">
         <appender-ref ref="other"/>
     </logger>
-    <logger name="org.hibernate.validator" level="debug" additivity="true">
+    <logger name="io.micrometer" level="info" additivity="true">
         <appender-ref ref="other"/>
     </logger>
+    <!-- other程序日志 -->
 
     <!-- hibernate程序日志器 -->
     <appender name="hibernate"
@@ -293,13 +340,9 @@
             <pattern>${PATTERN_DEF}</pattern>
         </encoder>
     </appender>
-    <logger name="org.hibernate.SQL" level="debug" additivity="true">
+    <logger name="org.hibernate" level="info" additivity="true">
         <appender-ref ref="hibernate"/>
     </logger>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="debug" additivity="true">
-        <appender-ref ref="hibernate"/>
-    </logger>
-
     <!-- hibernate程序日志器 -->
     <appender name="druid"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
