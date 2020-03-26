@@ -1,9 +1,15 @@
 package com.latico.archetype.springboot.controller;
 
+import com.latico.archetype.springboot.common.util.PageableUtils;
 import com.latico.archetype.springboot.elasticsearch.entity.DemoElasticsearchBean;
 import com.latico.archetype.springboot.elasticsearch.service.DemoElasticsearchService;
 import com.latico.archetype.springboot.mongodb.entity.DemoMongoDbBean;
+import com.latico.archetype.springboot.mongodb.repository.DemoMongoDbBeanRepository;
+import com.latico.archetype.springboot.mongodb.service.DemoMongoDbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,31 +27,31 @@ import java.util.List;
  * @version: 1.0
  */
 @RestController
-@RequestMapping("demo/elasticsearch")
-public class DemoElasticsearchController {
+@RequestMapping("demo/mongodb")
+public class DemoMongoDbController {
 
     @Autowired
-    private DemoElasticsearchService demoElasticsearchService;
+    private DemoMongoDbService demoMongoDbService;
 
     @GetMapping("init")
     public void init(){
-        demoElasticsearchService.createIndex();
-        List<DemoElasticsearchBean> list =new ArrayList<>();
-        list.add(new DemoElasticsearchBean("1","XX0193","XX8064","内容1",1));
-        list.add(new DemoElasticsearchBean("2","XX0210","XX7475","内容2",1));
-        list.add(new DemoElasticsearchBean("3","XX0257","XX8097","内容3",1));
-        demoElasticsearchService.saveAll(list);
-
+        demoMongoDbService.init();
     }
 
     @GetMapping("queryAll")
-    public Iterator<DemoElasticsearchBean> queryAll(){
-        return demoElasticsearchService.findAll();
+    public List<DemoMongoDbBean> queryAll(){
+        return demoMongoDbService.queryAll();
     }
 
+    @GetMapping("deleteAll")
+    public String deleteAll(){
+        return demoMongoDbService.deleteAll();
+    }
+
+
     @GetMapping("queryByPage")
-    public List<DemoElasticsearchBean> queryByPage(){
-        return demoElasticsearchService.queryByPage().getContent();
+    public List<DemoMongoDbBean> queryByPage(){
+        return demoMongoDbService.queryByPage();
     }
 
 }

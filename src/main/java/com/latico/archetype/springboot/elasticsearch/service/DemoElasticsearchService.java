@@ -72,5 +72,11 @@ public interface DemoElasticsearchService {
      * @return
      */
     Page<DemoElasticsearchBean> query(String key);
+
+    /**
+     * 分页查询
+     * @return
+     */
+    Page<DemoElasticsearchBean> queryByPage();
 }
 

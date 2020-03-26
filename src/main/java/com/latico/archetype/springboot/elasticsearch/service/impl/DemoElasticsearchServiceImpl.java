@@ -77,5 +77,11 @@ public class DemoElasticsearchServiceImpl implements DemoElasticsearchService {
         Pageable pageable = PageRequest.of(0, 10);
         return demoElasticsearchRepository.findByContent(key, pageable);
     }
+
+    @Override
+    public Page<DemoElasticsearchBean> queryByPage() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return demoElasticsearchRepository.findAll(pageable);
+    }
 }
 

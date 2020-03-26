@@ -729,6 +729,14 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
             <version>1.0.0</version>
         </dependency>
         <!--hadoop配置-->
+
+        <!--集成Mongo的依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <!--集成Mongo的依赖-->
+
     </dependencies>
 
 </project>
