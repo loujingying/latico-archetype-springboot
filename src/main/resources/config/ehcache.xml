@@ -11,6 +11,10 @@ maxElementsOnDisk：硬盘最大缓存个数。
 diskPersistent：是否缓存虚拟机重启期数据。
 diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。
 memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。
+    FIFO，first in first out，先进先出。
+    LFU， Less Frequently Used，一直以来最少被使用的。如上面所讲，缓存的元素有一个hit属性，hit值最小的将会被清出缓存。
+    LRU，Least Recently Used，最近最少使用的，缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时
+
 clearOnFlush：内存数量最大时是否清除。
 diskStore 则表示临时缓存的硬盘目录。
 
@@ -60,6 +64,8 @@ overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到�
            eternal="false"
            overflowToDisk="true"
            diskPersistent="true"
-           maxElementsInMemory="10000"
+           maxElementsInMemory="100000"
+           timeToIdleSeconds="120"
+           timeToLiveSeconds="120"
            diskExpiryThreadIntervalSeconds="600"/>
 </ehcache>
