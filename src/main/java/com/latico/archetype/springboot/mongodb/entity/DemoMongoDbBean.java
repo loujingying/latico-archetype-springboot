@@ -1,6 +1,8 @@
 package com.latico.archetype.springboot.mongodb.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +18,8 @@ import java.io.Serializable;
  */
 @Data
 @Document(collection = "user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class DemoMongoDbBean implements Serializable {
 
     private static final long serialVersionUID = -1L;
@@ -25,12 +29,4 @@ public class DemoMongoDbBean implements Serializable {
     private String username;
     private Integer age;
 
-    public DemoMongoDbBean() {
-    }
-
-    public DemoMongoDbBean(Long id, String username, Integer age) {
-        this.id = id;
-        this.username = username;
-        this.age = age;
-    }
 }

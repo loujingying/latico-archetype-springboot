@@ -51,12 +51,13 @@ spring:
     password: 123456
   ###########################################################
   ###########################################################
-  ##REST方式配置
   #elasticsearch配置
+
   ##TCP方式配置
   #spring.data.elasticsearch.cluster-name=elasticsearch
   #spring.data.elasticsearch.cluster-nodes=127.0.0.1:9300
 
+  ##REST方式配置
   elasticsearch:
     rest:
       uris: http://localhost:9200
@@ -98,6 +99,14 @@ spring:
         idle-timeout: 30000
     ###########################################################
     ###########################################################
+  #  ehcache配置
+  cache:
+    #    类型可以不指定，支持自动检测
+    type: ehcache
+    ehcache:
+      config: classpath:config/ehcache.xml
+  ###########################################################
+  ###########################################################
 #hadoop配置
 hdfs:
   url: hdfs://localhost:9000

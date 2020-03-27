@@ -51,4 +51,7 @@ public interface DemoRepository extends BaseRepository<Demo, String> {
      */
     @Query(value = "select max(task_id) max from demo", nativeQuery = true)
     Integer getTaskIdMax();
+
+    @Transactional(rollbackFor = Exception.class)
+    void deleteByTaskId(Integer taskId);
 }

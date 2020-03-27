@@ -59,12 +59,13 @@ spring:
 
   ###########################################################
   ###########################################################
-  ##REST方式配置
   #elasticsearch配置
+
   ##TCP方式配置
   #spring.data.elasticsearch.cluster-name=elasticsearch
   #spring.data.elasticsearch.cluster-nodes=127.0.0.1:9300
 
+  ##REST方式配置
   elasticsearch:
     rest:
       uris: http://172.168.10.7:9200
@@ -105,6 +106,14 @@ spring:
       max-connections: 10
   #空闲的连接过期时间，默认为30秒
       idle-timeout: 30000
+  ###########################################################
+  ###########################################################
+#  ehcache配置
+  cache:
+#    类型可以不指定，支持自动检测
+    type: ehcache
+    ehcache:
+      config: classpath:config/ehcache.xml
   ###########################################################
   ###########################################################
 #hadoop配置
