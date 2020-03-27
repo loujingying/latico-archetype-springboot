@@ -6,11 +6,14 @@ import com.latico.archetype.springboot.bean.bo.DemoTimeParam;
 import com.latico.archetype.springboot.bean.dto.RestRequestDTO;
 import com.latico.archetype.springboot.bean.dto.RestResponseDTO;
 import com.latico.archetype.springboot.common.anno.TimeStatisAspectAnnotation;
+import com.latico.archetype.springboot.common.util.HttpUtils;
 import com.latico.archetype.springboot.config.xml.XmlBizConfig;
 import com.latico.archetype.springboot.config.yaml.YamlBizConfig;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
 import com.latico.archetype.springboot.dao.secondary.entity.Demo2;
 import com.latico.archetype.springboot.service.DemoService;
+import com.latico.commons.common.util.io.FileUtils;
+import com.latico.commons.common.util.io.IOUtils;
 import com.latico.commons.common.util.json.JacksonUtils;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
@@ -18,10 +21,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -177,6 +182,44 @@ public class DemoController {
     public String testMultiPathVariable(@PathVariable Map<String, String> map) {
         //返回字符串，需要包一层JSON
         return JacksonUtils.objToJson("测试testMultiPathVariable:" + map.get("name") + "/" + map.get("value"));
+    }
+
+    /**
+     * <PRE>
+     *  下载文件示例
+     * </PRE>
+     * @author: latico
+     * @date: 2020-03-27 23:45:11
+     * @version: 1.0
+     */
+    @GetMapping("downloadFile")
+    @ApiOperation("下载文件示例")
+    public String downloadFile(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {
+        HttpUtils.downloadFile(httpServletResponse, "./config/README.md");
+        return "成功";
+    }
+
+    /**
+     * 处理文件上传，客户端可以通过postman或者使用文件上传表单进行上传，上传后，可以存储到本地文件，或者大数据系统中
+     *  <form action="demo/uploadFile" method="post" enctype="multipart/form-data">
+     *         <p><input type="file" name="fileName"/></p>
+     *         <p><input type="submit" value="上传文件"/></p>
+     *     </form>
+     * @param multipartFile
+     * @return
+     */
+    @RequestMapping(value="uploadFile", method = RequestMethod.POST)
+    public String uploadFile(@RequestParam("fileName") MultipartFile multipartFile) {
+        String fileName = multipartFile.getOriginalFilename();
+        //设置文件上传路径
+        String fileDir = "upload";
+        try {
+            FileUtils.writeByteArrayToFile(new File(fileDir + "/" + fileName), multipartFile.getBytes());
+            return "上传成功";
+        } catch (Exception e) {
+            LOG.error("", e);
+            return "上传失败";
+        }
     }
 
 }
