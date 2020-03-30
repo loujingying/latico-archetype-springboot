@@ -26,13 +26,13 @@ public class DemoSpringCacheServiceImpl implements SpringCacheService<Demo, Inte
     /**
      * 本缓存的名字
      */
-    public static final String CACHE_NAME = SpringCacheConfig.CACHE_NAME;
+    public static final String CACHE_NAME = SpringCacheConfig.CACHE_NAME_DEMO;
 
     @Autowired
     private DemoRepository demoRepository;
 
     @Override
-    public Demo cacheable(Integer id) {
+    public Demo cacheable(Integer id, Demo data) {
         log.info("通过id:{}查询获取", id);
         Demo demo = demoRepository.queryFirstByTaskId(id);
         log.info("从数据库查询出:{}", demo);

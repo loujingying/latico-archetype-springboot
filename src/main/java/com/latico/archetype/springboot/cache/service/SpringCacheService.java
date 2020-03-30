@@ -10,15 +10,13 @@ import org.springframework.cache.annotation.Cacheable;
  * <PRE>
  *
  * </PRE>
- *
+ * @param <T> 数据的类型
+ * @param <K> ID的类型
  * @author: latico
  * @date: 2020-03-27 10:35
  * @version: 1.0
  */
-public interface SpringCacheService<T, ID> {
-
-    /** 日志对象 */
-    public static final Logger LOG = LoggerFactory.getLogger(SpringCacheService.class);
+public interface SpringCacheService<T, K> {
 
     /**
      * 把数据进行缓存
@@ -26,10 +24,11 @@ public interface SpringCacheService<T, ID> {
      * 如果获取到了，就直接返回缓存中的数据，不会执行方法体
      * 获取不到，就执行方法体，并把方法体的数据放进缓存，
      * @param id 缓存的key,必须输入
+     * @param data 这里把数据对象也放进来，目的是假如id字段是多个字段的拼接字段，那么这个data方便的传入各个所需字段，方便库查询操作
      * @return 返回值会入到缓存中
      */
     @Cacheable(key = "#id")
-    T cacheable(ID id);
+    T cacheable(K id, T data);
 
     /**
      * 更新缓存数据
@@ -40,7 +39,7 @@ public interface SpringCacheService<T, ID> {
      * @return 返回值会强制更新进缓存中，如果缓存没有就是插入，有就更新
      */
     @CachePut(key = "#id")
-    T put(ID id, T data);
+    T put(K id, T data);
 
     /**
      * 根据id删除缓存单个数据
@@ -51,7 +50,7 @@ public interface SpringCacheService<T, ID> {
      * @return
      */
     @CacheEvict(key = "#id", allEntries = false)
-    void evict(ID id, T data);
+    void evict(K id, T data);
 
     /**
      * 清空缓存中所有数据

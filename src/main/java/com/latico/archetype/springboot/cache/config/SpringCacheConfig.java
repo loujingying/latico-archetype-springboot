@@ -24,5 +24,5 @@ public class SpringCacheConfig {
     /**
      * 某一个缓存的名字，在ehcache.xml中配置的demo缓存
      */
-    public static final String CACHE_NAME = "demo";
+    public static final String CACHE_NAME_DEMO = "demo";
 }

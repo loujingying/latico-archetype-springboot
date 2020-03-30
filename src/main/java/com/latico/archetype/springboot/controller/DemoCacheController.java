@@ -18,28 +18,28 @@ import org.springframework.web.bind.annotation.*;
 public class DemoCacheController {
 
     @Autowired
-    private DemoSpringCacheServiceImpl demoCacheServiceImpl;
+    private DemoSpringCacheServiceImpl demoSpringCacheServiceImpl;
 
     @GetMapping("cacheable")
     public Demo cacheable(@RequestParam int id){
-        return demoCacheServiceImpl.cacheable(id);
+        return demoSpringCacheServiceImpl.cacheable(id, null);
     }
 
     @PostMapping("put")
     public boolean put(@RequestBody Demo demo){
-        demoCacheServiceImpl.put(demo.getTaskId(), demo);
+        demoSpringCacheServiceImpl.put(demo.getTaskId(), demo);
         return true;
     }
 
     @GetMapping("evict")
     public boolean evict(@RequestParam int id){
-        demoCacheServiceImpl.evict(id, null);
+        demoSpringCacheServiceImpl.evict(id, null);
         return true;
     }
 
     @GetMapping("clean")
     public boolean clean(){
-        demoCacheServiceImpl.clean();
+        demoSpringCacheServiceImpl.clean();
         return true;
     }
     
