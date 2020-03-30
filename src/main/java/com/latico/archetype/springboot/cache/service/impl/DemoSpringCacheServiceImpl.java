@@ -32,6 +32,14 @@ public class DemoSpringCacheServiceImpl implements SpringCacheService<Demo, Inte
     private DemoRepository demoRepository;
 
     @Override
+    public Demo cacheable(Integer id) {
+        log.info("通过id:{}查询获取", id);
+        Demo demo = demoRepository.queryFirstByTaskId(id);
+        log.info("从数据库查询出:{}", demo);
+        return demo;
+    }
+
+    @Override
     public Demo cacheable(Integer id, Demo data) {
         log.info("通过id:{}查询获取", id);
         Demo demo = demoRepository.queryFirstByTaskId(id);
