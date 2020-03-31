@@ -1,9 +1,11 @@
 package com.latico.archetype.springboot.controller;
 
-import com.latico.archetype.springboot.cache.service.impl.DemoSpringCacheServiceImpl;
+import com.latico.archetype.springboot.cache.dao.impl.DemoSpringCacheDaoImpl;
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <PRE>
@@ -18,11 +20,16 @@ import org.springframework.web.bind.annotation.*;
 public class DemoCacheController {
 
     @Autowired
-    private DemoSpringCacheServiceImpl demoSpringCacheServiceImpl;
+    private DemoSpringCacheDaoImpl demoSpringCacheServiceImpl;
+
+    @GetMapping("getCacheKeys")
+    public List<Integer> getCacheKeys(){
+        return demoSpringCacheServiceImpl.getCacheKeys();
+    }
 
     @GetMapping("cacheable")
     public Demo cacheable(@RequestParam int id){
-        return demoSpringCacheServiceImpl.cacheable(id, null);
+        return demoSpringCacheServiceImpl.cacheable(id);
     }
 
     @PostMapping("put")
@@ -33,7 +40,7 @@ public class DemoCacheController {
 
     @GetMapping("evict")
     public boolean evict(@RequestParam int id){
-        demoSpringCacheServiceImpl.evict(id, null);
+        demoSpringCacheServiceImpl.evict(id);
         return true;
     }
 
