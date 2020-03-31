@@ -65,7 +65,7 @@ overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到�
            overflowToDisk="true"
            diskPersistent="true"
            maxElementsInMemory="100000"
-           timeToIdleSeconds="120"
-           timeToLiveSeconds="120"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
            diskExpiryThreadIntervalSeconds="600"/>
 </ehcache>
