@@ -4,29 +4,36 @@
 server:
   port: 8080
 spring:
+  ###########################################################
+  ###########################################################
+
   #spring安全认证配置
   security:
     user:
       name: admin
       password: admin
-  ###########################################################
-  ###########################################################
-  #配置数据源
+    ###########################################################
+    ###########################################################
+    #配置数据源
   datasource:
     #    默认数据源，主数据源
     primary:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+      url: jdbc:mysql://172.168.63.232:3307/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
       username: root
       password: root
+    ###########################################################
+    ###########################################################
     #      第二个数据源，可以跟第一个数据源一样，这里因为大多数项目都是默认一样
     secondary:
       driver-class-name: ${spring.datasource.primary.driver-class-name}
       url: ${spring.datasource.primary.url}
       username: ${spring.datasource.primary.username}
       password: ${spring.datasource.primary.password}
+
   ###########################################################
   ###########################################################
+
   #  配置redis不常用参数
   redis:
 
@@ -34,9 +41,9 @@ spring:
     # Redis数据库ID（默认为0）
     database: 0
     # Redis服务器地址和端口
-    host: 127.0.0.1
+    host: 172.168.10.7
     port: 6379
-      # ============单机模式============
+    # ============单机模式============
 
     # ============哨兵模式============
     #    sentinel:
@@ -47,6 +54,7 @@ spring:
     # ============哨兵模式============
     #密码是共用
     password: 123456
+
   ###########################################################
   ###########################################################
   #elasticsearch配置
@@ -58,15 +66,16 @@ spring:
   ##REST方式配置
   elasticsearch:
     rest:
-      uris: http://localhost:9200
+      uris: http://172.168.10.7:9200
       username:
       password:
   #elasticsearch配置
   ###########################################################
   ###########################################################
+
   #kafka配置
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 172.168.10.7:9092
     ## 对于每个topic，会发送到每个组一份，如果在同一个组内有多个机器，只会有一个机器收到消息
     consumer:
       group-id: group-demo
@@ -75,7 +84,7 @@ spring:
   #  MongoDB连接配置
   data:
     mongodb:
-      host: 127.0.0.1
+      host: 172.168.10.7
       port: 27017
       #      数据库名称
       database: demo
@@ -85,25 +94,17 @@ spring:
   ###########################################################
   #  activemq配置
   activemq:
-    broker-url: tcp://localhost:61616
-    #true 表示使用内置的MQ，false则连接服务器
-    in-memory: false
-    #true表示使用连接池；false时，每发送一条数据创建一个连接
-    pool:
-      enabled: true
-      #连接池最大连接数
-      max-connections: 10
-      #空闲的连接过期时间，默认为30秒
-      idle-timeout: 30000
+    broker-url: tcp://172.168.10.7:61616
   ###########################################################
   ###########################################################
 #hadoop配置
 hdfs:
-  url: hdfs://localhost:9000
+  url: hdfs://172.168.10.7:9000
   username: hadoop
   #hadoop配置
   ###########################################################
   ###########################################################
+
 eureka:
   instance:
     #客户端IP，因为假如存在多网卡，要明确使用某个网卡的IP跟服务端进行通信，默认是自动选择一个
@@ -112,6 +113,6 @@ eureka:
   client:
     serviceUrl:
       #      可以多个，用逗号分割，逗号跟实际内容之间不能有空格
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:5000/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.168.10.7:5000/eureka/
   ###########################################################
   ###########################################################
