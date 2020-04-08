@@ -1,6 +1,7 @@
 /**
  * <PRE>
- * kafka的消息
+ * kafka
+ * 会检测连通性，不影响程序启动
  * </PRE>
  *
  * @author: latico

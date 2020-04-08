@@ -1,6 +1,7 @@
 /**
  * <PRE>
- * ElasticSearch的DAO相关
+ * ElasticSearch
+ * 启动时会检测连通性，但是不影响程序启动
  * </PRE>
  *
  * @author: latico
