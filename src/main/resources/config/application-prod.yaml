@@ -6,20 +6,12 @@ server:
 spring:
   ###########################################################
   ###########################################################
-
-  #spring安全认证配置
-  security:
-    user:
-      name: admin
-      password: admin
-    ###########################################################
-    ###########################################################
     #配置数据源
   datasource:
     #    默认数据源，主数据源
     primary:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://172.168.63.232:3307/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
       username: root
       password: root
     ###########################################################
@@ -30,7 +22,14 @@ spring:
       url: ${spring.datasource.primary.url}
       username: ${spring.datasource.primary.username}
       password: ${spring.datasource.primary.password}
-
+    ###########################################################
+    ###########################################################
+    # postgresql数据源
+    postgresql:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://127.0.0.1:5432/postgres
+      username: postgres
+      password: postgres
   ###########################################################
   ###########################################################
 
@@ -41,7 +40,7 @@ spring:
     # Redis数据库ID（默认为0）
     database: 0
     # Redis服务器地址和端口
-    host: 172.168.10.7
+    host: 127.0.0.1
     port: 6379
     # ============单机模式============
 
@@ -66,7 +65,7 @@ spring:
   ##REST方式配置
   elasticsearch:
     rest:
-      uris: http://172.168.10.7:9200
+      uris: http://127.0.0.1:9200
       username:
       password:
   #elasticsearch配置
@@ -75,7 +74,7 @@ spring:
 
   #kafka配置
   kafka:
-    bootstrap-servers: 172.168.10.7:9092
+    bootstrap-servers: 127.0.0.1:9092
     ## 对于每个topic，会发送到每个组一份，如果在同一个组内有多个机器，只会有一个机器收到消息
     consumer:
       group-id: group-demo
@@ -84,7 +83,7 @@ spring:
   #  MongoDB连接配置
   data:
     mongodb:
-      host: 172.168.10.7
+      host: 127.0.0.1
       port: 27017
       #      数据库名称
       database: demo
@@ -94,12 +93,12 @@ spring:
   ###########################################################
   #  activemq配置
   activemq:
-    broker-url: tcp://172.168.10.7:61616
+    broker-url: tcp://127.0.0.1:61616
   ###########################################################
   ###########################################################
 #hadoop配置
 hdfs:
-  url: hdfs://172.168.10.7:9000
+  url: hdfs://127.0.0.1:9000
   username: hadoop
   #hadoop配置
   ###########################################################
@@ -113,6 +112,6 @@ eureka:
   client:
     serviceUrl:
       #      可以多个，用逗号分割，逗号跟实际内容之间不能有空格
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.168.10.7:5000/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:5000/eureka/
   ###########################################################
   ###########################################################

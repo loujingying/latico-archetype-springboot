@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * <PRE>
- *  演示elasticsearch的操作
+ *  演示 MongoDB 的操作
  * </PRE>
  * @author: latico
  * @date: 2020-03-10 11:23:00

@@ -767,6 +767,15 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
             <version>2.10.6</version>
         </dependency>
         <!--ehcache-->
+
+        <!--postgresql-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <!--<scope>runtime</scope>-->
+        </dependency>
+        <!--postgresql-->
+
     </dependencies>
 
 </project>

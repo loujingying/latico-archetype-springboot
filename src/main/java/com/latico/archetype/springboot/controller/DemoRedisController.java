@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * <PRE>
  *
- 测试时，可以在redis手工创建对应的列表等
+ 测试时，可以在 redis手工创建对应的列表等
  * </PRE>
  *
  * @author: latico
