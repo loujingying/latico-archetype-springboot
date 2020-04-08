@@ -1,9 +1,11 @@
 package com.latico.archetype.springboot.dao.primary.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +18,8 @@ import javax.persistence.*;
  * @version: 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "demo")
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})

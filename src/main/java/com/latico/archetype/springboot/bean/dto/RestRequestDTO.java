@@ -2,6 +2,7 @@ package com.latico.archetype.springboot.bean.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ import java.io.Serializable;
  * @version: 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("请求传输对象")
 public class RestRequestDTO<T> implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -1,7 +1,9 @@
 package com.latico.archetype.springboot.dao.primary.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +20,8 @@ import java.io.Serializable;
  * @version: 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "database_lock")
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})

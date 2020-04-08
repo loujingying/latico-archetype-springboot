@@ -1,7 +1,9 @@
 package com.latico.archetype.springboot.bean.bo;
 
 import com.latico.archetype.springboot.dao.primary.entity.Demo;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
  * @version: 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DemoByPageResult implements Serializable {
     private List<Demo> demos;
     private int totalPages;

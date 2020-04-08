@@ -2,6 +2,7 @@ package com.latico.archetype.springboot.bean.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,6 +18,8 @@ import java.util.Date;
  * @version: 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("演示时间bean")
 public class DemoTimeParam implements Serializable {
 
