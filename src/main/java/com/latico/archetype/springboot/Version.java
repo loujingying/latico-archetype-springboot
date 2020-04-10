@@ -37,6 +37,9 @@ public class Version {
     static {
         VersionUtils.addVersionInfo(PROJECT_NAME,"1.0", "latico", "2020-01-13",
                 "构建项目");
+
+        VersionUtils.addVersionInfo(PROJECT_NAME,"1.0", "latico", "2020-04-08",
+                "集成postgreSql");
     }
 
 }

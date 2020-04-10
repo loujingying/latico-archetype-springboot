@@ -51,12 +51,13 @@ overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到�
             eternal="false"
             overflowToDisk="true"
             diskPersistent="false"
-            timeToIdleSeconds="120"
-            timeToLiveSeconds="120"
-            diskExpiryThreadIntervalSeconds="120"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            diskExpiryThreadIntervalSeconds="600"
             maxElementsInMemory="100000"
             maxElementsOnDisk="10000000"
             memoryStoreEvictionPolicy="LRU"
+
     />
 
     <!--示例demo名称缓存-->
@@ -64,8 +65,9 @@ overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到�
            eternal="false"
            overflowToDisk="true"
            diskPersistent="true"
-           maxElementsInMemory="100000"
            timeToIdleSeconds="3600"
            timeToLiveSeconds="3600"
-           diskExpiryThreadIntervalSeconds="600"/>
+           diskExpiryThreadIntervalSeconds="600"
+           maxElementsInMemory="100000"
+    />
 </ehcache>

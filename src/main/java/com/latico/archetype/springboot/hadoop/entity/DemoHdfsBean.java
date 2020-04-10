@@ -1,6 +1,8 @@
 package com.latico.archetype.springboot.hadoop.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.hadoop.io.Writable;
 
 import java.io.DataInput;
@@ -16,20 +18,13 @@ import java.io.IOException;
  * @version: 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DemoHdfsBean implements Writable {
 
 	private String username;
 	private Integer age;
 	private String address;
-
-	public DemoHdfsBean() {
-	}
-
-	public DemoHdfsBean(String username, Integer age, String address) {
-		this.username = username;
-		this.age = age;
-		this.address = address;
-	}
 
 	@Override
 	public void write(DataOutput output) throws IOException {
