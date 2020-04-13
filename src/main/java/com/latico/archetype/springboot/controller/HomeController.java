@@ -10,7 +10,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +47,7 @@ public class HomeController {
     @Value("${server.servlet.context-path}")
     private String serverContextPath;
 
-    @RequestMapping("")
+    @GetMapping("")
     @ApiOperation("默认主页API")
     public String home(@Context HttpServletRequest httpServletRequest) {
         String requestUri = httpServletRequest.getRequestURI();
@@ -84,19 +86,19 @@ public class HomeController {
         return sb.toString();
     }
 
-    @RequestMapping(value = "version")
+    @GetMapping(value = "version")
     @ApiOperation("查询程序版本信息，默认格式")
     public String version() {
         return VersionUtils.getVersionInfosToMarkdown();
     }
 
-    @RequestMapping(value = "version/md")
+    @GetMapping(value = "version/md")
     @ApiOperation("查询程序版本信息，markdown格式")
     public String versionMd() {
         return VersionUtils.getVersionInfosToMarkdown();
     }
 
-    @RequestMapping(value = "version/html")
+    @GetMapping(value = "version/html")
     @ApiOperation("查询程序版本信息，HTML表格式")
     public String versionHtml() {
         return VersionUtils.getVersionInfosToHtml();
