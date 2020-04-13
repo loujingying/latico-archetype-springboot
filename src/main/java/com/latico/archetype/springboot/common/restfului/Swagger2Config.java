@@ -55,7 +55,6 @@ public class Swagger2Config {
     @Bean
     public Docket createRestApi() {
         // 要扫描的基本包，默认是该类的包名去掉.common.restfului，也就是项目包的根路径，目前直接优化成Application类路径下
-//        String basePackage = this.getClass().getPackage().getName().replace(".common.restfului", "");
         String basePackage = Application.class.getPackage().getName();
 
 

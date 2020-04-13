@@ -54,28 +54,26 @@ public class DbConfig {
      * 在这里，用了什么数据源就返回什么数据源，如果是返回{@link DataSource}，那么springboot2.0会默认使用HikariCP作为数据源
      * 拷贝后需要修改bean名称
      *
+     * 默认方式，springboot2.0会默认使用HikariCP作为数据源
+     * return DataSourceBuilder.create().build();
      * @return 主数据源
      */
     @Primary
     @Bean(name = DATASOURCE_CONFIG_PREFIX_PRIMARY)
     @ConfigurationProperties(prefix = DATASOURCE_CONFIG_PREFIX_PRIMARY)
     public DataSource primaryDatasource() {
-        //默认方式，springboot2.0会默认使用HikariCP作为数据源
-//        return DataSourceBuilder.create().build();
-
         // druid方式
         return DruidDataSourceBuilder.create().build();
     }
 
     /**
+     * 默认方式，springboot2.0会默认使用HikariCP作为数据源
+     * return DataSourceBuilder.create().build();
      * @return 第二个数据源
      */
     @Bean(name = DATASOURCE_CONFIG_PREFIX_SECONDARY)
     @ConfigurationProperties(prefix = DATASOURCE_CONFIG_PREFIX_SECONDARY)
     public DataSource secondaryDatasource() {
-        //默认方式，springboot2.0会默认使用HikariCP作为数据源
-//        return DataSourceBuilder.create().build();
-
         // druid方式
         return DruidDataSourceBuilder.create().build();
     }
