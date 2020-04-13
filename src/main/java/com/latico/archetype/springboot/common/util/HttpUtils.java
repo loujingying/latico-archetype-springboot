@@ -9,7 +9,7 @@ import java.io.*;
 
 /**
  * <PRE>
- *
+ * HTTP操作工具
  * </PRE>
  *
  * @author: latico
