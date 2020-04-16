@@ -35,7 +35,7 @@ public class AsyncConfigurerImpl implements AsyncConfigurer {
      */
     @Override
     public Executor getAsyncExecutor() {
-        String threadPoolName = "CommonSpringAsyncPool";
+        String threadPoolName = "DefaultPool";
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         int availableProcessors = ThreadUtils.getBestThreadSize();
         threadPoolTaskExecutor.setCorePoolSize(availableProcessors);

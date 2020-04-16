@@ -31,7 +31,7 @@ public class DemoAsyncTaskService {
      * @param date
      */
     public void asyncExec(Date date) {
-        springAsyncExecuter.doTaskByCommonPool(()->{
+        springAsyncExecuter.doTaskByDefaultPool(()->{
             LOG.info("异步执行数据:{}", date);
             return true;
         });

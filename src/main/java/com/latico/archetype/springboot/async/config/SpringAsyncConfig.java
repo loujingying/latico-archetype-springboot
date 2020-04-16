@@ -54,7 +54,7 @@ public class SpringAsyncConfig {
      * @param task 需要被执行的任务
      */
     @Async
-    public void asyncExecByCommonPool(AsyncExecuteTask task) {
+    public void asyncExecByDefaultPool(AsyncExecuteTask task) {
         task.execute();
     }
 
@@ -77,7 +77,7 @@ public class SpringAsyncConfig {
      * @return
      */
     @Async
-    public Future<Boolean> asyncExecWithCallbackByCommonPool(AsyncExecuteTask asyncExecute) {
+    public Future<Boolean> asyncExecWithCallbackByDefaultPool(AsyncExecuteTask asyncExecute) {
         boolean status = asyncExecute.execute();
         return AsyncResult.forValue(status);
     }

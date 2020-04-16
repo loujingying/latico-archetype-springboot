@@ -67,8 +67,8 @@ public class SpringAsyncExecuter {
      * 添加一个异步执行的方法，会丢进线程池中执行
      * @param task 需要被执行的任务
      */
-    public void doTaskByCommonPool(AsyncExecuteTask task) {
-        springAsyncConfig.asyncExecByCommonPool(task);
+    public void doTaskByDefaultPool(AsyncExecuteTask task) {
+        springAsyncConfig.asyncExecByDefaultPool(task);
     }
 
     /**
@@ -85,14 +85,14 @@ public class SpringAsyncExecuter {
      * 会等待所有任务执行完成
      * @param tasks
      */
-    public void doTasksAndWaitDoneByCommonPool(Collection<AsyncExecuteTask> tasks) {
+    public void doTasksAndWaitDoneByDefaultPool(Collection<AsyncExecuteTask> tasks) {
         if (tasks == null || tasks.isEmpty()) {
             return;
         }
 
         List<Future<Boolean>> futures = new ArrayList<>();
         for (AsyncExecuteTask task : tasks) {
-            Future<Boolean> booleanFuture = springAsyncConfig.asyncExecWithCallbackByCommonPool(task);
+            Future<Boolean> booleanFuture = springAsyncConfig.asyncExecWithCallbackByDefaultPool(task);
             futures.add(booleanFuture);
         }
 
