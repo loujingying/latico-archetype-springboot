@@ -48,6 +48,9 @@ public class DemoScheduled {
         Timestamp sysTimestamp = DateTimeUtils.getSysTimestamp();
         LOG.info("cron方式执行,每20秒执行一次,报告当前时间:{}", sysTimestamp);
 
-        demoAsyncTaskService.asyncExec(sysTimestamp);
+        demoAsyncTaskService.asyncExec(()->{
+            LOG.info("异步执行数据:{}", sysTimestamp);
+            return true;
+        });
     }
 }

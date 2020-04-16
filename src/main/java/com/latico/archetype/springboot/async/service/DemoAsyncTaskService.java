@@ -1,12 +1,14 @@
 package com.latico.archetype.springboot.async.service;
 
 import com.latico.archetype.springboot.async.SpringAsyncExecuter;
+import com.latico.archetype.springboot.async.config.AsyncExecuteTask;
 import com.latico.commons.common.util.logging.Logger;
 import com.latico.commons.common.util.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -28,13 +30,18 @@ public class DemoAsyncTaskService {
 
     /**
      * 添加一个异步执行的方法，会丢进线程池中执行
-     * @param date
+     * @param task
      */
-    public void asyncExec(Date date) {
-        springAsyncExecuter.doTaskByDefaultPool(()->{
-            LOG.info("异步执行数据:{}", date);
-            return true;
-        });
+    public void asyncExec(AsyncExecuteTask task) {
+        springAsyncExecuter.doTaskByDefaultPool(task);
+    }
+
+    /**
+     * 批量执行，并等待所有执行完成
+     * @param tasks
+     */
+    public void asyncExec(List<AsyncExecuteTask> tasks) {
+        springAsyncExecuter.doTasksAndWaitDoneByDefaultPool(tasks);
     }
 
 
