@@ -1,13 +1,6 @@
 package com.latico.archetype.springboot.config.yaml;
 
 import com.latico.commons.spring.util.SpringUtils;
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <PRE>
@@ -24,6 +17,9 @@ public class YamlBizConfig {
      * 私有单例对象，需要使用volatile，让其他线程直接可见
      */
     private static volatile YamlBizConfig instance;
+    /**
+     * 配置对象
+     */
     private final DemoYamlConfig demoYamlConfig;
 
     /**
@@ -53,24 +49,6 @@ public class YamlBizConfig {
         this.demoYamlConfig = SpringUtils.getBean(DemoYamlConfig.class);
     }
 
-    /**
-     * 获取里面的value字段
-     *
-     * @return
-     */
-    public String getDemoYamlConfigValue() {
-        return demoYamlConfig.getValue();
-    }
-
-    /**
-     * 统计任务的表达式
-     *
-     * @return
-     */
-    public String getStatsticsCron() {
-        return demoYamlConfig.getStatsticsCron();
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("YamlBizConfig{");
@@ -78,28 +56,14 @@ public class YamlBizConfig {
         sb.append('}');
         return sb.toString();
     }
+
+    /**
+     * 拿到配置对象
+     * @return
+     */
+    public DemoYamlConfig getDemoYamlConfig() {
+        return demoYamlConfig;
+    }
 }
 
-/**
- * <PRE>
- * config/application-biz.yaml中的demo-yaml-config配置对应
- * 该配置项，演示了众多场景下的配置情况，应该满足大部分需求
- * <p>
- * demo-yaml-config的配置，因为不能让外界修改配置数据，所以把类放到这里
- * </PRE>
- *
- * @author: latico
- * @date: 2019-06-30 15:10:58
- * @version: 1.0
- */
-@Data
-@Component
-@ConfigurationProperties(prefix = "demo-yaml-config")
-class DemoYamlConfig {
-    private String statsticsCron;
-    private String value;
-    private String[] valueArray;
-    private List<String> valueList;
-    private HashMap<String, String> valueMap;
-    private List<Map<String, String>> valueMapList;
-}
+
