@@ -151,7 +151,6 @@ public class StatisticsData {
                 sb.append("[").append(groupName).append("]").append("[");
                 sb.append(MapUtils.mapToStr(entry.getValue(), ",", "="));
                 String str = sb.toString();
-                str = str.substring(0, str.length() - 1);
                 LOG_STATISTICS.info(str + "]");
             }
         }

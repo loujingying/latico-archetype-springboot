@@ -774,6 +774,10 @@ Maven依赖(使用curator的版本：2.12.0，对应Zookeeper的版本为：3.4.
             <artifactId>postgresql</artifactId>
             <!--<scope>runtime</scope>-->
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+        </dependency>
         <!--postgresql-->
 
     </dependencies>
