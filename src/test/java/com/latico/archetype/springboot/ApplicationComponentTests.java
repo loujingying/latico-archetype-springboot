@@ -1,5 +1,6 @@
 package com.latico.archetype.springboot;
 
+import com.latico.commons.spring.extend.ApplicationContextAwareImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Version: 1.0
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {TestComponentApplication.class})
+@SpringBootTest(classes = {Application.class, ApplicationContextAwareImpl.class})
 public class ApplicationComponentTests {
 
     @Test

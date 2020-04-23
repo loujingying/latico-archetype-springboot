@@ -32,20 +32,41 @@ public class SpringAsyncExecuter {
     private SpringAsyncConfig springAsyncConfig;
 
     /**
+     * 等待future完成
+     * @param future
+     * @param <T>
+     */
+    public static <T> void waitFutureDone(Future<T> future) {
+        if (future == null) {
+            return;
+        }
+        while (true) {
+            if (future.isDone() || future.isCancelled()) {
+                break;
+            }
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+
+    /**
      * 等待所有的future完成
      * @param futureList
      * @param <T>
      */
     public static <T> void waitFuturesDone(Collection<Future<T>> futureList) {
-        if (futureList.isEmpty()) {
+        if (futureList == null || futureList.isEmpty()) {
             return;
         }
         while (true) {
             boolean isEndFlag = true;
             Iterator<Future<T>> iterator = futureList.iterator();
             while (iterator.hasNext()) {
-                Future<T> next = iterator.next();
-                if (next.isDone()) {
+                Future<T> future = iterator.next();
+                if (future.isDone() || future.isCancelled()) {
                     iterator.remove();
                 } else {
                     isEndFlag = false;
@@ -83,6 +104,20 @@ public class SpringAsyncExecuter {
     /**
      * 做任务，通过公共池
      * 会等待所有任务执行完成
+     * @param task
+     */
+    public void doTaskAndWaitDoneByDefaultPool(AsyncExecuteTask task) {
+        if (task == null) {
+            return;
+        }
+        Future<Boolean> booleanFuture = springAsyncConfig.asyncExecWithCallbackByDefaultPool(task);
+        //等待线程池任务完成
+        waitFutureDone(booleanFuture);
+    }
+
+    /**
+     * 做任务，通过公共池
+     * 会等待所有任务执行完成
      * @param tasks
      */
     public void doTasksAndWaitDoneByDefaultPool(Collection<AsyncExecuteTask> tasks) {
@@ -100,6 +135,19 @@ public class SpringAsyncExecuter {
         waitFuturesDone(futures);
     }
 
+    /**
+     * 做任务，通过数据库池
+     * 会等待所有任务执行完成
+     * @param task
+     */
+    public void doTaskAndWaitDoneByDbPool(AsyncExecuteTask task) {
+        if (task == null) {
+            return;
+        }
+        Future<Boolean> booleanFuture = springAsyncConfig.asyncExecWithCallbackByDbPool(task);
+        //等待线程池任务完成
+        waitFutureDone(booleanFuture);
+    }
     /**
      * 做任务，通过数据库池
      * 会等待所有任务执行完成
